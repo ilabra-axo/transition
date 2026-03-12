@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DEPLOYMENT_GUIDE</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f5f5f5;
+            padding: 20px;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .header-actions {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #e1e4e8;
+        }
+        .export-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            background: #0366d6;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 500;
+            transition: background 0.2s;
+        }
+        .export-btn:hover {
+            background: #0256c7;
+            text-decoration: none;
+        }
+        .export-btn::before {
+            content: "📄";
+        }
+        .meta {
+            color: #6a737d;
+            font-size: 0.9em;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            margin-top: 24px;
+            margin-bottom: 16px;
+            font-weight: 600;
+            line-height: 1.25;
+            color: #1a1a1a;
+        }
+        h1 {
+            font-size: 2.5em;
+            border-bottom: 2px solid #e1e4e8;
+            padding-bottom: 0.3em;
+            margin-top: 0;
+        }
+        h2 {
+            font-size: 2em;
+            border-bottom: 1px solid #e1e4e8;
+            padding-bottom: 0.3em;
+        }
+        h3 { font-size: 1.5em; }
+        h4 { font-size: 1.25em; }
+        h5 { font-size: 1em; }
+        h6 { font-size: 0.875em; }
+        p {
+            margin-bottom: 16px;
+        }
+        a {
+            color: #0366d6;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        code {
+            background-color: #f6f8fa;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 85%;
+            color: #e83e8c;
+        }
+        pre {
+            background-color: #f6f8fa;
+            padding: 16px;
+            overflow: auto;
+            border-radius: 6px;
+            margin: 16px 0;
+            border: 1px solid #e1e4e8;
+        }
+        pre code {
+            background-color: transparent;
+            padding: 0;
+            color: #24292e;
+            display: block;
+            white-space: pre;
+        }
+        ul, ol {
+            margin: 16px 0;
+            padding-left: 32px;
+        }
+        li {
+            margin: 4px 0;
+        }
+        blockquote {
+            border-left: 4px solid #dfe2e5;
+            padding: 0 16px;
+            margin: 16px 0;
+            color: #6a737d;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 16px 0;
+        }
+        table th, table td {
+            border: 1px solid #dfe2e5;
+            padding: 8px 12px;
+            text-align: left;
+        }
+        table th {
+            background-color: #f6f8fa;
+            font-weight: 600;
+        }
+        table tr:nth-child(even) {
+            background-color: #f6f8fa;
+        }
+        hr {
+            border: 0;
+            border-top: 1px solid #e1e4e8;
+            margin: 24px 0;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+            margin: 16px 0;
+        }
+        .footer {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #e1e4e8;
+            text-align: center;
+            color: #6a737d;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header-actions">
+            <div class="meta">Generated from Markdown</div>
+            <a href="../DEPLOYMENT_GUIDE.md" class="export-btn" download>Export as MD</a>
+        </div>
+        <h1>Deployment Guide</h1>
+<h2>Local Setup for BCS Knowledge Transfer Package</h2>
+<p><strong>Version:</strong> 1.0.0  
+<strong>Last Updated:</strong> February 2024  
+<strong>Purpose:</strong> Get the SDV Agent Suite running on your local machine</p>
+<hr>
+<h2>🎯 Quick Start (5 Minutes)</h2>
+<h3>What You'll Need</h3>
+<ul><li>A computer (Windows, Mac, or Linux)</li>
+<li>Internet connection</li>
+<li>Web browser (Chrome, Firefox, Safari, Edge)</li>
+<li>Text editor (VS Code, Sublime, Notepad++, or any editor)</li>
+<h3>What You'll Get</h3>
+<li>Interactive website running locally</li>
+<li>8 AI research agents ready to use</li>
+<li>Complete documentation package</li>
+<li>All BCS project materials</li>
+<hr>
+<h2>📥 Step 1: Download the Package</h2>
+<h3>Option A: Download from GitHub (Recommended)</h3>
+<pre><code><h1>Clone the repository</h1>
+git clone https://github.com/ilabra-axo/transition.git
+<h1>Navigate to the folder</h1>
+cd transition
+</code></pre>
+<h3>Option B: Download ZIP File</h3>
+<li>Go to: https://github.com/ilabra-axo/transition</li>
+<li>Click the green <strong>"Code"</strong> button</li>
+<li>Select <strong>"Download ZIP"</strong></li>
+<li>Extract the ZIP file to your desired location</li>
+<li>Open terminal/command prompt in that folder</li>
+<hr>
+<h2>🌐 Step 2: View the Website Locally</h2>
+<h3>Method 1: Simple File Open (No Server Required)</h3>
+<p><strong>For Windows:</strong>
+<pre><code><h1>Navigate to the website file</h1>
+cd agents\sdv-suite</p>
+<h1>Open in default browser</h1>
+start index.html
+</code></pre>
+<p><strong>For Mac:</strong>
+<pre><code><h1>Navigate to the website file</h1>
+cd agents/sdv-suite</p>
+<h1>Open in default browser</h1>
+open index.html
+</code></pre>
+<p><strong>For Linux:</strong>
+<pre><code><h1>Navigate to the website file</h1>
+cd agents/sdv-suite</p>
+<h1>Open in default browser</h1>
+xdg-open index.html
+</code></pre>
+<p><strong>Or simply:</strong>
+<li>Navigate to <code>transition/agents/sdv-suite/</code> folder</li>
+<li>Double-click <code>index.html</code></li>
+<li>Website opens in your browser!</li></p>
+<hr>
+<h3>Method 2: Local Web Server (Optional, Better Performance)</h3>
+<p><strong>Using Python (if installed):</strong>
+<pre><code><h1>Navigate to the package root</h1>
+cd transition</p>
+<h1>Start a simple web server</h1>
+python3 -m http.server 8000
+<h1>OR for Python 2</h1>
+python -m SimpleHTTPServer 8000
+</code></pre>
+<p>Then open browser to: <strong>http://localhost:8000/agents/sdv-suite/</strong></p>
+<p><strong>Using Node.js (if installed):</strong>
+<pre><code><h1>Install http-server globally (one-time)</h1>
+npm install -g http-server</p>
+<h1>Navigate to package root</h1>
+cd transition
+<h1>Start server</h1>
+http-server -p 8000
+</code></pre>
+<p>Then open browser to: <strong>http://localhost:8000/agents/sdv-suite/</strong></p>
+<hr>
+<h2>🤖 Step 3: Set Up AI Agents (For Active Use)</h2>
+<h3>Prerequisites for Agent Use</h3>
+<p><strong>Required:</strong>
+<li>Anthropic Claude API key</li>
+<li>Python 3.9 or higher</li>
+<li>Basic Python libraries</li></p>
+<h3>Get Your API Key</h3>
+<li><strong>Sign up for Anthropic Claude API:</strong></li>
+   - Go to: https://console.anthropic.com/
+   - Create an account
+   - Navigate to API Keys section
+   - Generate a new API key
+   - Copy and save it securely
+<li><strong>Estimated Costs:</strong></li>
+   - Claude 3.5 Sonnet: ~$0.10-$0.25 per agent query
+   - Monthly budget estimate: $50-200 depending on usage
+   - See pricing: https://www.anthropic.com/pricing
+<h3>Install Python Dependencies</h3>
+<pre><code><h1>Install required packages</h1>
+pip install anthropic python-dotenv
+<h1>Verify installation</h1>
+python -c "import anthropic; print('Success!')"
+</code></pre>
+<h3>Configure API Key</h3>
+<p><strong>Option A: Environment Variable (Recommended)</strong></p>
+<p><strong>For Mac/Linux:</strong>
+<pre><code><h1>Add to your shell profile (~/.bashrc, ~/.zshrc, or ~/.bash_profile)</h1>
+export ANTHROPIC<em>API</em>KEY="your-api-key-here"</p>
+<h1>Apply changes</h1>
+source ~/.bashrc  # or ~/.zshrc
+</code></pre>
+<p><strong>For Windows (Command Prompt):</strong>
+<pre><code>setx ANTHROPIC<em>API</em>KEY "your-api-key-here"
+</code></pre></p>
+<p><strong>For Windows (PowerShell):</strong>
+<pre><code>$env:ANTHROPIC<em>API</em>KEY="your-api-key-here"
+</code></pre></p>
+<p><strong>Option B: .env File</strong></p>
+<p>Create a file named <code>.env</code> in the <code>transition/</code> folder:
+<pre><code>ANTHROPIC<em>API</em>KEY=your-api-key-here
+</code></pre></p>
+<hr>
+<h2>▶️ Step 4: Run Your First Agent Query</h2>
+<h3>Quick Test Script</h3>
+<p>Create a file called <code>test_agent.py</code> in the <code>transition/</code> folder:</p>
+<pre><code>import json
+from anthropic import Anthropic
+<h1>Initialize client</h1>
+client = Anthropic()  # Uses ANTHROPIC<em>API</em>KEY from environment
+<h1>Load an agent card</h1>
+with open('agents/sdv-suite/cards/sensor<em>fusion</em>analyst.json') as f:
+    agent = json.load(f)
+<h1>Prepare a test query</h1>
+query = """
+Analyze a sensor suite for L2+ highway pilot:
+<li>3 front cameras (1 telephoto 50° FOV, 2 wide 120° FOV)</li>
+<li>5 radars (1 long-range 250m, 4 corner 100m)</li>
+<li>1 LiDAR (solid-state, 120° FOV, 150m range)</li>
+<p>Evaluate 360° coverage and identify any blind spots.
+Target: ASIL-B safety compliance.
+"""</p>
+<p>print("🤖 Running Sensor Fusion Analyst...")
+print("Query:", query[:100] + "...")</p>
+<h1>Execute agent</h1>
+response = client.messages.create(
+    model=agent['executor']['config']['model'],
+    max<em>tokens=agent['executor']['config']['max</em>tokens'],
+    temperature=agent['executor']['config']['temperature'],
+    system=agent['executor']['config']['system_prompt'],
+    messages=[{"role": "user", "content": query}]
+)
+<h1>Display result</h1>
+print("\n" + "="*60)
+print("AGENT RESPONSE:")
+print("="*60)
+print(response.content[0].text)
+print("\n✅ Agent query successful!")
+</code></pre>
+<h3>Run the Test</h3>
+<pre><code><h1>Navigate to transition folder</h1>
+cd transition
+<h1>Run the test script</h1>
+python test_agent.py
+</code></pre>
+<p><strong>Expected Output:</strong>
+<li>Agent analyzes the sensor suite</li>
+<li>Provides coverage assessment</li>
+<li>Identifies blind spots</li>
+<li>Recommends improvements</li>
+<li>Includes confidence score and sources</li></p>
+<hr>
+<h2>📚 Step 5: Explore Documentation</h2>
+<p>All documentation is in Markdown format and can be read in any text editor or browser.</p>
+<h3>Start Here</h3>
+<li><strong>Main README</strong></li>
+   <pre><code>   # Mac/Linux
+   open README.md
+   
+   # Windows
+   start README.md
+   
+   # Or open in VS Code
+   code README.md
+   </code></pre>
+<li><strong>Transition Dashboard</strong> (master knowledge map)</li>
+   - File: <code>TRANSITION_DASHBOARD.md</code>
+   - Maps all BCS work areas to artifacts
+<li><strong>Quick Reference</strong> (practical usage)</li>
+   - File: <code>agents/QUICK_REFERENCE.md</code>
+   - Query patterns and examples
+<li><strong>BCS Project Continuity</strong></li>
+   - File: <code>BCS<em>PROJECT</em>CONTINUITY_GUIDE.md</code>
+   - Active projects and handoffs
+<h3>Documentation Tree</h3>
+<pre><code>transition/
+├── README.md                          ← Start here
+├── TRANSITION_DASHBOARD.md            ← Work area mapping
+├── BCS<em>PROJECT</em>CONTINUITY_GUIDE.md    ← Project handoffs
+├── DEPLOYMENT_GUIDE.md                ← You are here
+├── QUICK_REFERENCE.md                 ← Usage patterns
+│
+├── agents/
+│   ├── INDEX.md
+│   ├── QUICK_REFERENCE.md
+│   ├── SDV<em>AGENT</em>SUITE<em>EXECUTIVE</em>SUMMARY.md
+│   └── sdv-suite/
+│       ├── index.html                 ← Interactive website
+│       ├── README.md
+│       ├── SDV<em>AGENT</em>SYSTEM_DESIGN.md
+│       └── cards/*.json               ← Agent definitions
+│
+└── [Research Artifacts]
+    ├── digital-twin-rain-light-sensor.md
+    ├── patent_research.md
+    └── ...
+</code></pre>
+<hr>
+<h2>🔧 Step 6: Use Agents in Your Workflow</h2>
+<h3>Example Workflow: Customer RFQ Response</h3>
+<p><strong>Scenario:</strong> OEM requests sensor suite design for L2+ system</p>
+<pre><code>import json
+from anthropic import Anthropic
+<p>client = Anthropic()</p>
+<h1>Step 1: Load Sensor Fusion Analyst</h1>
+with open('agents/sdv-suite/cards/sensor<em>fusion</em>analyst.json') as f:
+    sensor_agent = json.load(f)
+<h1>Step 2: Prepare customer query</h1>
+customer_query = """
+Design sensor suite for highway pilot (L2+):
+<li>Cost target: $600 per vehicle</li>
+<li>Detection range: 250m forward, 100m lateral</li>
+<li>Operating conditions: day/night, rain, fog</li>
+<li>Safety: ASIL-B required</li>
+<li>Regional: North American market (FMVSS compliance)</li>
+<p>Recommend sensor types, quantities, and placement.
+"""</p>
+<h1>Step 3: Get baseline design</h1>
+response = client.messages.create(
+    model=sensor_agent['executor']['config']['model'],
+    max_tokens=4096,
+    temperature=0.3,
+    system=sensor<em>agent['executor']['config']['system</em>prompt'],
+    messages=[{"role": "user", "content": customer_query}]
+)
+<p>baseline_design = response.content[0].text</p>
+<h1>Step 4: Save results</h1>
+with open('customer<em>rfq</em>response.txt', 'w') as f:
+    f.write("BASELINE SENSOR SUITE DESIGN\n")
+    f.write("="*60 + "\n\n")
+    f.write(baseline_design)
+<p>print("✅ Results saved to: customer<em>rfq</em>response.txt")
+</code></pre></p>
+<h3>Multi-Agent Workflow</h3>
+<p>Chain multiple agents together:</p>
+<pre><code><h1>1. Sensor Fusion Analyst → baseline design</h1>
+<h1>2. Virtual Sensor Designer → cost optimization</h1>
+<h1>3. SDV Architecture Validator → safety validation</h1>
+<h1>Load all agents</h1>
+agents = {}
+for agent<em>id in ['sensor</em>fusion<em>analyst', 'virtual</em>sensor<em>designer', 'sdv</em>arch_validator']:
+    with open(f'agents/sdv-suite/cards/{agent_id}.json') as f:
+        agents[agent_id] = json.load(f)
+<h1>Sequential workflow</h1>
+results = {}
+results['baseline'] = query<em>agent(agents['sensor</em>fusion<em>analyst'], customer</em>query)
+results['optimized'] = query<em>agent(agents['virtual</em>sensor_designer'], 
+                                    f"Optimize this design: {results['baseline']}")
+results['validated'] = query<em>agent(agents['sdv</em>arch_validator'], 
+                                    f"Validate safety: {results['optimized']}")
+<h1>Final synthesis</h1>
+print(results['validated'])
+</code></pre>
+<hr>
+<h2>⚙️ Advanced Setup (Optional)</h2>
+<h3>Create Helper Scripts</h3>
+<p><strong>File: <code>query_agent.py</code></strong></p>
+<pre><code>#!/usr/bin/env python3
+"""
+Simple command-line interface for querying agents
+Usage: python query<em>agent.py <agent</em>id> "Your query here"
+"""
+<p>import sys
+import json
+from anthropic import Anthropic</p>
+<p>def query<em>agent(agent</em>id, query_text):
+    client = Anthropic()
+    
+    # Load agent card
+    with open(f'agents/sdv-suite/cards/{agent_id}.json') as f:
+        agent = json.load(f)
+    
+    # Execute query
+    response = client.messages.create(
+        model=agent['executor']['config']['model'],
+        max<em>tokens=agent['executor']['config']['max</em>tokens'],
+        temperature=agent['executor']['config']['temperature'],
+        system=agent['executor']['config']['system_prompt'],
+        messages=[{"role": "user", "content": query_text}]
+    )
+    
+    return response.content[0].text</p>
+<p>if <strong>name</strong> == "<strong>main</strong>":
+    if len(sys.argv) < 3:
+        print("Usage: python query<em>agent.py <agent</em>id> 'Your query'")
+        print("\nAvailable agents:")
+        print("  - sensor<em>fusion</em>analyst")
+        print("  - sdv<em>arch</em>validator")
+        print("  - hmi<em>ux</em>forecaster")
+        print("  - virtual<em>sensor</em>designer")
+        print("  - automotive<em>tech</em>scout")
+        sys.exit(1)
+    
+    agent_id = sys.argv[1]
+    query = sys.argv[2]
+    
+    print(f"🤖 Querying {agent_id}...")
+    result = query<em>agent(agent</em>id, query)
+    print("\n" + "="*60)
+    print(result)
+    print("="*60)
+</code></pre></p>
+<p>Make it executable:
+<pre><code>chmod +x query_agent.py</p>
+<h1>Use it</h1>
+python query<em>agent.py sensor</em>fusion_analyst "Analyze 3 camera + 2 radar setup for parking assist"
+</code></pre>
+<hr>
+<h2>🚨 Troubleshooting</h2>
+<h3>Issue: "Module 'anthropic' not found"</h3>
+<p><strong>Solution:</strong>
+<pre><code>pip install anthropic
+<h1>OR</h1>
+pip3 install anthropic
+</code></pre></p>
+<h3>Issue: "API Key not found"</h3>
+<p><strong>Solution:</strong>
+<pre><code><h1>Check if environment variable is set</h1>
+echo $ANTHROPIC<em>API</em>KEY  # Mac/Linux
+echo %ANTHROPIC<em>API</em>KEY%  # Windows CMD</p>
+<h1>If empty, set it:</h1>
+export ANTHROPIC<em>API</em>KEY="your-key"  # Mac/Linux
+setx ANTHROPIC<em>API</em>KEY "your-key"    # Windows
+</code></pre>
+<h3>Issue: "Website styles not loading"</h3>
+<p><strong>Solution:</strong>
+<li>Use a local web server instead of opening file directly</li>
+<li>Try: <code>python3 -m http.server 8000</code></li>
+<li>Then visit: <code>http://localhost:8000/agents/sdv-suite/</code></li></p>
+<h3>Issue: "Agent response too slow"</h3>
+<p><strong>Possible causes:</strong>
+<li>Large/complex query → reduce scope</li>
+<li>Network latency → check connection</li>
+<li>API rate limits → wait 1-2 minutes</li></p>
+<p><strong>Optimization:</strong>
+<li>Use Claude Haiku for simple queries (faster, cheaper)</li>
+<li>Cache repeated queries</li>
+<li>Batch similar analyses</li></p>
+<h3>Issue: "Agent gives generic answers"</h3>
+<p><strong>Solution:</strong>
+<li>Provide more specific details in query</li>
+<li>Include constraints (cost, timeline, standards)</li>
+<li>Reference specific technologies or requirements</li>
+<li>See examples in <code>agents/QUICK_REFERENCE.md</code></li></p>
+<hr>
+<h2>📊 System Requirements</h2>
+<h3>Minimum Requirements</h3>
+<li><strong>OS:</strong> Windows 10, macOS 10.14+, or Linux (any modern distro)</li>
+<li><strong>Browser:</strong> Chrome 90+, Firefox 88+, Safari 14+, Edge 90+</li>
+<li><strong>Python:</strong> 3.9+ (only if using agents)</li>
+<li><strong>RAM:</strong> 4GB+</li>
+<li><strong>Storage:</strong> 500MB for package + dependencies</li>
+<h3>Recommended for Best Experience</h3>
+<li><strong>Python:</strong> 3.11+</li>
+<li><strong>RAM:</strong> 8GB+</li>
+<li><strong>Text Editor:</strong> VS Code with Markdown preview</li>
+<li><strong>Internet:</strong> Stable connection for API calls</li>
+<hr>
+<h2>💰 Cost Estimates</h2>
+<h3>One-Time Setup</h3>
+<li><strong>Free:</strong> Download and local deployment</li>
+<li><strong>Free:</strong> Anthropic API account (pay as you go)</li>
+<h3>Ongoing Usage (Claude 3.5 Sonnet)</h3>
+<li><strong>Simple query:</strong> $0.02 - $0.05</li>
+<li><strong>Complex analysis:</strong> $0.10 - $0.25</li>
+<li><strong>Multi-agent workflow:</strong> $0.50 - $1.50</li>
+<p><strong>Monthly Estimates:</strong>
+<li><strong>Light use</strong> (10-20 queries/month): $5-10</li>
+<li><strong>Medium use</strong> (50-100 queries/month): $25-50</li>
+<li><strong>Heavy use</strong> (200+ queries/month): $100-200</li></p>
+<p><strong>Cost Optimization:</strong>
+<li>Use Claude Haiku for simple queries (5x cheaper)</li>
+<li>Cache and reuse results</li>
+<li>Batch similar analyses</li></p>
+<hr>
+<h2>🔒 Security Best Practices</h2>
+<h3>API Key Protection</h3>
+<p><strong>DO:</strong>
+<li>✅ Store API key in environment variables</li>
+<li>✅ Use <code>.env</code> file (add to <code>.gitignore</code>)</li>
+<li>✅ Rotate keys periodically</li>
+<li>✅ Use separate keys for dev/prod</li></p>
+<p><strong>DON'T:</strong>
+<li>❌ Hardcode API key in scripts</li>
+<li>❌ Commit API key to version control</li>
+<li>❌ Share API key via email/chat</li>
+<li>❌ Use same key across multiple projects</li></p>
+<h3>Data Privacy</h3>
+<p><strong>For BCS Internal Use:</strong>
+<li>Agents can process proprietary data (data is not used for training)</li>
+<li>See Anthropic privacy policy: https://www.anthropic.com/legal/privacy</li>
+<li>For highly sensitive data, consider self-hosted LLM solutions</li></p>
+<p><strong>Customer Data:</strong>
+<li>Sanitize customer names/details when possible</li>
+<li>Use generic descriptors (e.g., "Premium OEM" vs actual name)</li>
+<li>Review Anthropic's enterprise agreement if needed</li></p>
+<hr>
+<h2>📖 Quick Reference Commands</h2>
+<h3>Essential Commands</h3>
+<pre><code><h1>Clone repository</h1>
+git clone https://github.com/ilabra-axo/transition.git
+<h1>View website locally</h1>
+cd transition/agents/sdv-suite && open index.html
+<h1>Start local server</h1>
+python3 -m http.server 8000
+<h1>Install dependencies</h1>
+pip install anthropic python-dotenv
+<h1>Test agent</h1>
+python test_agent.py
+<h1>Update from GitHub</h1>
+git pull origin main
+</code></pre>
+<h3>File Locations</h3>
+<pre><code><h1>Main documentation</h1>
+transition/README.md
+<h1>Interactive website</h1>
+transition/agents/sdv-suite/index.html
+<h1>Agent cards</h1>
+transition/agents/sdv-suite/cards/*.json
+<h1>BCS project info</h1>
+transition/BCS<em>PROJECT</em>CONTINUITY_GUIDE.md
+<h1>Research artifacts</h1>
+transition/digital-twin-rain-light-sensor.md
+</code></pre>
+<hr>
+<h2>🎯 Next Steps After Deployment</h2>
+<h3>Week 1: Familiarization</h3>
+<li>✅ Browse all documentation</li>
+<li>✅ View website locally</li>
+<li>✅ Read BCS project continuity guide</li>
+<li>✅ Test one agent with sample query</li>
+<h3>Week 2: Integration</h3>
+<li>✅ Apply agent to real BCS project</li>
+<li>✅ Measure time savings</li>
+<li>✅ Share with team</li>
+<li>✅ Gather feedback</li>
+<h3>Week 3-4: Customization</h3>
+<li>✅ Modify agent prompts for BCS use cases</li>
+<li>✅ Create helper scripts for common workflows</li>
+<li>✅ Document BCS-specific examples</li>
+<li>✅ Train team members</li>
+<hr>
+<h2>🆘 Getting Help</h2>
+<h3>Documentation</h3>
+<li><strong>Main README:</strong> <code>README.md</code></li>
+<li><strong>Quick Reference:</strong> <code>agents/QUICK_REFERENCE.md</code></li>
+<li><strong>System Design:</strong> <code>agents/sdv-suite/SDV<em>AGENT</em>SYSTEM_DESIGN.md</code></li>
+<h3>Troubleshooting</h3>
+<li>Check this deployment guide first</li>
+<li>Review agent card limitations</li>
+<li>Verify API key and connectivity</li>
+<li>Try simpler test query</li>
+<h3>External Resources</h3>
+<li><strong>Anthropic Docs:</strong> https://docs.anthropic.com/</li>
+<li><strong>Python Setup:</strong> https://www.python.org/downloads/</li>
+<li><strong>Git Guide:</strong> https://git-scm.com/book/en/v2</li>
+<hr>
+<h2>✅ Deployment Checklist</h2>
+<p><strong>Before you start:</strong>
+<li>[ ] Computer with internet connection</li>
+<li>[ ] Text editor installed</li>
+<li>[ ] Terminal/command prompt access</li></p>
+<p><strong>Basic deployment (view docs/website):</strong>
+<li>[ ] Package downloaded/cloned</li>
+<li>[ ] Website opened in browser</li>
+<li>[ ] Documentation accessible</li></p>
+<p><strong>Full deployment (use agents):</strong>
+<li>[ ] Python 3.9+ installed</li>
+<li>[ ] Anthropic API key obtained</li>
+<li>[ ] Dependencies installed (<code>pip install anthropic</code>)</li>
+<li>[ ] API key configured (environment variable)</li>
+<li>[ ] Test agent query successful</li></p>
+<p><strong>BCS integration:</strong>
+<li>[ ] Team members trained</li>
+<li>[ ] Agent applied to real project</li>
+<li>[ ] Time savings measured</li>
+<li>[ ] Feedback collected</li></p>
+<hr>
+<h2>🎉 Success!</h2>
+<p>If you can:
+<li>✅ Open the website in your browser</li>
+<li>✅ Read the documentation</li>
+<li>✅ Run a test agent query</li>
+<li>✅ Get meaningful results</li></ul></p>
+<p><strong>You're ready to use the SDV Agent Suite!</strong></p>
+<p>Start with the <a href="agents/QUICK_REFERENCE.html">Quick Reference Guide</a> for practical usage examples.</p>
+<hr>
+<p><strong>Last Updated:</strong> February 2024  
+<strong>Version:</strong> 1.0.0  
+<strong>Support:</strong> See documentation package for comprehensive guides</p>
+        <div class="footer">
+            <p>Source: <a href="../DEPLOYMENT_GUIDE.md">DEPLOYMENT_GUIDE.md</a></p>
+        </div>
+    </div>
+</body>
+</html>

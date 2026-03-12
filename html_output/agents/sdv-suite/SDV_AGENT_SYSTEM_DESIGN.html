@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SDV_AGENT_SYSTEM_DESIGN</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f5f5f5;
+            padding: 20px;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .header-actions {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #e1e4e8;
+        }
+        .export-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            background: #0366d6;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 500;
+            transition: background 0.2s;
+        }
+        .export-btn:hover {
+            background: #0256c7;
+            text-decoration: none;
+        }
+        .export-btn::before {
+            content: "📄";
+        }
+        .meta {
+            color: #6a737d;
+            font-size: 0.9em;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            margin-top: 24px;
+            margin-bottom: 16px;
+            font-weight: 600;
+            line-height: 1.25;
+            color: #1a1a1a;
+        }
+        h1 {
+            font-size: 2.5em;
+            border-bottom: 2px solid #e1e4e8;
+            padding-bottom: 0.3em;
+            margin-top: 0;
+        }
+        h2 {
+            font-size: 2em;
+            border-bottom: 1px solid #e1e4e8;
+            padding-bottom: 0.3em;
+        }
+        h3 { font-size: 1.5em; }
+        h4 { font-size: 1.25em; }
+        h5 { font-size: 1em; }
+        h6 { font-size: 0.875em; }
+        p {
+            margin-bottom: 16px;
+        }
+        a {
+            color: #0366d6;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        code {
+            background-color: #f6f8fa;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 85%;
+            color: #e83e8c;
+        }
+        pre {
+            background-color: #f6f8fa;
+            padding: 16px;
+            overflow: auto;
+            border-radius: 6px;
+            margin: 16px 0;
+            border: 1px solid #e1e4e8;
+        }
+        pre code {
+            background-color: transparent;
+            padding: 0;
+            color: #24292e;
+            display: block;
+            white-space: pre;
+        }
+        ul, ol {
+            margin: 16px 0;
+            padding-left: 32px;
+        }
+        li {
+            margin: 4px 0;
+        }
+        blockquote {
+            border-left: 4px solid #dfe2e5;
+            padding: 0 16px;
+            margin: 16px 0;
+            color: #6a737d;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 16px 0;
+        }
+        table th, table td {
+            border: 1px solid #dfe2e5;
+            padding: 8px 12px;
+            text-align: left;
+        }
+        table th {
+            background-color: #f6f8fa;
+            font-weight: 600;
+        }
+        table tr:nth-child(even) {
+            background-color: #f6f8fa;
+        }
+        hr {
+            border: 0;
+            border-top: 1px solid #e1e4e8;
+            margin: 24px 0;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+            margin: 16px 0;
+        }
+        .footer {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #e1e4e8;
+            text-align: center;
+            color: #6a737d;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header-actions">
+            <div class="meta">Generated from Markdown</div>
+            <a href="../../../agents/sdv-suite/SDV_AGENT_SYSTEM_DESIGN.md" class="export-btn" download>Export as MD</a>
+        </div>
+        <h1>SDV Connected Car Multi-Agent System Design</h1>
+<p><strong>Version:</strong> 1.0  
+<strong>Last Updated:</strong> 2024-02-07  
+<strong>Author:</strong> Alena Taranka  
+<strong>Domain:</strong> Software-Defined Vehicles & Connected Car Technologies</p>
+<hr>
+<h2>Executive Summary</h2>
+<p>This document describes a multi-agent research system designed to support software-defined vehicle (SDV) development and connected car technology research. The system consists of 8 specialized agents that work collaboratively to analyze sensor architectures, validate system designs, scout emerging technologies, and provide evidence-based insights for automotive R&D decisions.</p>
+<p>The agent suite is built using Fermi forecasting principles and designed for automotive engineers, sensor architects, HMI designers, and R&D teams working on next-generation vehicle platforms.</p>
+<hr>
+<h2>System Architecture</h2>
+<h3>Design Philosophy</h3>
+<p>The SDV Agent Suite follows a <strong>domain-specialized, collaborative architecture</strong> where:</p>
+<li><strong>Specialization:</strong> Each agent has deep expertise in a specific SDV domain</li>
+<li><strong>Collaboration:</strong> Agents share a common ontology and can reference each other's outputs</li>
+<li><strong>Evidence-Based:</strong> All forecasts and analyses are grounded in technical literature, patents, and market data</li>
+<li><strong>Confidence-Aware:</strong> Agents express uncertainty and provide confidence scores</li>
+<li><strong>Interoperable:</strong> Agents can be used independently or orchestrated for complex analyses</li>
+<h3>Agent Roster</h3>
+<p>| Agent ID | Agent Name | Primary Domain | Executor Type |
+|----------|-----------|----------------|---------------|
+| <code>sdv<em>arch</em>validator</code> | SDV Architecture Validator | System architecture analysis | LLM |
+| <code>sensor<em>fusion</em>analyst</code> | Sensor Fusion Analyst | Multi-sensor integration | LLM + MCP |
+| <code>hmi<em>ux</em>forecaster</code> | HMI/UX Experience Forecaster | Human-machine interface trends | LLM |
+| <code>virtual<em>sensor</em>designer</code> | Virtual Sensor Designer | Software-based sensing | LLM + Skill |
+| <code>automotive<em>tech</em>scout</code> | Automotive Tech Scout | Emerging technology tracking | MCP |
+| <code>signal<em>processing</em>advisor</code> | Signal Processing Advisor | Cross-domain signal analysis | LLM |
+| <code>optical<em>sensor</em>specialist</code> | Optical Sensor Specialist | Camera & LiDAR systems | LLM + Skill |
+| <code>connectivity<em>standards</em>tracker</code> | Connectivity Standards Tracker | V2X, 5G, automotive protocols | MCP |</p>
+<hr>
+<h2>Agent Descriptions</h2>
+<h3>1. SDV Architecture Validator</h3>
+<p><strong>Purpose:</strong> Validates software-defined vehicle system architectures against industry standards, safety requirements, and emerging best practices.</p>
+<p><strong>Key Capabilities:</strong>
+<ul><li>AUTOSAR Adaptive architecture validation</li>
+<li>Zonal architecture assessment</li>
+<li>Safety integrity level (ASIL) compliance checking</li>
+<li>SOA (Service-Oriented Architecture) pattern analysis</li>
+<li>Domain controller topology evaluation</li></p>
+<p><strong>Input Sources:</strong>
+<li>Architecture diagrams (XML, JSON, or textual descriptions)</li>
+<li>System requirements documents</li>
+<li>Industry standards (ISO 26262, ASPICE, AUTOSAR)</li></p>
+<p><strong>Output Format:</strong>
+<li>Validation report with pass/fail/warning status</li>
+<li>Compliance gaps and remediation suggestions</li>
+<li>Architecture optimization recommendations</li>
+<li>Confidence score (0-100%)</li></p>
+<p><strong>Primary Use Cases:</strong>
+<li>Pre-design architecture review</li>
+<li>Migration planning (classic AUTOSAR → Adaptive)</li>
+<li>Multi-supplier integration validation</li>
+<li>Safety case development support</li></p>
+<hr>
+<h3>2. Sensor Fusion Analyst</h3>
+<p><strong>Purpose:</strong> Analyzes multi-sensor fusion architectures for redundancy, coverage, performance, and failure modes.</p>
+<p><strong>Key Capabilities:</strong>
+<li>Sensor suite composition analysis (camera + radar + LiDAR + ultrasonic)</li>
+<li>Field-of-view (FOV) overlap calculation</li>
+<li>Temporal synchronization validation</li>
+<li>Degradation mode analysis</li>
+<li>Sensor modality selection optimization</li></p>
+<p><strong>Input Sources:</strong>
+<li>Sensor placement diagrams</li>
+<li>Sensor specification sheets</li>
+<li>Environmental condition profiles</li>
+<li>Target detection requirements</li></p>
+<p><strong>Output Format:</strong>
+<li>Fusion architecture assessment</li>
+<li>Coverage gap visualization (text-based or coordinate-based)</li>
+<li>Failure mode analysis (FMEA-style)</li>
+<li>Recommended sensor redundancy strategies</li>
+<li>Confidence score with justification</li></p>
+<p><strong>Primary Use Cases:</strong>
+<li>L2+ / L3 / L4 sensor suite design</li>
+<li>Cost-performance tradeoff analysis</li>
+<li>Sensor down-selection</li>
+<li>Validation of virtual sensor feasibility</li></p>
+<hr>
+<h3>3. HMI/UX Experience Forecaster</h3>
+<p><strong>Purpose:</strong> Forecasts trends in human-machine interface design for SDVs, including displays, controls, AR/VR, and multimodal interaction.</p>
+<p><strong>Key Capabilities:</strong>
+<li>HMI technology trend analysis (haptics, voice, gesture, gaze)</li>
+<li>Driver state monitoring (DSM) integration patterns</li>
+<li>Display technology evolution (micro-LED, OLED, transparent displays)</li>
+<li>Regulatory compliance for driver distraction (NHTSA, Euro NCAP)</li>
+<li>User experience benchmarking</li></p>
+<p><strong>Input Sources:</strong>
+<li>Patent databases (USPTO, EPO, WIPO)</li>
+<li>Automotive HMI research papers</li>
+<li>OEM product announcements</li>
+<li>Regulatory filings</li></p>
+<p><strong>Output Format:</strong>
+<li>Technology adoption timeline (1-year, 3-year, 5-year horizon)</li>
+<li>Probability estimates for specific HMI features</li>
+<li>Risk factors (regulatory, technical, cost)</li>
+<li>Confidence intervals</li></p>
+<p><strong>Primary Use Cases:</strong>
+<li>Product roadmap planning</li>
+<li>Next-generation cockpit design</li>
+<li>Technology investment decisions</li>
+<li>Competitive benchmarking</li></p>
+<hr>
+<h3>4. Virtual Sensor Designer</h3>
+<p><strong>Purpose:</strong> Designs and evaluates virtual sensors that use software to infer physical quantities from existing sensor data.</p>
+<p><strong>Key Capabilities:</strong>
+<li>Virtual sensor concept generation</li>
+<li>Feasibility assessment (physics-based + ML-based approaches)</li>
+<li>Training data requirements estimation</li>
+<li>Accuracy and latency prediction</li>
+<li>Safety validation strategy design</li></p>
+<p><strong>Input Sources:</strong>
+<li>Available sensor suite specifications</li>
+<li>Target sensing modality requirements</li>
+<li>Computational budget constraints</li>
+<li>Safety integrity requirements (ASIL levels)</li></p>
+<p><strong>Output Format:</strong>
+<li>Virtual sensor architecture proposal</li>
+<li>Implementation roadmap</li>
+<li>Data collection plan</li>
+<li>Validation test matrix</li>
+<li>Confidence score and risk assessment</li></p>
+<p><strong>Primary Use Cases:</strong>
+<li>Cost reduction through sensor elimination</li>
+<li>Sensor redundancy without hardware duplication</li>
+<li>Retrofit applications (software-only upgrades)</li>
+<li>Graceful degradation strategies</li></p>
+<hr>
+<h3>5. Automotive Tech Scout</h3>
+<p><strong>Purpose:</strong> Continuously monitors emerging automotive technologies, startups, research breakthroughs, and patent activity.</p>
+<p><strong>Key Capabilities:</strong>
+<li>Technology trend detection (solid-state LiDAR, neuromorphic cameras, etc.)</li>
+<li>Startup ecosystem mapping</li>
+<li>Patent landscape analysis</li>
+<li>Conference and publication tracking (SAE, IEEE, CVPR)</li>
+<li>Technology readiness level (TRL) estimation</li></p>
+<p><strong>Input Sources:</strong>
+<li>Arxiv.org (computer vision, ML, robotics)</li>
+<li>USPTO / EPO / WIPO patent databases</li>
+<li>Automotive conference proceedings</li>
+<li>Crunchbase / PitchBook startup data</li>
+<li>Industry news feeds</li></p>
+<p><strong>Output Format:</strong>
+<li>Technology briefing reports</li>
+<li>Weak signal detection alerts</li>
+<li>Patent citation networks</li>
+<li>Technology maturity assessments</li>
+<li>Recommended deep-dive topics</li></p>
+<p><strong>Primary Use Cases:</strong>
+<li>Strategic technology planning</li>
+<li>M&A target identification</li>
+<li>Competitive intelligence</li>
+<li>Research collaboration opportunities</li></p>
+<hr>
+<h3>6. Signal Processing Advisor</h3>
+<p><strong>Purpose:</strong> Provides expert guidance on signal processing techniques for automotive sensor data (filtering, feature extraction, compression, etc.).</p>
+<p><strong>Key Capabilities:</strong>
+<li>Algorithm selection for specific sensor types</li>
+<li>Real-time performance optimization</li>
+<li>Trade-off analysis (accuracy vs. latency vs. compute)</li>
+<li>Edge vs. cloud processing recommendations</li>
+<li>Noise and interference mitigation strategies</li></p>
+<p><strong>Input Sources:</strong>
+<li>Sensor data characteristics (sampling rate, resolution, SNR)</li>
+<li>Processing constraints (CPU, GPU, FPGA, ASIC)</li>
+<li>Target output requirements (format, latency)</li>
+<li>Environmental conditions</li></p>
+<p><strong>Output Format:</strong>
+<li>Algorithm recommendations with justifications</li>
+<li>Performance estimates (throughput, latency, accuracy)</li>
+<li>Implementation complexity assessment</li>
+<li>Resource consumption estimates</li>
+<li>Confidence score</li></p>
+<p><strong>Primary Use Cases:</strong>
+<li>Sensor pipeline design</li>
+<li>ECU/domain controller specification</li>
+<li>Legacy system optimization</li>
+<li>Hardware platform selection</li></p>
+<hr>
+<h3>7. Optical Sensor Specialist</h3>
+<p><strong>Purpose:</strong> Deep expertise in camera systems, LiDAR, time-of-flight sensors, and optical metrology for automotive applications.</p>
+<p><strong>Key Capabilities:</strong>
+<li>Camera lens design evaluation (fisheye, wide-angle, telephoto)</li>
+<li>LiDAR modality comparison (spinning, solid-state, FMCW, flash)</li>
+<li>Automotive optics testing standards (ISO 16505, etc.)</li>
+<li>Environmental robustness analysis (rain, fog, glare, night)</li>
+<li>Calibration and alignment strategies</li></p>
+<p><strong>Input Sources:</strong>
+<li>Optical sensor datasheets</li>
+<li>Environmental test data</li>
+<li>Geometric constraints (packaging, mounting)</li>
+<li>Regulatory requirements (ECE R46, FMVSS)</li></p>
+<p><strong>Output Format:</strong>
+<li>Sensor selection recommendations</li>
+<li>Optical design trade-offs</li>
+<li>Test and validation plans</li>
+<li>Failure mode analysis</li>
+<li>Confidence score with technical justification</li></p>
+<p><strong>Primary Use Cases:</strong>
+<li>Camera/LiDAR down-selection</li>
+<li>Optical test specification</li>
+<li>Sensor integration troubleshooting</li>
+<li>Performance benchmarking</li></p>
+<hr>
+<h3>8. Connectivity Standards Tracker</h3>
+<p><strong>Purpose:</strong> Tracks standards, protocols, and best practices for connected vehicle technologies (V2X, 5G, Ethernet, CAN-FD, etc.).</p>
+<p><strong>Key Capabilities:</strong>
+<li>V2X standard evolution (DSRC vs. C-V2X)</li>
+<li>In-vehicle networking (automotive Ethernet, TSN)</li>
+<li>Cybersecurity standards (ISO/SAE 21434, UNR 155)</li>
+<li>OTA update architectures</li>
+<li>Cloud connectivity patterns</li></p>
+<p><strong>Input Sources:</strong>
+<li>Standards bodies (SAE, ISO, ETSI, 3GPP)</li>
+<li>Industry alliances (5GAA, Car Connectivity Consortium)</li>
+<li>Regulatory filings</li>
+<li>OEM technical publications</li></p>
+<p><strong>Output Format:</strong>
+<li>Standards adoption forecasts</li>
+<li>Compatibility matrices</li>
+<li>Deployment timeline estimates</li>
+<li>Risk and mitigation strategies</li>
+<li>Confidence intervals</li></p>
+<p><strong>Primary Use Cases:</strong>
+<li>Technology roadmap alignment</li>
+<li>Compliance planning</li>
+<li>Supplier ecosystem mapping</li>
+<li>Future-proofing architecture decisions</li></p>
+<hr>
+<h2>Agent Interactions & Workflows</h2>
+<h3>Interaction Patterns</h3>
+<p>Agents in the SDV Suite can operate in three modes:</p>
+<li><strong>Independent Mode:</strong> Single agent responds to a specific query</li>
+<li><strong>Sequential Mode:</strong> One agent's output feeds into another agent</li>
+<li><strong>Collaborative Mode:</strong> Multiple agents analyze the same problem and results are synthesized</li>
+<h3>Example Workflow: L3 Autonomous Driving System Design</h3>
+<pre><code>User Query: "Design and validate a sensor suite for an L3 highway pilot system 
+             with cost target of $800 and ASIL-B safety requirement."
+<p>Step 1: Sensor Fusion Analyst
+   Input: L3 highway pilot requirements, cost target, ASIL-B
+   Output: Recommended sensor suite (e.g., 4 cameras, 2 radars, 1 LiDAR)
+   
+Step 2: Optical Sensor Specialist
+   Input: Camera/LiDAR recommendations from Step 1
+   Output: Detailed specifications, supplier options, optical design validation
+   
+Step 3: Virtual Sensor Designer
+   Input: Sensor suite from Step 1, cost pressure
+   Output: Virtual sensor opportunities (e.g., replace 1 radar with virtual approach)
+   
+Step 4: Signal Processing Advisor
+   Input: Final sensor suite, processing requirements
+   Output: ECU compute requirements, algorithm recommendations
+   
+Step 5: SDV Architecture Validator
+   Input: Complete system design (sensors + compute + algorithms)
+   Output: ASIL-B compliance validation, architecture review, gaps/risks
+   
+Step 6: Connectivity Standards Tracker
+   Input: System design
+   Output: V2X integration recommendations, OTA update architecture
+</code></pre></p>
+<p><strong>Evidence Synthesis:</strong>
+<li>Each agent provides confidence scores</li>
+<li>Conflicting recommendations are flagged</li>
+<li>Final report aggregates insights with source attribution</li></p>
+<hr>
+<h2>System-Level Ontology</h2>
+<h3>Core Entities</h3>
+<p>The SDV Agent Suite shares a common ontology:</p>
+<pre><code>Vehicle
+├── Architecture
+│   ├── DomainController
+│   ├── ZonalArchitecture
+│   └── CentralCompute
+├── SensorSuite
+│   ├── Camera
+│   ├── Radar
+│   ├── LiDAR
+│   ├── Ultrasonic
+│   └── VirtualSensor
+├── HMI
+│   ├── Display
+│   ├── Controls
+│   ├── Voice
+│   └── Haptics
+├── Connectivity
+│   ├── V2X
+│   ├── Cellular (4G/5G)
+│   ├── InVehicleNetwork
+│   └── OTA
+├── SoftwareStack
+│   ├── AUTOSAR
+│   ├── Middleware
+│   ├── ApplicationLayer
+│   └── SignalProcessing
+└── Safety
+    ├── ASIL_Level
+    ├── Redundancy
+    └── Validation
+</code></pre>
+<h3>Relationship Types</h3>
+<li><strong>requires:</strong> Component A requires Component B</li>
+<li><strong>validates:</strong> Agent A validates output from Agent B</li>
+<li><strong>optimizes:</strong> Agent A optimizes design from Agent B</li>
+<li><strong>monitors:</strong> Agent A tracks evolution of technology B</li>
+<li><strong>implements:</strong> Software component implements sensor function</li>
+<hr>
+<h2>Evidence Aggregation Strategy</h2>
+<h3>Confidence Scoring</h3>
+<p>Each agent uses a 0-100% confidence scale:</p>
+<li><strong>90-100%:</strong> High confidence, multiple authoritative sources, recent data</li>
+<li><strong>70-89%:</strong> Moderate confidence, some sources, reasonable assumptions</li>
+<li><strong>50-69%:</strong> Low confidence, limited sources, extrapolation required</li>
+<li><strong><50%:</strong> Speculative, significant uncertainty, expert judgment</li>
+<h3>Source Attribution</h3>
+<p>All agent outputs cite sources:
+<li>Academic papers (with DOI/URL)</li>
+<li>Patents (with patent number)</li>
+<li>Standards (with document ID)</li>
+<li>Industry reports (with publisher and date)</li>
+<li>Expert judgment (clearly marked)</li></p>
+<h3>Conflict Resolution</h3>
+<p>When agents disagree:
+<li><strong>Flag the conflict</strong> in the synthesis report</li>
+<li><strong>Explain divergence</strong> (different assumptions, data sources, methodologies)</li>
+<li><strong>Provide scenarios</strong> (optimistic, base, conservative)</li>
+<li><strong>Recommend further analysis</strong> if resolution is critical</li></p>
+<hr>
+<h2>Use Cases</h2>
+<h3>Use Case 1: Technology Roadmap Planning</h3>
+<p><strong>Scenario:</strong> An OEM is planning their 2026-2030 sensor technology roadmap.</p>
+<p><strong>Agents Involved:</strong>
+<li>Automotive Tech Scout (emerging technologies)</li>
+<li>Optical Sensor Specialist (camera/LiDAR evolution)</li>
+<li>HMI/UX Forecaster (display & interaction trends)</li>
+<li>Connectivity Standards Tracker (V2X, 5G timelines)</li></p>
+<p><strong>Output:</strong> 5-year technology adoption timeline with confidence intervals</p>
+<hr>
+<h3>Use Case 2: Sensor Suite Cost Optimization</h3>
+<p><strong>Scenario:</strong> Reduce sensor costs by 20% without compromising L2+ functionality.</p>
+<p><strong>Agents Involved:</strong>
+<li>Sensor Fusion Analyst (baseline architecture analysis)</li>
+<li>Virtual Sensor Designer (sensor elimination opportunities)</li>
+<li>SDV Architecture Validator (safety validation)</li></p>
+<p><strong>Output:</strong> Cost-optimized sensor suite with safety validation report</p>
+<hr>
+<h3>Use Case 3: New Product Concept Validation</h3>
+<p><strong>Scenario:</strong> Evaluate feasibility of a rain light sensor HUD with AR navigation.</p>
+<p><strong>Agents Involved:</strong>
+<li>HMI/UX Forecaster (market readiness, regulatory)</li>
+<li>Optical Sensor Specialist (optical design challenges)</li>
+<li>Automotive Tech Scout (supplier ecosystem, patents)</li>
+<li>Signal Processing Advisor (graphics rendering requirements)</li></p>
+<p><strong>Output:</strong> Go/no-go recommendation with risk assessment</p>
+<hr>
+<h2>Deployment Architecture</h2>
+<h3>Local Deployment</h3>
+<pre><code>User Interface (CLI / Web / IDE Plugin)
+         ↓
+Agent Orchestrator
+         ↓
+    ┌────┴────┬────────┬────────┐
+    ↓         ↓        ↓        ↓
+ Agent 1   Agent 2  Agent 3  Agent N
+    ↓         ↓        ↓        ↓
+LLM APIs  MCP Servers  Skills  Data Sources
+</code></pre>
+<h3>Cloud Deployment (Optional)</h3>
+<li>Agents run as containerized services (Docker/K8s)</li>
+<li>API gateway for unified access</li>
+<li>Caching layer for repeated queries</li>
+<li>Audit log for traceability</li>
+<hr>
+<h2>Performance Estimates</h2>
+<h3>Response Time</h3>
+<p>| Agent | Typical Query | Expected Response Time |
+|-------|--------------|----------------------|
+| SDV Architecture Validator | Architecture review | 20-40 seconds |
+| Sensor Fusion Analyst | Sensor suite analysis | 15-30 seconds |
+| HMI/UX Forecaster | 5-year trend forecast | 30-60 seconds |
+| Virtual Sensor Designer | Concept generation | 25-45 seconds |
+| Automotive Tech Scout | Technology brief | 40-90 seconds |
+| Signal Processing Advisor | Algorithm recommendation | 10-25 seconds |
+| Optical Sensor Specialist | Sensor evaluation | 15-35 seconds |
+| Connectivity Standards Tracker | Standards lookup | 20-40 seconds |</p>
+<h3>Cost Estimates (per query)</h3>
+<p>Assuming Claude Sonnet 3.5:
+<li>Simple queries: $0.02 - $0.05</li>
+<li>Complex analyses: $0.10 - $0.25</li>
+<li>Multi-agent workflows: $0.50 - $1.50</li></p>
+<hr>
+<h2>Development Roadmap</h2>
+<h3>Phase 1: Core Agents (Weeks 1-4)</h3>
+<li>Implement agent cards for all 8 agents</li>
+<li>Define shared ontology</li>
+<li>Build basic orchestrator</li>
+<li>Create test query suite</li>
+<h3>Phase 2: Integration & Testing (Weeks 5-8)</h3>
+<li>MCP server integration (for Tech Scout, Standards Tracker)</li>
+<li>Multi-agent workflows</li>
+<li>Confidence scoring calibration</li>
+<li>Documentation and examples</li>
+<h3>Phase 3: Advanced Features (Weeks 9-12)</h3>
+<li>Web UI for query submission</li>
+<li>Result visualization</li>
+<li>Agent performance monitoring</li>
+<li>Custom skill development</li>
+<h3>Phase 4: Production Hardening (Weeks 13-16)</h3>
+<li>Error handling and retry logic</li>
+<li>Caching and optimization</li>
+<li>Security and access control</li>
+<li>Deployment automation</li>
+<hr>
+<h2>Success Metrics</h2>
+<h3>Agent Performance</h3>
+<li><strong>Accuracy:</strong> >85% validated against expert assessment</li>
+<li><strong>Response Time:</strong> <60 seconds for 95% of queries</li>
+<li><strong>Confidence Calibration:</strong> Confidence scores match actual accuracy ±10%</li>
+<h3>System Performance</h3>
+<li><strong>Availability:</strong> >99% uptime for production deployment</li>
+<li><strong>Query Success Rate:</strong> >95% queries complete without errors</li>
+<li><strong>User Satisfaction:</strong> >4.0/5.0 in user surveys</li>
+<h3>Business Impact</h3>
+<li><strong>Time Savings:</strong> 50% reduction in research time for common queries</li>
+<li><strong>Decision Quality:</strong> Measurable improvement in technology selection outcomes</li>
+<li><strong>Knowledge Capture:</strong> 100% of agent interactions logged for organizational learning</li>
+<hr>
+<h2>Maintenance & Evolution</h2>
+<h3>Quarterly Reviews</h3>
+<li>Update agent prompts based on user feedback</li>
+<li>Refresh data sources and API integrations</li>
+<li>Retrain/recalibrate confidence models</li>
+<li>Add new agents for emerging needs</li>
+<h3>Data Freshness</h3>
+<li>Tech Scout: Weekly patent/publication scans</li>
+<li>Standards Tracker: Monthly standards body monitoring</li>
+<li>Other agents: On-demand updates when major industry events occur</li>
+<hr>
+<h2>Appendix: Related Resources</h2>
+<li><strong>Agent Card Templates:</strong> <code>agents/sdv-suite/cards/</code></li>
+<li><strong>Ontology Schemas:</strong> <code>agents/sdv-suite/ontology/</code></li>
+<li><strong>Example Queries:</strong> <code>agents/sdv-suite/examples/</code></li>
+<li><strong>Test Suites:</strong> <code>agents/sdv-suite/tests/</code></li></ul>
+<hr>
+<p><strong>Document Status:</strong> Draft v1.0  
+<strong>Next Review:</strong> 2024-03-07  
+<strong>Feedback:</strong> Submit issues or suggestions to the repository</p>
+<hr>
+<p><em>This agent suite design is built on years of automotive sensor architecture experience and is designed to be vendor-neutral, standards-based, and production-ready for SDV and connected car development teams.</em></p>
+        <div class="footer">
+            <p>Source: <a href="../../../agents/sdv-suite/SDV_AGENT_SYSTEM_DESIGN.md">agents/sdv-suite/SDV_AGENT_SYSTEM_DESIGN.md</a></p>
+        </div>
+    </div>
+</body>
+</html>

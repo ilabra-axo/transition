@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>README</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f5f5f5;
+            padding: 20px;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .header-actions {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #e1e4e8;
+        }
+        .export-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            background: #0366d6;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 500;
+            transition: background 0.2s;
+        }
+        .export-btn:hover {
+            background: #0256c7;
+            text-decoration: none;
+        }
+        .export-btn::before {
+            content: "📄";
+        }
+        .meta {
+            color: #6a737d;
+            font-size: 0.9em;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            margin-top: 24px;
+            margin-bottom: 16px;
+            font-weight: 600;
+            line-height: 1.25;
+            color: #1a1a1a;
+        }
+        h1 {
+            font-size: 2.5em;
+            border-bottom: 2px solid #e1e4e8;
+            padding-bottom: 0.3em;
+            margin-top: 0;
+        }
+        h2 {
+            font-size: 2em;
+            border-bottom: 1px solid #e1e4e8;
+            padding-bottom: 0.3em;
+        }
+        h3 { font-size: 1.5em; }
+        h4 { font-size: 1.25em; }
+        h5 { font-size: 1em; }
+        h6 { font-size: 0.875em; }
+        p {
+            margin-bottom: 16px;
+        }
+        a {
+            color: #0366d6;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        code {
+            background-color: #f6f8fa;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 85%;
+            color: #e83e8c;
+        }
+        pre {
+            background-color: #f6f8fa;
+            padding: 16px;
+            overflow: auto;
+            border-radius: 6px;
+            margin: 16px 0;
+            border: 1px solid #e1e4e8;
+        }
+        pre code {
+            background-color: transparent;
+            padding: 0;
+            color: #24292e;
+            display: block;
+            white-space: pre;
+        }
+        ul, ol {
+            margin: 16px 0;
+            padding-left: 32px;
+        }
+        li {
+            margin: 4px 0;
+        }
+        blockquote {
+            border-left: 4px solid #dfe2e5;
+            padding: 0 16px;
+            margin: 16px 0;
+            color: #6a737d;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 16px 0;
+        }
+        table th, table td {
+            border: 1px solid #dfe2e5;
+            padding: 8px 12px;
+            text-align: left;
+        }
+        table th {
+            background-color: #f6f8fa;
+            font-weight: 600;
+        }
+        table tr:nth-child(even) {
+            background-color: #f6f8fa;
+        }
+        hr {
+            border: 0;
+            border-top: 1px solid #e1e4e8;
+            margin: 24px 0;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+            margin: 16px 0;
+        }
+        .footer {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #e1e4e8;
+            text-align: center;
+            color: #6a737d;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header-actions">
+            <div class="meta">Generated from Markdown</div>
+            <a href="../../../agents/sdv-suite/README.md" class="export-btn" download>Export as MD</a>
+        </div>
+        <h1>SDV Connected Car Agent Suite</h1>
+<p><strong>Version:</strong> 1.0.0  
+<strong>Author:</strong> Alena Taranka  
+<strong>License:</strong> Proprietary - Transition Package  
+<strong>Last Updated:</strong> 2024-02-07</p>
+<hr>
+<h2>Overview</h2>
+<p>The <strong>SDV Connected Car Agent Suite</strong> is a collection of specialized research agents designed to support software-defined vehicle (SDV) development and connected car technology research. Built using Fermi forecasting principles and agent-based design patterns, this suite provides evidence-based insights for automotive R&D teams, sensor architects, HMI designers, and system engineers.</p>
+<h3>Key Features</h3>
+<ul><li><strong>8 Specialized Agents</strong> covering architecture, sensing, HMI, connectivity, and signal processing</li>
+<li><strong>Evidence-Based Analysis</strong> grounded in technical literature, patents, and industry standards</li>
+<li><strong>Confidence-Aware</strong> outputs with quantified uncertainty</li>
+<li><strong>Interoperable Design</strong> for independent use or orchestrated workflows</li>
+<li><strong>Production-Ready</strong> with structured JSON schemas and comprehensive documentation</li>
+<hr>
+<h2>Agent Roster</h2>
+<p>| Agent | Domain | Primary Capabilities |
+|-------|--------|---------------------|
+| <strong><a href="cards/sdv<em>arch</em>validator.json">SDV Architecture Validator</a></strong> | System Architecture | AUTOSAR validation, zonal architecture analysis, ASIL compliance, SOA patterns |
+| <strong><a href="cards/sensor<em>fusion</em>analyst.json">Sensor Fusion Analyst</a></strong> | Multi-Sensor Integration | Sensor suite design, FOV analysis, redundancy planning, FMEA |
+| <strong><a href="cards/hmi<em>ux</em>forecaster.json">HMI/UX Forecaster</a></strong> | Human-Machine Interface | Display tech trends, multimodal interaction, regulatory compliance |
+| <strong><a href="cards/virtual<em>sensor</em>designer.json">Virtual Sensor Designer</a></strong> | Software-Based Sensing | Virtual sensor feasibility, ML architecture, safety validation |
+| <strong><a href="cards/automotive<em>tech</em>scout.json">Automotive Tech Scout</a></strong> | Technology Intelligence | Patent tracking, startup ecosystem, research trends |
+| <strong><a href="cards/signal<em>processing</em>advisor.json">Signal Processing Advisor</a></strong> | Algorithm Selection | Filtering, feature extraction, real-time optimization |
+| <strong><a href="cards/optical<em>sensor</em>specialist.json">Optical Sensor Specialist</a></strong> | Camera & LiDAR | Lens design, environmental testing, calibration strategies |
+| <strong><a href="cards/connectivity<em>standards</em>tracker.json">Connectivity Standards Tracker</a></strong> | V2X & Networking | V2X evolution, automotive Ethernet, cybersecurity standards |</p>
+<hr>
+<h2>Quick Start</h2>
+<h3>Prerequisites</h3>
+<li><strong>LLM Access:</strong> Anthropic Claude API key (recommended: Claude 3.5 Sonnet)</li>
+<li><strong>Python:</strong> 3.9+ with <code>anthropic</code>, <code>requests</code>, <code>json</code> libraries</li>
+<li><strong>Optional:</strong> MCP (Model Context Protocol) servers for extended capabilities</li>
+<h3>Installation</h3>
+<pre><code><h1>Clone or copy the agent suite to your workspace</h1>
+cd transition/agents/sdv-suite
+<h1>Install dependencies</h1>
+pip install anthropic python-dotenv
+<h1>Set up API credentials</h1>
+export ANTHROPIC<em>API</em>KEY="your-api-key-here"
+</code></pre>
+<h3>Basic Usage</h3>
+<p>#### Example 1: Validate an SDV Architecture</p>
+<pre><code>import json
+from anthropic import Anthropic
+<p>client = Anthropic()</p>
+<h1>Load agent card</h1>
+with open('cards/sdv<em>arch</em>validator.json') as f:
+    agent = json.load(f)
+<h1>Prepare query</h1>
+query = """
+Validate a zonal architecture with:
+<li>3 zone controllers (left, right, rear)</li>
+<li>1 central compute unit (high-performance SoC)</li>
+<li>Ethernet backbone (1 Gbps)</li>
+<li>AUTOSAR Adaptive Platform</li>
+<li>Target: L3 highway pilot, ASIL-D for AD functions</li>
+<p>Evaluate compliance with AUTOSAR AP R22-11 and ISO 26262.
+"""</p>
+<h1>Execute agent</h1>
+response = client.messages.create(
+    model=agent['executor']['config']['model'],
+    max<em>tokens=agent['executor']['config']['max</em>tokens'],
+    temperature=agent['executor']['config']['temperature'],
+    system=agent['executor']['config']['system_prompt'],
+    messages=[{"role": "user", "content": query}]
+)
+<p>print(response.content[0].text)
+</code></pre></p>
+<p>#### Example 2: Analyze a Sensor Suite</p>
+<pre><code>query = """
+Analyze this sensor suite for L2+ highway pilot:
+<li>3 front cameras: 1 telephoto (50° HFOV, 200m range), 2 wide-angle (120° HFOV, 60m range)</li>
+<li>5 radars: 1 long-range front (77 GHz, 250m), 4 corner radars (77 GHz, 100m)</li>
+<li>1 front LiDAR: solid-state, 120° HFOV, 150m range</li>
+<li>Target cost: $800</li>
+<li>ASIL-B required</li>
+<p>Evaluate coverage, redundancy, and cost optimization opportunities.
+"""</p>
+<h1>Use sensor<em>fusion</em>analyst agent card</h1>
+with open('cards/sensor<em>fusion</em>analyst.json') as f:
+    agent = json.load(f)
+<h1>Execute (same pattern as above)</h1>
+</code></pre>
+<p>#### Example 3: Forecast HMI Trends</p>
+<pre><code>query = """
+Forecast the adoption of augmented reality head-up displays (AR-HUD) 
+for navigation in premium vehicles over the next 5 years.
+<p>Focus on:
+<li>Technology maturity and cost trajectory</li>
+<li>Regulatory compliance (NHTSA distraction guidelines)</li>
+<li>Competitive landscape (Mercedes, BMW, Audi)</li>
+<li>Market penetration probability by 2027, 2029</li></p>
+<p>Provide confidence intervals and key risk factors.
+"""</p>
+<h1>Use hmi<em>ux</em>forecaster agent card</h1>
+with open('cards/hmi<em>ux</em>forecaster.json') as f:
+    agent = json.load(f)
+<h1>Execute</h1>
+</code></pre>
+<hr>
+<h2>Multi-Agent Workflows</h2>
+<p>Agents can be orchestrated for complex analyses. See <a href="SDV</em>AGENT<em>SYSTEM</em>DESIGN.html">SDV<em>AGENT</em>SYSTEM<em>DESIGN.md</a> for detailed workflow examples.</p>
+<h3>Example Workflow: L3 Autonomous Driving System Design</h3>
+<pre><code>Step 1: Sensor Fusion Analyst
+  → Design sensor suite for L3 highway pilot with $800 cost target
+<p>Step 2: Optical Sensor Specialist
+  → Validate camera/LiDAR specifications and supplier options</p>
+<p>Step 3: Virtual Sensor Designer
+  → Evaluate virtual sensor opportunities to reduce cost</p>
+<p>Step 4: Signal Processing Advisor
+  → Recommend ECU compute requirements and algorithms</p>
+<p>Step 5: SDV Architecture Validator
+  → Validate ASIL-B compliance and architecture design</p>
+<p>Step 6: Connectivity Standards Tracker
+  → Add V2X integration and OTA update recommendations
+</code></pre></p>
+<p><strong>Synthesis:</strong> Combine outputs with confidence weighting and source attribution.</p>
+<hr>
+<h2>Agent Cards</h2>
+<p>Each agent is defined by a JSON card containing:</p>
+<li><strong>Metadata:</strong> ID, name, version, tags, description</li>
+<li><strong>Executor:</strong> LLM configuration (model, temperature, system prompt)</li>
+<li><strong>Input Schema:</strong> Structured input format</li>
+<li><strong>Output Schema:</strong> Expected output structure</li>
+<li><strong>Data Sources:</strong> Reference materials and APIs</li>
+<li><strong>Performance Estimates:</strong> Response time, cost, accuracy</li>
+<li><strong>Example Queries:</strong> Sample use cases</li>
+<li><strong>Error Handling:</strong> Fallback strategies</li>
+<li><strong>Limitations:</strong> Known constraints</li>
+<h3>Schema Example</h3>
+<pre><code>{
+  "agent<em>id": "sdv</em>arch_validator",
+  "agent_name": "SDV Architecture Validator",
+  "version": "1.0.0",
+  "executor": {
+    "type": "llm",
+    "config": {
+      "provider": "anthropic",
+      "model": "claude-3-5-sonnet-20241022",
+      "temperature": 0.2,
+      "system_prompt": "You are an expert..."
+    }
+  },
+  "input_schema": { ... },
+  "output_schema": { ... }
+}
+</code></pre>
+<hr>
+<h2>System Architecture</h2>
+<h3>Design Principles</h3>
+<li><strong>Domain Specialization:</strong> Each agent has deep expertise in a specific SDV area</li>
+<li><strong>Evidence-Based:</strong> All outputs cite sources (papers, patents, standards)</li>
+<li><strong>Confidence-Aware:</strong> Agents quantify uncertainty (0-100% scores)</li>
+<li><strong>Interoperable:</strong> Shared ontology enables agent collaboration</li>
+<li><strong>Production-Ready:</strong> Structured I/O, error handling, performance SLAs</li>
+<h3>Ontology</h3>
+<p>All agents share a common SDV ontology:</p>
+<pre><code>Vehicle
+├── Architecture (DomainController, ZonalArchitecture, CentralCompute)
+├── SensorSuite (Camera, Radar, LiDAR, Ultrasonic, Virtual)
+├── HMI (Display, Controls, Voice, Haptics)
+├── Connectivity (V2X, Cellular, InVehicleNetwork, OTA)
+├── SoftwareStack (AUTOSAR, Middleware, Applications, SignalProcessing)
+└── Safety (ASIL_Level, Redundancy, Validation)
+</code></pre>
+<h3>Confidence Scoring</h3>
+<p>| Score Range | Interpretation | Typical Characteristics |
+|-------------|---------------|------------------------|
+| 90-100% | High confidence | Multiple authoritative sources, recent data, well-established domain |
+| 70-89% | Moderate confidence | Some sources, reasonable assumptions, established patterns |
+| 50-69% | Low confidence | Limited sources, extrapolation required, emerging domain |
+| <50% | Speculative | Significant uncertainty, expert judgment, novel area |</p>
+<hr>
+<h2>Performance Benchmarks</h2>
+<p>Based on Claude 3.5 Sonnet (as of 2024-02-07):</p>
+<p>| Agent | Avg Response Time | Cost per Query | Success Rate |
+|-------|------------------|----------------|--------------|
+| SDV Architecture Validator | 30s | $0.15 | 95% |
+| Sensor Fusion Analyst | 25s | $0.12 | 92% |
+| HMI/UX Forecaster | 45s | $0.18 | 88% |
+| Virtual Sensor Designer | 35s | $0.18 | 88% |
+| Automotive Tech Scout | 60s | $0.25 | 90% |
+| Signal Processing Advisor | 20s | $0.10 | 94% |
+| Optical Sensor Specialist | 25s | $0.12 | 93% |
+| Connectivity Standards Tracker | 30s | $0.15 | 91% |</p>
+<p><strong>Note:</strong> Complex multi-agent workflows: $0.50-$1.50 per analysis.</p>
+<hr>
+<h2>Use Cases</h2>
+<h3>1. Technology Roadmap Planning</h3>
+<p><strong>Scenario:</strong> Plan 2026-2030 sensor technology roadmap for OEM</p>
+<p><strong>Agents:</strong>
+<li>Automotive Tech Scout (emerging technologies)</li>
+<li>Optical Sensor Specialist (camera/LiDAR evolution)</li>
+<li>HMI/UX Forecaster (cockpit trends)</li>
+<li>Connectivity Standards Tracker (V2X timelines)</li></p>
+<p><strong>Output:</strong> 5-year adoption timeline with confidence intervals</p>
+<hr>
+<h3>2. Sensor Suite Cost Optimization</h3>
+<p><strong>Scenario:</strong> Reduce sensor costs by 20% without compromising L2+ functionality</p>
+<p><strong>Agents:</strong>
+<li>Sensor Fusion Analyst (baseline analysis)</li>
+<li>Virtual Sensor Designer (elimination opportunities)</li>
+<li>SDV Architecture Validator (safety validation)</li></p>
+<p><strong>Output:</strong> Cost-optimized design with safety report</p>
+<hr>
+<h3>3. New Product Concept Validation</h3>
+<p><strong>Scenario:</strong> Evaluate rain light sensor AR-HUD feasibility</p>
+<p><strong>Agents:</strong>
+<li>HMI/UX Forecaster (market readiness)</li>
+<li>Optical Sensor Specialist (optical challenges)</li>
+<li>Automotive Tech Scout (supplier ecosystem)</li>
+<li>Signal Processing Advisor (rendering requirements)</li></p>
+<p><strong>Output:</strong> Go/no-go recommendation with risk assessment</p>
+<hr>
+<h2>Advanced Features</h2>
+<h3>MCP Server Integration</h3>
+<p>Agents can leverage Model Context Protocol (MCP) servers for enhanced capabilities:</p>
+<li><strong>Patent Search:</strong> USPTO, EPO, WIPO integration</li>
+<li><strong>Arxiv Search:</strong> Research paper discovery</li>
+<li><strong>Sensor Database:</strong> Automotive sensor specifications and pricing</li>
+<li><strong>Standards API:</strong> Real-time standards tracking (SAE, ISO, ETSI)</li>
+<h3>Custom Skills</h3>
+<p>Some agents support custom Python skills:</p>
+<li><strong>Depth Estimation Calculator:</strong> Camera geometry calculations</li>
+<li><strong>ML Performance Estimator:</strong> Model accuracy prediction</li>
+<li><strong>FOV Overlap Calculator:</strong> Sensor coverage analysis</li>
+<h3>Caching & Optimization</h3>
+<p>For production deployments:</p>
+<li>Cache repeated queries (e.g., standard sensor configurations)</li>
+<li>Batch processing for technology scouting</li>
+<li>Pre-compute common analysis scenarios</li>
+<hr>
+<h2>Development & Customization</h2>
+<h3>Adding a New Agent</h3>
+<li><strong>Define Agent Concept:</strong> Domain, capabilities, unique value</li>
+<li><strong>Create Agent Card:</strong> Use <a href="../../PROMPT<em>ENGINEERING</em>GUIDE.html">PROMPT<em>ENGINEERING</em>GUIDE.md</a> Prompt 1</li>
+<li><strong>Design System Prompt:</strong> Focus on evidence-based analysis and confidence scoring</li>
+<li><strong>Define I/O Schemas:</strong> Structure input/output for consistency</li>
+<li><strong>Test with Examples:</strong> Validate with 5-10 representative queries</li>
+<li><strong>Document:</strong> Add to README and create agent-specific documentation</li>
+<h3>Customizing Existing Agents</h3>
+<li><strong>Adjust Temperature:</strong> Lower (0.1-0.2) for deterministic, higher (0.4-0.6) for creative</li>
+<li><strong>Tune System Prompt:</strong> Add domain-specific constraints or output formats</li>
+<li><strong>Extend Input Schema:</strong> Add optional parameters for specialized use cases</li>
+<li><strong>Update Data Sources:</strong> Reference newer standards or proprietary databases</li>
+<h3>Best Practices</h3>
+<li><strong>Provide Context:</strong> Include vehicle class, market segment, development phase</li>
+<li><strong>Specify Constraints:</strong> Cost targets, timeline, regulatory requirements</li>
+<li><strong>Request Justification:</strong> Ask for sources, assumptions, and confidence rationale</li>
+<li><strong>Iterate:</strong> Refine queries based on initial outputs</li>
+<li><strong>Validate:</strong> Cross-check critical recommendations with domain experts</li>
+<hr>
+<h2>Limitations & Considerations</h2>
+<h3>General Limitations</h3>
+<li><strong>Knowledge Cutoff:</strong> LLMs have training data cutoffs (check model release date)</li>
+<li><strong>No Real-World Testing:</strong> Agents cannot validate designs with physical experiments</li>
+<li><strong>Proprietary Data:</strong> Limited access to OEM internal roadmaps and specifications</li>
+<li><strong>Rapid Evolution:</strong> Automotive tech evolves quickly; agents need periodic updates</li>
+<h3>Agent-Specific Limitations</h3>
+<p>See individual agent cards for detailed limitations.</p>
+<h3>Responsible Use</h3>
+<li><strong>Expert Review:</strong> Agent outputs should inform, not replace, expert judgment</li>
+<li><strong>Safety Critical:</strong> For ASIL-C/D systems, formal verification is required</li>
+<li><strong>IP Protection:</strong> Avoid sharing proprietary designs in queries to external LLMs</li>
+<li><strong>Bias Awareness:</strong> LLM outputs may reflect biases in training data</li>
+<hr>
+<h2>Roadmap</h2>
+<h3>Phase 1: Core Agents ✅ (Complete)</h3>
+<li>8 agent cards with full specifications</li>
+<li>System design document</li>
+<li>Basic usage examples</li>
+<h3>Phase 2: Integration & Testing (Next)</h3>
+<li>[ ] MCP server integration (patent search, arxiv)</li>
+<li>[ ] Multi-agent orchestrator</li>
+<li>[ ] Confidence calibration dataset</li>
+<li>[ ] Comprehensive test suite</li>
+<h3>Phase 3: Advanced Features</h3>
+<li>[ ] Web UI for query submission</li>
+<li>[ ] Result visualization (charts, diagrams)</li>
+<li>[ ] Agent performance monitoring dashboard</li>
+<li>[ ] Custom skill library</li>
+<h3>Phase 4: Production Hardening</h3>
+<li>[ ] Error handling and retry logic</li>
+<li>[ ] Query caching and optimization</li>
+<li>[ ] Authentication and access control</li>
+<li>[ ] Deployment automation (Docker, K8s)</li>
+<hr>
+<h2>Related Documentation</h2>
+<li><strong><a href="SDV<em>AGENT</em>SYSTEM_DESIGN.html">System Design</a>:</strong> Multi-agent architecture and workflows</li>
+<li><strong><a href="../../PROMPT<em>ENGINEERING</em>GUIDE.html">Prompt Engineering Guide</a>:</strong> Agent development patterns</li>
+<li><strong><a href="cards/">Agent Cards</a>:</strong> Individual agent specifications</li>
+<li><strong><a href="examples/">Examples</a>:</strong> Sample queries and outputs <em>(coming soon)</em></li>
+<li><strong><a href="tests/">Tests</a>:</strong> Validation test suites <em>(coming soon)</em></li>
+<hr>
+<h2>Support & Contributions</h2>
+<h3>Reporting Issues</h3>
+<p>For bugs, feature requests, or questions:</p>
+<li>Check existing documentation</li>
+<li>Review agent limitations</li>
+<li>Submit detailed issue with:</li>
+   - Agent ID
+   - Input query
+   - Expected vs. actual output
+   - LLM model and version
+<h3>Contributing</h3>
+<p>Contributions welcome for:</p>
+<li>New agent designs</li>
+<li>Improved system prompts</li>
+<li>Validation test cases</li>
+<li>Documentation improvements</li>
+<li>MCP server integrations</li>
+<hr>
+<h2>License</h2>
+<p><strong>Proprietary - Transition Package</strong></p>
+<p>This agent suite is part of a professional transition package consolidating years of automotive R&D experience. All rights reserved.</p>
+<p>For inquiries about licensing or collaboration, contact the author.</p>
+<hr>
+<h2>Citation</h2>
+<p>If you reference this work:</p>
+<pre><code>Taranka, A. (2024). SDV Connected Car Agent Suite: 
+Multi-Agent Research System for Software-Defined Vehicles. 
+Transition Package v1.0.
+</code></pre>
+<hr>
+<h2>Acknowledgments</h2>
+<p>This agent suite design draws on:</p>
+<li><strong>Fermi Project:</strong> Agent-based forecasting framework and template patterns</li>
+<li><strong>Automotive Industry Standards:</strong> AUTOSAR, ISO 26262, SAE J3016, ISO/SAE 21434</li>
+<li><strong>Research Community:</strong> IEEE, SAE, CVPR publications on automotive perception and HMI</li>
+<li><strong>9+ Years of Automotive R&D:</strong> Sensor architecture, optical metrology, and SDV development</li></ul>
+<hr>
+<p><strong>Built with expertise. Powered by AI. Grounded in evidence.</strong></p>
+<p><em>"From sensors to systems, from concepts to confidence."</em></p>
+        <div class="footer">
+            <p>Source: <a href="../../../agents/sdv-suite/README.md">agents/sdv-suite/README.md</a></p>
+        </div>
+    </div>
+</body>
+</html>

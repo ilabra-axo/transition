@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PROMPT_ENGINEERING_GUIDE</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f5f5f5;
+            padding: 20px;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .header-actions {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #e1e4e8;
+        }
+        .export-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            background: #0366d6;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 500;
+            transition: background 0.2s;
+        }
+        .export-btn:hover {
+            background: #0256c7;
+            text-decoration: none;
+        }
+        .export-btn::before {
+            content: "📄";
+        }
+        .meta {
+            color: #6a737d;
+            font-size: 0.9em;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            margin-top: 24px;
+            margin-bottom: 16px;
+            font-weight: 600;
+            line-height: 1.25;
+            color: #1a1a1a;
+        }
+        h1 {
+            font-size: 2.5em;
+            border-bottom: 2px solid #e1e4e8;
+            padding-bottom: 0.3em;
+            margin-top: 0;
+        }
+        h2 {
+            font-size: 2em;
+            border-bottom: 1px solid #e1e4e8;
+            padding-bottom: 0.3em;
+        }
+        h3 { font-size: 1.5em; }
+        h4 { font-size: 1.25em; }
+        h5 { font-size: 1em; }
+        h6 { font-size: 0.875em; }
+        p {
+            margin-bottom: 16px;
+        }
+        a {
+            color: #0366d6;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        code {
+            background-color: #f6f8fa;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 85%;
+            color: #e83e8c;
+        }
+        pre {
+            background-color: #f6f8fa;
+            padding: 16px;
+            overflow: auto;
+            border-radius: 6px;
+            margin: 16px 0;
+            border: 1px solid #e1e4e8;
+        }
+        pre code {
+            background-color: transparent;
+            padding: 0;
+            color: #24292e;
+            display: block;
+            white-space: pre;
+        }
+        ul, ol {
+            margin: 16px 0;
+            padding-left: 32px;
+        }
+        li {
+            margin: 4px 0;
+        }
+        blockquote {
+            border-left: 4px solid #dfe2e5;
+            padding: 0 16px;
+            margin: 16px 0;
+            color: #6a737d;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 16px 0;
+        }
+        table th, table td {
+            border: 1px solid #dfe2e5;
+            padding: 8px 12px;
+            text-align: left;
+        }
+        table th {
+            background-color: #f6f8fa;
+            font-weight: 600;
+        }
+        table tr:nth-child(even) {
+            background-color: #f6f8fa;
+        }
+        hr {
+            border: 0;
+            border-top: 1px solid #e1e4e8;
+            margin: 24px 0;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+            margin: 16px 0;
+        }
+        .footer {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #e1e4e8;
+            text-align: center;
+            color: #6a737d;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header-actions">
+            <div class="meta">Generated from Markdown</div>
+            <a href="../PROMPT_ENGINEERING_GUIDE.md" class="export-btn" download>Export as MD</a>
+        </div>
+        <h1>Prompt Engineering Guide for Agent Development</h1>
+<p>This guide provides proven prompts to help you generate high-quality agent designs, ontologies, and documentation using AI assistants (Claude, GPT-4, etc.).</p>
+<h2>Table of Contents</h2>
+<li><a href="#agent-card-generation">Agent Card Generation</a></li>
+<li><a href="#ontology-design">Ontology Design</a></li>
+<li><a href="#documentation-writing">Documentation Writing</a></li>
+<li><a href="#example-query-generation">Example Query Generation</a></li>
+<li><a href="#error-handling-scenarios">Error Handling Scenarios</a></li>
+<li><a href="#performance-estimation">Performance Estimation</a></li>
+<li><a href="#iterative-refinement">Iterative Refinement</a></li>
+<hr>
+<h2>Agent Card Generation</h2>
+<h3>Prompt 1: Initial Agent Card from Concept</h3>
+<pre><code>I'm designing a Fermi forecasting agent. Help me create an agent_card.json file.
+<p><strong>Agent Concept:</strong> [Describe what your agent does in 2-3 sentences]</p>
+<p><strong>Domain:</strong> [e.g., market analysis, sentiment, risk assessment, technical specs]</p>
+<p><strong>Data Sources:</strong> [e.g., APIs, databases, LLM analysis, web scraping]</p>
+<p>Please generate a complete agent_card.json following the Fermi specification with:
+<ul><li>Appropriate executor type (llm, mcp, manual, skill)</li>
+<li>Model selection and temperature tuning</li>
+<li>MCP server configurations (if needed)</li>
+<li>Realistic performance estimates</li>
+<li>Proper JSON structure with all required fields</li></p>
+<p>Reference the template at: agents/templates/agent_card.json
+</code></pre></p>
+<p><strong>Example:</strong>
+<pre><code>I'm designing a Fermi forecasting agent. Help me create an agent_card.json file.</p>
+<p><strong>Agent Concept:</strong> Tracks cryptocurrency market sentiment by analyzing social media posts, news headlines, and trading volume. Provides sentiment scores and identifies emerging trends.</p>
+<p><strong>Domain:</strong> Sentiment analysis + market intelligence</p>
+<p><strong>Data Sources:</strong> Twitter API, Reddit API, CoinGecko API, news RSS feeds</p>
+<p>Please generate a complete agent_card.json following the Fermi specification...
+</code></pre></p>
+<h3>Prompt 2: Refine Existing Agent Card</h3>
+<pre><code>I have an agent card but need to improve it. Please review and suggest improvements.
+<p><strong>Current agent_card.json:</strong>
+[Paste your JSON]</p>
+<p><strong>Issues I'm experiencing:</strong>
+<li>[e.g., Low confidence scores, slow execution, high costs]</li></p>
+<p><strong>Goals:</strong>
+<li>[e.g., Improve accuracy to >85%, reduce response time to <3s]</li></p>
+<p>Please suggest:
+<li>Better model selection (Haiku/Sonnet/Opus)</li>
+<li>Temperature tuning</li>
+<li>System prompt improvements</li>
+<li>MCP server optimizations</li>
+<li>Any missing fields or configurations</li>
+</code></pre></p>
+<h3>Prompt 3: Convert User Story to Agent Card</h3>
+<pre><code>Convert this user story into a Fermi agent card:
+<p><strong>User Story:</strong> "As a [role], I want to [action] so that [benefit]"</p>
+<p>Example: "As a product manager, I want to track competitor feature releases so that I can prioritize our roadmap effectively."</p>
+<p>Please generate:
+<li>agent<em>name (lowercase</em>with_underscores)</li>
+<li>agent_type (classification)</li>
+<li>Appropriate executor configuration</li>
+<li>Data source recommendations (APIs, databases, etc.)</li>
+<li>Complete agent_card.json</li></p>
+<p>Make it production-ready with realistic configurations.
+</code></pre></p>
+<hr>
+<h2>Ontology Design</h2>
+<h3>Prompt 4: Generate Entity-Relationship Diagram</h3>
+<pre><code>I'm designing the ontology for a Fermi agent. Generate a Mermaid ER diagram.
+<p><strong>Agent Purpose:</strong> [What does your agent do?]</p>
+<p><strong>Key Concepts:</strong> [List 5-10 important nouns your agent tracks]
+Examples: Companies, Products, Technologies, Market Segments, Vulnerabilities, etc.</p>
+<p><strong>Relationships:</strong> [Describe how concepts connect]
+Example: "Companies produce Products, Products use Technologies"</p>
+<p>Please generate:
+<li>Mermaid erDiagram syntax</li>
+<li>5-15 core entities (not too many!)</li>
+<li>Proper cardinality (||--||, ||--o{, }o--||, }o--o{)</li>
+<li>Appropriate attributes for each entity (id, name, timestamps, scores, etc.)</li>
+<li>Clear relationship labels</li></p>
+<p>Keep it simple and focused. Avoid over-engineering.</p>
+<p>Reference: https://mermaid.js.org/syntax/entityRelationshipDiagram.html
+</code></pre></p>
+<p><strong>Example:</strong>
+<pre><code>I'm designing the ontology for a Fermi agent. Generate a Mermaid ER diagram.</p>
+<p><strong>Agent Purpose:</strong> Tracks technology adoption trends across enterprises</p>
+<p><strong>Key Concepts:</strong> 
+<li>Companies (enterprises adopting technology)</li>
+<li>Technologies (software, frameworks, tools)</li>
+<li>Adoption Events (when companies start using tech)</li>
+<li>Use Cases (how tech is being used)</li>
+<li>Decision Makers (people influencing adoption)</li></p>
+<p><strong>Relationships:</strong>
+<li>Companies adopt Technologies through Adoption Events</li>
+<li>Technologies are used for Use Cases</li>
+<li>Decision Makers work at Companies and influence Adoption Events</li></p>
+<p>Please generate a complete Mermaid erDiagram...
+</code></pre></p>
+<h3>Prompt 5: Validate and Improve Ontology</h3>
+<pre><code>Review my ontology design and suggest improvements.
+<p><strong>Current ontology.mermaid:</strong>
+[Paste your Mermaid code]</p>
+<p><strong>Questions:</strong>
+<li>Are there redundant relationships?</li>
+<li>Is cardinality correct?</li>
+<li>Are entity attributes appropriate?</li>
+<li>Is it over-engineered or too simple?</li>
+<li>Will it scale as the agent learns?</li>
+<li>Are there missing entities or relationships?</li></p>
+<p>Please provide:
+<li>Specific improvements with justification</li>
+<li>Updated Mermaid code</li>
+<li>Best practices I should follow</li>
+</code></pre></p>
+<h3>Prompt 6: Expand Ontology for New Capabilities</h3>
+<pre><code>I need to expand my agent's ontology to support new capabilities.
+<p><strong>Current ontology:</strong> [Brief description or paste Mermaid]</p>
+<p><strong>New capability:</strong> [What new thing should the agent track?]</p>
+<p><strong>New concepts:</strong> [List new entities/relationships needed]</p>
+<p>Please:
+<li>Identify new entities to add</li>
+<li>Define relationships to existing entities</li>
+<li>Ensure normalization (avoid redundancy)</li>
+<li>Update Mermaid diagram</li>
+<li>Explain the design decisions</li></p>
+<p>Keep backward compatibility where possible.
+</code></pre></p>
+<hr>
+<h2>Documentation Writing</h2>
+<h3>Prompt 7: Generate Agent README</h3>
+<pre><code>Write a comprehensive README.md for my Fermi agent.
+<p><strong>Agent Card:</strong> [Paste key fields: name, type, executor, capabilities]</p>
+<p><strong>Ontology:</strong> [Brief description of entities]</p>
+<p><strong>Example Queries:</strong> [2-3 questions the agent answers]</p>
+<p>Please generate a README with these sections:
+<li>Overview (2-3 sentences)</li>
+<li>Key Capabilities (bullet list)</li>
+<li>Data Sources (if MCP: list APIs with endpoints)</li>
+<li>Ontology Structure (entity summary)</li>
+<li>Usage Examples (3 detailed examples with inputs/outputs)</li>
+<li>Performance Metrics (based on agent card)</li>
+<li>Configuration (environment variables, API keys)</li>
+<li>Error Handling (failure modes and fallbacks)</li>
+<li>Best Practices (for users of this agent)</li>
+<li>Limitations (honest about what it can't do)</li>
+<li>Troubleshooting (common issues and solutions)</li></p>
+<p>Target length: 400-800 lines
+Tone: Professional but accessible
+Include: Code blocks, examples, realistic outputs
+</code></pre></p>
+<h3>Prompt 8: Write Usage Examples</h3>
+<pre><code>Generate 5 realistic usage examples for my agent.
+<p><strong>Agent:</strong> [Name and brief description]</p>
+<p><strong>Capabilities:</strong> [What it can do]</p>
+<p>For each example, provide:
+<li><strong>User Query:</strong> Natural language question</li>
+<li><strong>Agent Process:</strong> Step-by-step what agent does</li>
+<li><strong>Output:</strong> Realistic JSON response with:</li>
+   - Data/insights
+   - Confidence score (0.0-1.0)
+   - Evidence/justification
+   - Sources (if applicable)</p>
+<p>Make outputs realistic - include:
+<li>Appropriate confidence levels (not always 0.95!)</li>
+<li>Real-world data patterns</li>
+<li>Honest limitations (e.g., "Data unavailable for...")</li>
+<li>Proper timestamps and units</li></p>
+<p>Examples should range from simple to complex queries.
+</code></pre></p>
+<h3>Prompt 9: Document Error Scenarios</h3>
+<pre><code>Help me document error handling for my agent.
+<p><strong>Agent:</strong> [Name and executor type]</p>
+<p><strong>Data Sources:</strong> [APIs, databases, etc.]</p>
+<p>Please generate a "Error Handling" section covering:</p>
+<li><strong>Common Failures:</strong></li>
+   - API unavailable
+   - Rate limit exceeded
+   - Invalid/malformed data
+   - Timeout
+   - Authentication failure
+   - Parse error
+<li><strong>For Each Failure:</strong></li>
+   - <strong>Scenario:</strong> When does this happen?
+   - <strong>Fallback:</strong> What does agent do?
+   - <strong>Output:</strong> How is error communicated?
+   - <strong>User Action:</strong> What should user do?
+   - <strong>Confidence Impact:</strong> How does confidence score change?
+<li><strong>Graceful Degradation Examples:</strong></li>
+   Show realistic degraded outputs with lower confidence
+<p>Make it practical and user-friendly.
+</code></pre></p>
+<hr>
+<h2>Example Query Generation</h2>
+<h3>Prompt 10: Generate Test Queries</h3>
+<pre><code>Generate 10 test queries for my Fermi agent.
+<p><strong>Agent:</strong> [Name and description]</p>
+<p><strong>Capabilities:</strong> [What it can do]</p>
+<p><strong>Data Sources:</strong> [Where it gets information]</p>
+<p>Please provide:
+<li><strong>5 Expected Success Cases:</strong></li>
+   - Queries agent should handle well
+   - Include simple, medium, complex examples
+   - Specify expected confidence levels (>0.7)</p>
+<li><strong>3 Edge Cases:</strong></li>
+   - Queries at limits of agent capabilities
+   - Expected confidence: 0.5-0.7
+   - Should still provide useful output
+<li><strong>2 Failure Cases:</strong></li>
+   - Queries agent cannot answer
+   - Should gracefully decline or return low confidence (<0.5)
+   - Clear explanation of why
+<p>For each query:
+<li>Natural language question</li>
+<li>Expected output structure</li>
+<li>Confidence score estimate</li>
+<li>Notes on why this tests specific capability</li>
+</code></pre></p>
+<h3>Prompt 11: Create Forecast Scenarios</h3>
+<pre><code>Create realistic forecast scenarios for testing my agent.
+<p><strong>Agent Domain:</strong> [e.g., market analysis, risk assessment]</p>
+<p><strong>Forecast Horizon:</strong> [e.g., 3 months, 1 year, 5 years]</p>
+<p>Generate 5 scenarios with:</p>
+<li><strong>Scenario Description:</strong> Context and assumptions</li>
+<li><strong>Key Questions:</strong> What needs forecasting?</li>
+<li><strong>Required Evidence:</strong> What data agent needs to gather</li>
+<li><strong>Expected Insights:</strong> What agent should discover</li>
+<li><strong>Uncertainty Factors:</strong> Sources of uncertainty</li>
+<li><strong>Confidence Range:</strong> Expected confidence levels</li>
+<li><strong>Decision Impact:</strong> How forecast informs decisions</li>
+<p>Make scenarios realistic and actionable.
+</code></pre></p>
+<hr>
+<h2>Error Handling Scenarios</h2>
+<h3>Prompt 12: Design Fallback Strategies</h3>
+<pre><code>Design fallback strategies for my agent's error scenarios.
+<p><strong>Agent:</strong> [Name and type]</p>
+<p><strong>Critical Dependencies:</strong> [APIs, databases, services it relies on]</p>
+<p>For each dependency, please design:</p>
+<li><strong>Primary Strategy:</strong> Normal operation</li>
+<li><strong>Fallback Level 1:</strong> What to try if primary fails</li>
+<li><strong>Fallback Level 2:</strong> If Level 1 also fails</li>
+<li><strong>Ultimate Fallback:</strong> Last resort (manual review, cached data, etc.)</li>
+<p>For each level, specify:
+<li>How to detect failure</li>
+<li>When to trigger fallback</li>
+<li>Expected output quality</li>
+<li>Confidence score adjustment</li>
+<li>User notification message</li></p>
+<p>Make it production-ready with realistic retry logic and timeouts.
+</code></pre></p>
+<hr>
+<h2>Performance Estimation</h2>
+<h3>Prompt 13: Estimate Performance Metrics</h3>
+<pre><code>Help me estimate realistic performance metrics for my agent.
+<p><strong>Agent Configuration:</strong>
+<li>Executor: [llm/mcp/manual/skill]</li>
+<li>Model: [if LLM: Haiku/Sonnet/Opus]</li>
+<li>Data Sources: [List APIs, databases]</li>
+<li>Complexity: [Simple/Medium/Complex]</li></p>
+<p>Please estimate:</p>
+<li><strong>Accuracy Rate:</strong></li>
+   - Expected accuracy (0.0-1.0)
+   - Justification based on task complexity
+   - Factors affecting accuracy
+<li><strong>Average Confidence:</strong></li>
+   - Typical confidence score
+   - Confidence distribution (high/medium/low)
+<li><strong>Execution Time:</strong></li>
+   - Average response time (ms)
+   - Breakdown by component (LLM call, API calls, processing)
+   - Best/worst case scenarios
+<li><strong>Cost per Execution:</strong></li>
+   - LLM costs (if applicable)
+   - API costs (if applicable)
+   - Total cost estimate
+<li><strong>Throughput:</strong></li>
+   - Queries per minute/hour
+   - Rate limiting factors
+   - Scalability considerations
+<p>Base estimates on similar systems and realistic assumptions.
+</code></pre></p>
+<h3>Prompt 14: Design Calibration Plan</h3>
+<pre><code>Design a calibration plan for my agent's confidence scores.
+<p><strong>Agent:</strong> [Name and type]</p>
+<p><strong>Current State:</strong> [Initial deployment / needs recalibration]</p>
+<p>Please provide:</p>
+<li><strong>Calibration Methodology:</strong></li>
+   - How to collect ground truth data
+   - Sample size needed for calibration
+   - Calibration frequency (weekly/monthly)
+<li><strong>Evaluation Metrics:</strong></li>
+   - Accuracy vs. predicted confidence
+   - Calibration curve analysis
+   - Over/under-confidence detection
+<li><strong>Adjustment Strategy:</strong></li>
+   - When to adjust confidence thresholds
+   - How to tune confidence calculation
+   - Version control for calibration updates
+<li><strong>Monitoring:</strong></li>
+   - Ongoing metrics to track
+   - Drift detection
+   - Recalibration triggers
+<p>Make it practical for production deployment.
+</code></pre></p>
+<hr>
+<h2>Iterative Refinement</h2>
+<h3>Prompt 15: Improve Agent Based on Feedback</h3>
+<pre><code>Improve my agent based on real-world feedback.
+<p><strong>Agent:</strong> [Name]</p>
+<p><strong>Current Performance:</strong>
+<li>Accuracy: [X%]</li>
+<li>Avg Confidence: [X]</li>
+<li>Execution Time: [X ms]</li>
+<li>User Satisfaction: [Low/Medium/High]</li></p>
+<p><strong>User Feedback:</strong>
+[List specific complaints or issues]
+Examples:
+<li>"Responses too slow"</li>
+<li>"Low confidence on simple queries"</li>
+<li>"Missing important data sources"</li>
+<li>"Errors on edge cases"</li></p>
+<p>Please suggest:</p>
+<li><strong>Quick Wins:</strong> Changes that immediately improve performance</li>
+<li><strong>Configuration Tuning:</strong> Temperature, model, thresholds</li>
+<li><strong>Data Source Additions:</strong> New APIs or data to integrate</li>
+<li><strong>Prompt Engineering:</strong> Better system prompts</li>
+<li><strong>Ontology Evolution:</strong> Entities/relationships to add</li>
+<li><strong>Documentation Updates:</strong> Clarifications needed</li>
+<p>Prioritize by impact vs. effort.
+</code></pre></p>
+<h3>Prompt 16: Compare Agent Approaches</h3>
+<pre><code>Compare different approaches for my agent design.
+<p><strong>Agent Goal:</strong> [What it should accomplish]</p>
+<p><strong>Approach A:</strong> [Current design]
+<li>Executor: [Type]</li>
+<li>Model: [If LLM]</li>
+<li>Data Sources: [List]</li>
+<li>Pros: [Advantages]</li>
+<li>Cons: [Disadvantages]</li></p>
+<p><strong>Approach B:</strong> [Alternative design]
+<li>Executor: [Type]</li>
+<li>Model: [If LLM]</li>
+<li>Data Sources: [List]</li>
+<li>Pros: [Advantages]</li>
+<li>Cons: [Disadvantages]</li></p>
+<p>Please compare on:
+<li><strong>Accuracy:</strong> Which will be more accurate?</li>
+<li><strong>Speed:</strong> Response time comparison</li>
+<li><strong>Cost:</strong> Operational cost per query</li>
+<li><strong>Complexity:</strong> Implementation and maintenance effort</li>
+<li><strong>Scalability:</strong> Which scales better?</li>
+<li><strong>Reliability:</strong> Failure modes and resilience</li>
+<li><strong>User Experience:</strong> Which provides better UX?</li></p>
+<p>Recommend the better approach with justification.
+</code></pre></p>
+<hr>
+<h2>Advanced Prompts</h2>
+<h3>Prompt 17: Design Multi-Agent System</h3>
+<pre><code>Design a multi-agent system for a complex forecasting task.
+<p><strong>Forecast Question:</strong> [High-level question requiring multiple types of evidence]</p>
+<p>Example: "What will AMD's datacenter GPU market share be in 2027?"</p>
+<p>Please design:</p>
+<li><strong>Agent Decomposition:</strong></li>
+   - List 3-5 specialized agents needed
+   - What each agent is responsible for
+   - Why specialization is beneficial
+<li><strong>Agent Interactions:</strong></li>
+   - How agents share information
+   - Dependencies between agents
+   - Execution order or parallelization
+<li><strong>Evidence Aggregation:</strong></li>
+   - How to combine outputs from multiple agents
+   - Confidence propagation strategy
+   - Conflict resolution (if agents disagree)
+<li><strong>System-Level Ontology:</strong></li>
+   - Shared entities across agents
+   - Integration points
+   - Ontology evolution strategy
+<p>Provide agent card stubs for each agent in the system.
+</code></pre></p>
+<h3>Prompt 18: Generate System Prompt for Agent</h3>
+<pre><code>Generate an optimized system prompt for my agent's LLM executor.
+<p><strong>Agent:</strong> [Name and purpose]</p>
+<p><strong>Task:</strong> [Specific task agent performs]</p>
+<p><strong>Output Format:</strong> [JSON structure, text, classification, etc.]</p>
+<p><strong>Key Requirements:</strong>
+<li>Evidence-based reasoning</li>
+<li>Confidence scoring</li>
+<li>Cite sources</li>
+<li>Handle uncertainty gracefully</li>
+<li>[Other requirements]</li></p>
+<p>Please generate a system prompt that:
+<li>Clearly defines agent role and capabilities</li>
+<li>Specifies output format requirements</li>
+<li>Emphasizes evidence-based reasoning</li>
+<li>Includes confidence scoring guidelines</li>
+<li>Defines tone and style (objective, analytical)</li>
+<li>Provides examples of good outputs</li>
+<li>Sets boundaries (what agent should NOT do)</li></p>
+<p>Length: 150-300 words
+Tone: Professional, directive, clear
+</code></pre></p>
+<h3>Prompt 19: Ontology Migration Plan</h3>
+<pre><code>I need to evolve my agent's ontology. Design a migration plan.
+<p><strong>Current Ontology:</strong> [Summary or paste Mermaid]</p>
+<p><strong>Current Stats:</strong>
+<li>Entity count: [X]</li>
+<li>Relationship count: [Y]</li>
+<li>Data volume: [Z episodic memories]</li></p>
+<p><strong>Proposed Changes:</strong>
+[List changes: new entities, new relationships, renamed fields, etc.]</p>
+<p><strong>Constraints:</strong>
+<li>Must maintain backward compatibility for existing queries</li>
+<li>Minimize data migration effort</li>
+<li>No downtime</li></p>
+<p>Please provide:</p>
+<li><strong>Migration Strategy:</strong></li>
+   - Step-by-step migration plan
+   - Data transformation requirements
+   - Rollback plan if issues occur
+<li><strong>Versioning:</strong></li>
+   - Version numbering scheme
+   - Changelog for ontology changes
+   - Git commit strategy
+<li><strong>Testing:</strong></li>
+   - Validation tests for migrated data
+   - Regression tests for existing functionality
+   - Performance benchmarks
+<li><strong>Updated Mermaid Diagram:</strong></li>
+   - New ontology structure
+   - Clearly marked changes
+<p>Make it production-safe with minimal risk.
+</code></pre></p>
+<hr>
+<h2>Tips for Better Prompts</h2>
+<h3>1. Provide Context</h3>
+<p>❌ <strong>Bad:</strong> "Generate an agent card"</p>
+<p>✅ <strong>Good:</strong> "Generate an agent card for a market analysis agent that tracks AMD's datacenter GPU market share using Yahoo Finance and SEC filings APIs."</p>
+<h3>2. Specify Output Format</h3>
+<p>❌ <strong>Bad:</strong> "Help with my ontology"</p>
+<p>✅ <strong>Good:</strong> "Generate a Mermaid erDiagram with 8-12 entities showing relationships between companies, products, and market segments."</p>
+<h3>3. Include Examples</h3>
+<p>❌ <strong>Bad:</strong> "Create test queries"</p>
+<p>✅ <strong>Good:</strong> "Create 5 test queries like: 'What is AMD's Q4 2024 datacenter revenue?' Include expected outputs with confidence scores."</p>
+<h3>4. Set Constraints</h3>
+<p>❌ <strong>Bad:</strong> "Design an agent"</p>
+<p>✅ <strong>Good:</strong> "Design an agent with: (1) LLM executor, (2) <$0.01 per query cost, (3) <3s response time, (4) >85% accuracy."</p>
+<h3>5. Request Justification</h3>
+<p>❌ <strong>Bad:</strong> "Pick a model for my agent"</p>
+<p>✅ <strong>Good:</strong> "Recommend Haiku, Sonnet, or Opus for sentiment analysis. Justify based on speed, cost, and accuracy trade-offs."</p>
+<h3>6. Iterate Incrementally</h3>
+<p>Start with high-level design, then drill down:
+<li>First prompt: "Design agent concept"</li>
+<li>Second prompt: "Refine executor configuration"</li>
+<li>Third prompt: "Optimize for cost and speed"</li>
+<li>Fourth prompt: "Add error handling"</li></p>
+<h3>7. Reference Documentation</h3>
+<p>Always point to relevant docs:
+<li>"Following the Fermi agent card specification at..."</li>
+<li>"Using Mermaid ER syntax from..."</li>
+<li>"Based on examples in agents/templates/examples/..."</li></p>
+<h3>8. Request Multiple Options</h3>
+<p>"Provide 3 different approaches: (A) LLM-only, (B) MCP-heavy, (C) Hybrid. Compare pros/cons."</p>
+<hr>
+<h2>Using These Prompts</h2>
+<h3>In Claude/ChatGPT</h3>
+<li>Copy the prompt template</li>
+<li>Fill in the bracketed placeholders <code>[like this]</code></li>
+<li>Paste into chat interface</li>
+<li>Review and iterate on the output</li>
+<li>Copy results into your agent files</li>
+<h3>In VS Code with Copilot</h3>
+<li>Create the target file (e.g., <code>agent_card.json</code>)</li>
+<li>Add a comment with the prompt at the top</li>
+<li>Let Copilot generate the content</li>
+<li>Review and refine</li>
+<h3>In Cursor/Windsurf</h3>
+<li>Use the prompt in the chat panel</li>
+<li>Reference your existing files with <code>@filename</code></li>
+<li>Ask AI to directly edit files</li>
+<li>Review diffs before accepting</li>
+<h3>Command Line with Claude API</h3>
+<pre><code>echo "Your prompt here" | claude --model sonnet --output agent_card.json
+</code></pre>
+<hr>
+<h2>Common Issues and Solutions</h2>
+<h3>Issue: Output Too Generic</h3>
+<p><strong>Solution:</strong> Add specific examples and constraints
+<pre><code>❌ "Generate an agent"
+✅ "Generate an agent that tracks CVE-2024-* vulnerabilities affecting Node.js dependencies, using NVD API, with <2s response time"
+</code></pre></p>
+<h3>Issue: JSON Syntax Errors</h3>
+<p><strong>Solution:</strong> Explicitly request validation
+<pre><code>"Generate valid JSON following this schema: [paste schema]. Validate syntax before responding."
+</code></pre></p>
+<h3>Issue: Unrealistic Performance Estimates</h3>
+<p><strong>Solution:</strong> Provide benchmarks
+<pre><code>"Estimate performance metrics. For reference: Haiku costs ~$0.001/query, typical API calls take 500ms, LLM analysis takes 1-2s."
+</code></pre></p>
+<h3>Issue: Over-Engineered Ontology</h3>
+<p><strong>Solution:</strong> Set entity limits
+<pre><code>"Design ontology with 5-10 core entities (not more!). Keep it simple. I can expand later."
+</code></pre></p>
+<h3>Issue: Missing Error Handling</h3>
+<p><strong>Solution:</strong> Explicitly ask for failure scenarios
+<pre><code>"Include error handling for: API timeout, rate limit, invalid data, network failure. Provide fallback strategies."
+</code></pre></p>
+<hr>
+<h2>Prompt Templates Library</h2>
+<p>Save your best prompts in a personal library:</p>
+<pre><code>~/fermi-prompts/
+├── agent<em>card</em>generation.md
+├── ontology_design.md
+├── documentation.md
+├── testing.md
+└── refinement.md
+</code></pre>
+<p>Build a collection of prompts that work well for your workflow.</p>
+<hr>
+<h2>Additional Resources</h2>
+<li><strong>Claude Prompt Engineering:</strong> https://docs.anthropic.com/claude/docs/prompt-engineering</li>
+<li><strong>GPT Best Practices:</strong> https://platform.openai.com/docs/guides/prompt-engineering</li>
+<li><strong>Mermaid Syntax:</strong> https://mermaid.js.org/syntax/entityRelationshipDiagram.html</li>
+<li><strong>JSON Schema:</strong> https://json-schema.org/understanding-json-schema/</li></ul>
+<hr>
+<p><strong>Pro Tip:</strong> Save successful prompts and their outputs. Build your own prompt library customized to your agent development workflow.</p>
+<p><strong>Last Updated:</strong> 2026-02-07
+</p>
+        <div class="footer">
+            <p>Source: <a href="../PROMPT_ENGINEERING_GUIDE.md">PROMPT_ENGINEERING_GUIDE.md</a></p>
+        </div>
+    </div>
+</body>
+</html>

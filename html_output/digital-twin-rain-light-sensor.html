@@ -1,0 +1,1077 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>digital-twin-rain-light-sensor</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f5f5f5;
+            padding: 20px;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .header-actions {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #e1e4e8;
+        }
+        .export-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            background: #0366d6;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 500;
+            transition: background 0.2s;
+        }
+        .export-btn:hover {
+            background: #0256c7;
+            text-decoration: none;
+        }
+        .export-btn::before {
+            content: "📄";
+        }
+        .meta {
+            color: #6a737d;
+            font-size: 0.9em;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            margin-top: 24px;
+            margin-bottom: 16px;
+            font-weight: 600;
+            line-height: 1.25;
+            color: #1a1a1a;
+        }
+        h1 {
+            font-size: 2.5em;
+            border-bottom: 2px solid #e1e4e8;
+            padding-bottom: 0.3em;
+            margin-top: 0;
+        }
+        h2 {
+            font-size: 2em;
+            border-bottom: 1px solid #e1e4e8;
+            padding-bottom: 0.3em;
+        }
+        h3 { font-size: 1.5em; }
+        h4 { font-size: 1.25em; }
+        h5 { font-size: 1em; }
+        h6 { font-size: 0.875em; }
+        p {
+            margin-bottom: 16px;
+        }
+        a {
+            color: #0366d6;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        code {
+            background-color: #f6f8fa;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 85%;
+            color: #e83e8c;
+        }
+        pre {
+            background-color: #f6f8fa;
+            padding: 16px;
+            overflow: auto;
+            border-radius: 6px;
+            margin: 16px 0;
+            border: 1px solid #e1e4e8;
+        }
+        pre code {
+            background-color: transparent;
+            padding: 0;
+            color: #24292e;
+            display: block;
+            white-space: pre;
+        }
+        ul, ol {
+            margin: 16px 0;
+            padding-left: 32px;
+        }
+        li {
+            margin: 4px 0;
+        }
+        blockquote {
+            border-left: 4px solid #dfe2e5;
+            padding: 0 16px;
+            margin: 16px 0;
+            color: #6a737d;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 16px 0;
+        }
+        table th, table td {
+            border: 1px solid #dfe2e5;
+            padding: 8px 12px;
+            text-align: left;
+        }
+        table th {
+            background-color: #f6f8fa;
+            font-weight: 600;
+        }
+        table tr:nth-child(even) {
+            background-color: #f6f8fa;
+        }
+        hr {
+            border: 0;
+            border-top: 1px solid #e1e4e8;
+            margin: 24px 0;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+            margin: 16px 0;
+        }
+        .footer {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #e1e4e8;
+            text-align: center;
+            color: #6a737d;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header-actions">
+            <div class="meta">Generated from Markdown</div>
+            <a href="../digital-twin-rain-light-sensor.md" class="export-btn" download>Export as MD</a>
+        </div>
+        <h1>Digital Twin for Rain Light Sensor</h1>
+<h2>Predictive Simulation & Manufacturing Optimization System</h2>
+<p><strong>Project Type:</strong> Advanced R&D - Digital Twin Development  
+<strong>Industry Focus:</strong> Automotive Sensors - Rain/Light Detection Systems  
+<strong>Technology Focus:</strong> Optical Simulation, Machine Learning, Real-Time Monitoring  
+<strong>Date:</strong> February 2024  
+<strong>Status:</strong> Concept to Prototype Phase  
+<strong>BCS Project Code:</strong> dtrl-2024-001</p>
+<hr>
+<h2>Executive Summary</h2>
+<p>This project develops a comprehensive digital twin system for automotive rain/light sensors, integrating optical simulation, manufacturing optimization, and real-time performance monitoring. The system enables predictive design, virtual prototyping, and continuous manufacturing improvement through closed-loop feedback between physical sensors and their digital counterparts.</p>
+<h3>Key Innovations</h3>
+<ul><li><strong>Parametric Optical Design:</strong> FRED-based simulation with Monte Carlo optimization for 10,000+ design iterations</li>
+<li><strong>Manufacturing Digital Thread:</strong> Real-time sensor performance linked to production parameters</li>
+<li><strong>Predictive Maintenance:</strong> ML models forecast sensor degradation and failure modes</li>
+<li><strong>Virtual Validation:</strong> 60% reduction in physical prototyping cycles</li>
+<li><strong>Cost Optimization:</strong> 25-30% manufacturing cost reduction through parameter optimization</li>
+<h3>Business Impact</h3>
+<li><strong>Time-to-Market:</strong> 40% reduction (18 months → 11 months)</li>
+<li><strong>Quality Improvement:</strong> 35% reduction in field failures</li>
+<li><strong>Development Cost:</strong> $2.5M savings per platform</li>
+<li><strong>Manufacturing Yield:</strong> 92% → 97% improvement</li>
+<hr>
+<h2>1. Technology Overview</h2>
+<h3>What is a Rain Light Sensor Digital Twin?</h3>
+<p>A digital twin is a virtual replica of the physical rain/light sensor system that mirrors its behavior, performance, and lifecycle in real-time. The system combines:</p>
+<li><strong>Design-Phase Twin:</strong> Optical simulation and optimization</li>
+<li><strong>Manufacturing Twin:</strong> Production parameter tracking and quality prediction</li>
+<li><strong>Operational Twin:</strong> In-vehicle performance monitoring and diagnostics</li>
+<li><strong>Lifecycle Twin:</strong> Long-term degradation modeling and predictive maintenance</li>
+<h3>Core Components</h3>
+<p><strong>Optical Simulation Engine</strong>
+<li>Ray tracing with FRED/Zemax integration</li>
+<li>Diffused screen printing optimization</li>
+<li>Light guide design and analysis</li>
+<li>Environmental condition modeling (rain, fog, night, glare)</li></p>
+<p><strong>Manufacturing Model</strong>
+<li>Screen printing parameter correlation</li>
+<li>Ink formulation optimization</li>
+<li>Curing process control</li>
+<li>Quality prediction algorithms</li></p>
+<p><strong>Sensor Performance Model</strong>
+<li>Light detection sensitivity curves</li>
+<li>Rain detection algorithms</li>
+<li>Temperature compensation</li>
+<li>Aging and degradation models</li></p>
+<p><strong>Real-Time Data Integration</strong>
+<li>Vehicle CAN bus data collection</li>
+<li>Cloud-based twin synchronization</li>
+<li>Fleet-wide performance analytics</li>
+<li>Predictive maintenance alerts</li></p>
+<hr>
+<h2>2. System Architecture</h2>
+<h3>Architecture Overview</h3>
+<p>The digital twin system consists of four interconnected layers that span the entire sensor lifecycle from design through end-of-life:</p>
+<pre><code>graph TB
+    subgraph "Design Phase Twin"
+        A[FRED Optical Simulation] --> B[Monte Carlo Optimization]
+        B --> C[Performance Prediction]
+        C --> D[Design Validation]
+    end
+    
+    subgraph "Manufacturing Phase Twin"
+        E[Process Parameter Tracking] --> F[Real-Time Quality Prediction]
+        F --> G[Digital Thread Database]
+        G --> H[Manufacturing Analytics]
+    end
+    
+    subgraph "Operational Phase Twin"
+        I[Vehicle CAN Bus] --> J[Sensor Telemetry]
+        J --> K[Cloud Platform]
+        K --> L[Performance Dashboard]
+        L --> M[Predictive Maintenance]
+    end
+    
+    subgraph "Lifecycle Phase Twin"
+        N[Fleet Analytics] --> O[Failure Mode Analysis]
+        O --> P[Design Feedback Loop]
+        P --> Q[Continuous Improvement]
+    end
+    
+    D -->|Optimized Design| E
+    H -->|Production Data| I
+    M -->|Field Performance| N
+    Q -->|Design Updates| A
+    
+    subgraph "Data Flow & Integration"
+        R[Physical Sensor] -.->|Real-time Data| J
+        R -.->|Manufacturing History| G
+        S[AI/ML Models] -.->|Predictions| C
+        S -.->|Quality Scoring| F
+        S -.->|Degradation Models| M
+        T[BCS Agent Suite] -.->|Analysis & Insights| A
+        T -.->|Optimization| B
+        T -.->|Tech Scouting| O
+    end
+    
+    style A fill:#e3f2fd
+    style E fill:#fff3e0
+    style I fill:#e8f5e9
+    style N fill:#f3e5f5
+    style R fill:#ffebee
+    style S fill:#fce4ec
+    style T fill:#e0f2f1
+</code></pre>
+<p><strong>Key Integration Points:</strong></p>
+<li><strong>Design → Manufacturing:</strong> Optimized parameters flow into production setup</li>
+<li><strong>Manufacturing → Operations:</strong> Digital thread tracks sensor from factory to field</li>
+<li><strong>Operations → Lifecycle:</strong> Real-time performance feeds long-term analytics</li>
+<li><strong>Lifecycle → Design:</strong> Field insights drive next-generation improvements</li>
+<li><strong>AI/ML Layer:</strong> Continuous prediction and optimization across all phases</li>
+<li><strong>BCS Agents:</strong> Strategic analysis and technology intelligence support</li>
+<h3>2.1 Design-Phase Digital Twin</h3>
+<p>#### Parametric Optical Design System</p>
+<p><strong>Software Stack:</strong>
+<li>FRED Optical Engineering Software (primary simulation)</li>
+<li>MATLAB/Python optimization framework</li>
+<li>Custom Monte Carlo parameter sweep</li>
+<li>Machine learning preference prediction</li></p>
+<p><strong>Design Parameters (28 variables):</strong></p>
+<pre><code>Light Guide Parameters:
+<li>Thickness: 2.0-5.0mm (0.5mm steps)</li>
+<li>Refractive index: 1.45-1.53 (polycarbonate/PMMA)</li>
+<li>Surface texture: 0-50μm Ra</li>
+<li>Geometry: planar/curved variants</li>
+<p>Diffuser Layer:
+<li>Thickness: 0.2-1.0mm</li>
+<li>Particle loading: 10-40%</li>
+<li>Particle size: 1-50μm</li>
+<li>Scatter coefficient: 0.7-0.95</li></p>
+<p>LED Light Source:
+<li>Power: 30-80mW</li>
+<li>Wavelength: 850-950nm (IR) / 400-700nm (visible)</li>
+<li>Beam angle: 15-120°</li>
+<li>Position tolerance: ±0.5mm</li></p>
+<p>Photodetector:
+<li>Active area: 2-10mm²</li>
+<li>Sensitivity range: 400-1100nm</li>
+<li>Response time: <1ms</li>
+<li>Angular acceptance: 30-180°</li></p>
+<p>Screen Printing Pattern:
+<li>Dot pitch: 50-500μm</li>
+<li>Coverage: 20-80%</li>
+<li>Layer count: 1-5</li>
+<li>Ink opacity: 60-95%</li>
+</code></pre></p>
+<p>#### Monte Carlo Optimization Workflow</p>
+<pre><code>-- FRED Script Integration
+function optimizeSensorDesign(targetPerformance)
+    local iterations = 10000
+    local bestScore = 0
+    local bestConfig = {}
+    
+    for i = 1, iterations do
+        -- Generate random parameter set within bounds
+        local config = generateRandomConfig()
+        
+        -- Run optical simulation
+        local opticalPerformance = simulateOpticalPath(config)
+        
+        -- Evaluate manufacturing feasibility
+        local manufacturability = assessManufacturing(config)
+        
+        -- Calculate cost estimate
+        local cost = estimateComponentCost(config)
+        
+        -- Multi-objective scoring
+        local score = calculateWeightedScore({
+            optical = opticalPerformance,
+            manufacturing = manufacturability,
+            cost = cost,
+            robustness = environmentalTesting(config)
+        })
+        
+        if score > bestScore then
+            bestScore = score
+            bestConfig = config
+            logOptimalDesign(i, score, config)
+        end
+    end
+    
+    return bestConfig, bestScore
+end
+<p>-- Environmental condition testing
+function environmentalTesting(config)
+    local conditions = {
+        {rain = "light", illumination = 50000},   -- Overcast day
+        {rain = "heavy", illumination = 10000},   -- Storm
+        {rain = "none", illumination = 100000},   -- Bright sun
+        {rain = "mist", illumination = 5000},     -- Fog/mist
+        {rain = "none", illumination = 1},        -- Night
+    }
+    
+    local robustnessScore = 0
+    for _, condition in ipairs(conditions) do
+        local performance = simulateCondition(config, condition)
+        robustnessScore = robustnessScore + performance
+    end
+    
+    return robustnessScore / #conditions
+end
+</code></pre></p>
+<p>#### Performance Metrics</p>
+<p><strong>Rain Detection Performance:</strong>
+<li>Light rain (0.1-2.5mm/hr): >95% detection accuracy</li>
+<li>Moderate rain (2.5-10mm/hr): >98% detection accuracy</li>
+<li>Heavy rain (>10mm/hr): >99% detection accuracy</li>
+<li>False positive rate: <2% (dirt, insects, shadows)</li></p>
+<p><strong>Light Sensing Performance:</strong>
+<li>Dynamic range: 1 lux - 100,000 lux</li>
+<li>Response time: <100ms (headlight activation)</li>
+<li>Temperature stability: ±5% over -40°C to +85°C</li>
+<li>Aging degradation: <10% sensitivity loss over 10 years</li></p>
+<hr>
+<h3>2.2 Manufacturing Digital Twin</h3>
+<p>#### Production Parameter Tracking</p>
+<p><strong>Screen Printing Variables:</strong>
+<pre><code>Process Parameters:
+<li>Squeegee pressure: 2-8 kg/cm</li>
+<li>Print speed: 10-50 mm/s</li>
+<li>Snap-off distance: 1-3mm</li>
+<li>Screen tension: 20-35 N/cm</li>
+<li>Ink viscosity: 8000-15000 cP at 25°C</li></p>
+<p>Curing Parameters:
+<li>UV intensity: 200-400 mJ/cm²</li>
+<li>Cure time: 5-30 seconds</li>
+<li>Temperature: 60-120°C (thermal post-cure)</li>
+<li>Atmosphere: N₂ or air</li></p>
+<p>Substrate Preparation:
+<li>Surface treatment: Corona/plasma</li>
+<li>Cleanliness: ISO Class 7 or better</li>
+<li>Temperature: 20-25°C ±2°C</li>
+<li>Humidity: 40-60% RH</li>
+</code></pre></p>
+<p>#### Quality Prediction Model</p>
+<p><strong>Machine Learning Architecture:</strong>
+<li>Input: 28 process parameters + environmental conditions</li>
+<li>Model: Gradient Boosted Decision Trees (XGBoost)</li>
+<li>Output: Predicted sensor performance + defect probability</li>
+<li>Training data: 50,000+ production units</li>
+<li>Accuracy: 94% for pass/fail prediction, ±8% for performance metrics</li></p>
+<p><strong>Real-Time Quality Gates:</strong>
+<li><strong>Pre-Print Inspection:</strong> Substrate cleanliness, alignment</li>
+<li><strong>Post-Print Inspection:</strong> Pattern coverage, thickness uniformity</li>
+<li><strong>Post-Cure Inspection:</strong> Optical transmission, scatter uniformity</li>
+<li><strong>Functional Test:</strong> LED-to-photodetector response</li>
+<li><strong>Environmental Test:</strong> Temperature cycling, humidity exposure</li></p>
+<p>#### Digital Thread Implementation</p>
+<pre><code>class ManufacturingDigitalTwin:
+    def <strong>init</strong>(self, sensor_id):
+        self.sensor<em>id = sensor</em>id
+        self.process_history = []
+        self.quality_metrics = {}
+        self.predicted_performance = None
+        
+    def log<em>process</em>step(self, step_name, parameters, timestamp):
+        """Record each manufacturing step"""
+        self.process_history.append({
+            'step': step_name,
+            'parameters': parameters,
+            'timestamp': timestamp,
+            'operator<em>id': get</em>operator_id(),
+            'equipment<em>id': get</em>equipment_id()
+        })
+        
+        # Update performance prediction
+        self.predict_quality()
+    
+    def predict_quality(self):
+        """ML-based quality prediction"""
+        features = self.extract_features()
+        self.predicted<em>performance = ml</em>model.predict(features)
+        
+        # Flag potential issues
+        if self.predicted<em>performance['defect</em>probability'] > 0.15:
+            alert<em>quality</em>team(self.sensor<em>id, self.predicted</em>performance)
+    
+    def correlate<em>field</em>performance(self, vehicle_data):
+        """Link manufacturing data to field performance"""
+        correlation = analyze_correlation(
+            self.process_history,
+            vehicle_data
+        )
+        
+        # Continuous learning: update ML model
+        update<em>quality</em>model(correlation)
+</code></pre>
+<hr>
+<h3>2.3 Operational Digital Twin</h3>
+<p>#### In-Vehicle Data Collection</p>
+<p><strong>CAN Bus Integration:</strong>
+<li>Sensor output: Rain intensity (0-7 scale), ambient light (lux)</li>
+<li>Wiper activation: Speed, frequency, duration</li>
+<li>Headlight state: Off, DRL, low beam, high beam</li>
+<li>Vehicle state: Speed, GPS, weather API correlation</li></p>
+<p><strong>Data Transmission:</strong>
+<li>Local storage: 7 days rolling buffer</li>
+<li>Cloud sync: Daily or on WiFi connection</li>
+<li>Data volume: ~5KB/day per vehicle</li>
+<li>Privacy: Anonymized, aggregated fleet data</li></p>
+<p>#### Performance Monitoring Dashboard</p>
+<p><strong>Real-Time Metrics:</strong>
+<li><strong>Sensor Health Score:</strong> 0-100 composite metric</li>
+<li><strong>Degradation Trend:</strong> Predicted remaining useful life</li>
+<li><strong>Environmental Stress:</strong> Cumulative UV, temperature cycles</li>
+<li><strong>Calibration Drift:</strong> Deviation from factory baseline</li></p>
+<p><strong>Visualization Components</strong> (React/TypeScript):</p>
+<pre><code>import React, { useState, useEffect } from 'react';
+import { LineChart, Line, ScatterChart, Scatter, RadarChart } from 'recharts';
+<p>const SensorDigitalTwinDashboard: React.FC = () => {
+  const [sensorData, setSensorData] = useState<SensorTelemetry>();
+  const [historicalTrend, setHistoricalTrend] = useState<PerformanceData[]>();
+  
+  // Real-time data fetching
+  useEffect(() => {
+    const ws = new WebSocket('wss://digital-twin.bcs-auto.com/sensor-feed');
+    ws.onmessage = (event) => {
+      const data = JSON.parse(event.data);
+      setSensorData(data);
+      updateHistoricalTrend(data);
+    };
+  }, []);
+  
+  return (
+    <div className="digital-twin-dashboard">
+      {/<em> Sensor Health Overview </em>/}
+      <HealthScoreGauge score={sensorData?.healthScore} />
+      
+      {/<em> Performance Degradation Trend </em>/}
+      <LineChart data={historicalTrend}>
+        <Line dataKey="sensitivity" stroke="#2563eb" />
+        <Line dataKey="predictedSensitivity" stroke="#dc2626" strokeDasharray="5 5" />
+      </LineChart>
+      
+      {/<em> Environmental Stress Analysis </em>/}
+      <RadarChart data={sensorData?.environmentalStress}>
+        <PolarGrid />
+        <PolarAngleAxis dataKey="factor" />
+        <Radar dataKey="current" fill="#0891b2" fillOpacity={0.6} />
+        <Radar dataKey="threshold" fill="#dc2626" fillOpacity={0.3} />
+      </RadarChart>
+      
+      {/<em> Manufacturing Correlation </em>/}
+      <ScatterChart>
+        <Scatter 
+          data={sensorData?.fleetComparison}
+          dataKey="performance"
+          fill="#10b981"
+        />
+      </ScatterChart>
+    </div>
+  );
+};</p>
+<p>interface SensorTelemetry {
+  sensorId: string;
+  healthScore: number;
+  sensitivity: number;
+  calibrationDrift: number;
+  environmentalStress: EnvironmentalFactor[];
+  fleetComparison: FleetData[];
+  predictedFailureDate: Date;
+}
+</code></pre></p>
+<p>#### Predictive Maintenance Algorithms</p>
+<p><strong>Degradation Models:</strong></p>
+<pre><code>import numpy as np
+from sklearn.ensemble import RandomForestRegressor
+<p>class SensorDegradationPredictor:
+    def <strong>init</strong>(self):
+        self.model = RandomForestRegressor(n_estimators=200)
+        self.features = [
+            'cumulative<em>uv</em>exposure',      # J/cm²
+            'thermal_cycles',               # count
+            'rain<em>detection</em>events',        # count
+            'wiper_activations',            # count
+            'contamination_events',         # count (cleaning needed)
+            'manufacturing<em>quality</em>score',  # 0-100
+            'ambient<em>temperature</em>avg',      # °C
+            'ambient<em>humidity</em>avg',         # %RH
+        ]
+    
+    def predict<em>remaining</em>life(self, sensor_data):
+        """Predict remaining useful life in months"""
+        features = self.extract<em>features(sensor</em>data)
+        rul_months = self.model.predict([features])[0]
+        confidence = self.calculate_confidence(features)
+        
+        return {
+            'remaining<em>months': rul</em>months,
+            'confidence': confidence,
+            'failure<em>probability</em>6m': self.failure<em>prob(rul</em>months, 6),
+            'failure<em>probability</em>12m': self.failure<em>prob(rul</em>months, 12),
+            'recommended<em>action': self.get</em>recommendation(rul_months)
+        }
+    
+    def get<em>recommendation(self, rul</em>months):
+        if rul_months < 3:
+            return 'URGENT: Schedule sensor replacement'
+        elif rul_months < 6:
+            return 'WARNING: Plan sensor replacement at next service'
+        elif rul_months < 12:
+            return 'MONITOR: Increased monitoring frequency'
+        else:
+            return 'NORMAL: Continue normal operation'
+</code></pre></p>
+<hr>
+<h3>2.4 Lifecycle Digital Twin</h3>
+<p>#### Long-Term Performance Tracking</p>
+<p><strong>Fleet Analytics:</strong>
+<li>Population: 100,000+ sensors across vehicle fleet</li>
+<li>Data retention: 10+ years (full vehicle lifecycle)</li>
+<li>Analysis: Reliability, warranty claims, failure modes</li>
+<li>Continuous improvement: Feed insights back to design</li></p>
+<p><strong>Failure Mode Analysis:</strong></p>
+<p>| Failure Mode | Frequency | Root Cause | Detection Time | Cost Impact |
+|--------------|-----------|------------|----------------|-------------|
+| LED degradation | 35% | Thermal stress | 4-6 years | $45 repair |
+| Photodetector drift | 25% | UV exposure | 5-8 years | $35 recalibration |
+| Contamination buildup | 20% | Adhesive outgassing | 2-4 years | $15 cleaning |
+| Screen print delamination | 12% | Poor adhesion | 3-5 years | $65 replacement |
+| Electronic failure | 8% | Moisture ingress | 1-10 years | $120 replacement |</p>
+<p><strong>Design Iteration Feedback Loop:</strong>
+<li><strong>Field data collection:</strong> Real-world failure modes</li>
+<li><strong>Digital twin validation:</strong> Update models with actual data</li>
+<li><strong>Root cause analysis:</strong> Correlate failures to manufacturing/design parameters</li>
+<li><strong>Design improvement:</strong> Next-generation sensor optimization</li>
+<li><strong>Predictive validation:</strong> Test improvements in digital twin before production</li></p>
+<hr>
+<h2>2.5 Agentification: AI-Powered Research & Decision Support</h2>
+<h3>Overview</h3>
+<p>The digital twin system integrates with the <strong>BCS SDV Agent Suite</strong> to provide intelligent analysis, strategic insights, and automated decision support throughout the sensor development lifecycle. This "agentification" layer transforms raw data into actionable intelligence.</p>
+<h3>Agent Integration Architecture</h3>
+<pre><code>graph LR
+    subgraph "Digital Twin System"
+        DT[Rain Light Sensor<br/>Digital Twin]
+    end
+    
+    subgraph "BCS Agent Suite"
+        A1[Optical Sensor<br/>Specialist]
+        A2[Signal Processing<br/>Advisor]
+        A3[Virtual Sensor<br/>Designer]
+        A4[Automotive Tech<br/>Scout]
+        A5[SDV Architecture<br/>Validator]
+    end
+    
+    subgraph "Use Cases"
+        UC1[Design Optimization]
+        UC2[Manufacturing Quality]
+        UC3[Cost Reduction]
+        UC4[Technology Roadmap]
+        UC5[System Integration]
+    end
+    
+    DT -->|Design Parameters| A1
+    DT -->|Algorithm Requirements| A2
+    DT -->|Cost Targets| A3
+    DT -->|Technology Trends| A4
+    DT -->|Architecture Context| A5
+    
+    A1 --> UC1
+    A2 --> UC1
+    A2 --> UC2
+    A3 --> UC3
+    A4 --> UC4
+    A5 --> UC5
+    
+    UC1 -.->|Optimized Designs| DT
+    UC2 -.->|Quality Improvements| DT
+    UC3 -.->|Virtual Sensor Options| DT
+    UC4 -.->|Tech Insights| DT
+    UC5 -.->|Integration Validation| DT
+</code></pre>
+<h3>Agent Applications by Development Phase</h3>
+<p>#### Phase 1: Design & Optimization</p>
+<p><strong>Optical Sensor Specialist Agent:</strong>
+<pre><code>Query: "Analyze rain light sensor optical design with parameters:
+<li>Light guide: 3.5mm polycarbonate (n=1.49)</li>
+<li>Diffuser: 0.6mm thickness, 25% particle loading</li>
+<li>LED: 850nm IR, 45mW, 30° beam angle</li>
+<li>Photodetector: 5mm² active area, 400-1100nm range</li></p>
+<p>Evaluate performance under conditions: rain (0.1-20mm/hr), ambient 
+light (1-100,000 lux), temperature (-40°C to +85°C). Recommend 
+optimization strategies."</p>
+<p>Expected Output:
+<li>Optical efficiency analysis (current vs. theoretical maximum)</li>
+<li>Environmental robustness assessment with confidence scores</li>
+<li>Design improvement recommendations (prioritized)</li>
+<li>Alternative material suggestions with cost-performance tradeoffs</li>
+</code></pre></p>
+<p><strong>Signal Processing Advisor Agent:</strong>
+<pre><code>Query: "Design signal processing algorithms for rain light sensor:
+<li>Input: 850nm IR photodetector (1kHz sampling)</li>
+<li>Noise: Ambient light interference, electromagnetic noise</li>
+<li>Constraints: <50ms detection latency, <2% false positive rate</li>
+<li>Platform: Automotive-grade MCU (ARM Cortex-M4, 168MHz)</li></p>
+<p>Recommend filtering, feature extraction, and decision algorithms."</p>
+<p>Expected Output:
+<li>Algorithm architecture (bandpass filter + threshold + hysteresis)</li>
+<li>Computational complexity estimates (MIPS, memory usage)</li>
+<li>Performance predictions (accuracy, latency, robustness)</li>
+<li>Implementation pseudocode and validation approach</li>
+</code></pre></p>
+<p>#### Phase 2: Manufacturing Excellence</p>
+<p><strong>Virtual Sensor Designer Agent:</strong>
+<pre><code>Query: "Evaluate virtual rain sensing using existing vehicle sensors:
+<li>Available: Windshield wiper current draw, wiper speed, vehicle speed</li>
+<li>Target: Replace $45 optical rain sensor with $0 software solution</li>
+<li>Requirements: 90% correlation with optical sensor, ASIL-B safety</li></p>
+<p>Assess feasibility, ML architecture, training data needs, and safety 
+validation strategy."</p>
+<p>Expected Output:
+<li>Feasibility assessment (medium-high confidence for light rain)</li>
+<li>ML model recommendation (LSTM + gradient boosting ensemble)</li>
+<li>Training data requirements (50K+ labeled wiper activation events)</li>
+<li>Cost-benefit analysis ($45 savings vs. $120K development cost)</li>
+<li>Safety validation roadmap for ASIL-B compliance</li>
+</code></pre></p>
+<p>#### Phase 3: Technology Intelligence</p>
+<p><strong>Automotive Tech Scout Agent:</strong>
+<pre><code>Query: "Scout emerging technologies for next-gen rain light sensors:
+<li>Focus areas: Solid-state rain detection, LiDAR integration, </li>
+  smart glass windshields, neuromorphic sensing
+<li>Timeframe: 2025-2030 automotive production</li>
+<li>Output: Patent landscape, startup ecosystem, technology maturity</li></p>
+<p>Include cost trajectories and competitive intelligence."</p>
+<p>Expected Output:
+<li>Patent analysis (50+ recent filings, top assignees, innovation clusters)</li>
+<li>Startup tracking (15+ companies, funding stages, technology approaches)</li>
+<li>Technology maturity (TRL 4-7, 3-5 year timeline to production)</li>
+<li>Cost projections (current $45 → $25-30 by 2028 with solid-state)</li>
+<li>Strategic recommendations (partner vs. develop vs. acquire)</li>
+</code></pre></p>
+<p>#### Phase 4: System Validation</p>
+<p><strong>SDV Architecture Validator Agent:</strong>
+<pre><code>Query: "Validate rain light sensor integration in zonal SDV architecture:
+<li>Architecture: 3 zone controllers + central compute</li>
+<li>Sensor: CAN bus interface, 10ms update rate, ASIL-B</li>
+<li>Integration: Zone 1 (front), data to ADAS ECU and body controller</li>
+<li>Standards: AUTOSAR Adaptive, ISO 26262 Part 11</li></p>
+<p>Assess compliance, identify risks, recommend improvements."</p>
+<p>Expected Output:
+<li>AUTOSAR compliance analysis (Adaptive Platform R22-11)</li>
+<li>Safety validation (ASIL-B decomposition, redundancy assessment)</li>
+<li>Architecture risks (CAN bus latency, single point of failure)</li>
+<li>Integration recommendations (diagnostics, OTA updates)</li>
+<li>Confidence score: 85% (validated against similar sensor integrations)</li>
+</code></pre></p>
+<h3>Multi-Agent Workflows</h3>
+<p><strong>Example: Complete Sensor Redesign</strong></p>
+<pre><code>Step 1: Automotive Tech Scout
+└─> Identify emerging solid-state rain detection technology
+    └─> Output: 3 viable technologies, patent owners, cost estimates
+<p>Step 2: Optical Sensor Specialist
+└─> Evaluate optical design for solid-state approach
+    └─> Output: Feasibility study, design recommendations</p>
+<p>Step 3: Signal Processing Advisor
+└─> Design algorithms for new sensor modality
+    └─> Output: Algorithm architecture, performance predictions</p>
+<p>Step 4: Virtual Sensor Designer
+└─> Assess hybrid approach (optical + virtual fusion)
+    └─> Output: Cost optimization analysis, safety validation</p>
+<p>Step 5: SDV Architecture Validator
+└─> Validate complete system integration
+    └─> Output: Compliance validation, risk assessment</p>
+<p>Synthesis: Comprehensive redesign with 30% cost reduction, 
+improved performance, validated safety compliance
+</code></pre></p>
+<h3>Agent Query Templates</h3>
+<p><strong>Design Optimization:</strong>
+<pre><code>def optimize<em>sensor</em>design(digital<em>twin</em>data):
+    query = f"""
+    Optimize rain light sensor design using digital twin data:
+    - Current performance: {digital<em>twin</em>data['performance_metrics']}
+    - Cost target: {digital<em>twin</em>data['cost_target']}
+    - Manufacturing constraints: {digital<em>twin</em>data['manufacturing_limits']}
+    - Environmental requirements: {digital<em>twin</em>data['environment_specs']}
+    
+    Provide 3 design alternatives with cost-performance tradeoffs.
+    """
+    
+    result = query<em>agent('optical</em>sensor_specialist', query)
+    return parse<em>design</em>recommendations(result)
+</code></pre></p>
+<p><strong>Predictive Maintenance:</strong>
+<pre><code>def predict<em>sensor</em>maintenance(field_data):
+    query = f"""
+    Analyze sensor degradation patterns:
+    - Fleet size: {len(field_data)} sensors
+    - Average age: {field<em>data['avg</em>age_months']} months
+    - Failure rate: {field<em>data['failure</em>rate']}%
+    - Common failure modes: {field<em>data['top</em>failures']}
+    
+    Predict failure probability for next 12 months and recommend 
+    preventive maintenance strategy.
+    """
+    
+    result = query<em>agent('sensor</em>fusion_analyst', query)
+    return generate<em>maintenance</em>schedule(result)
+</code></pre></p>
+<h3>Benefits of Agentification</h3>
+<p><strong>Speed & Efficiency:</strong>
+<li>Design iteration time: 6 weeks → 2 weeks (67% reduction)</li>
+<li>Technology scouting: 2 weeks → 2 days (10x faster)</li>
+<li>Architecture validation: 4 weeks → 1 week (75% reduction)</li></p>
+<p><strong>Quality & Insight:</strong>
+<li>Evidence-based recommendations with source citations</li>
+<li>Confidence scoring for decision risk assessment</li>
+<li>Multi-perspective analysis through agent collaboration</li>
+<li>Continuous learning from field data and outcomes</li></p>
+<p><strong>Cost Optimization:</strong>
+<li>Analysis cost: $15K/iteration → $500/iteration (97% reduction)</li>
+<li>Expert availability: Eliminates bottlenecks</li>
+<li>Knowledge retention: Preserves institutional expertise</li>
+<li>Scalability: Parallel analysis of multiple design options</li></p>
+<h3>Implementation Strategy</h3>
+<p><strong>Week 1-2: Agent Integration Setup</strong>
+<li>Configure API access to BCS Agent Suite</li>
+<li>Define query templates for common use cases</li>
+<li>Train team on agent capabilities and limitations</li></p>
+<p><strong>Month 1-3: Pilot Applications</strong>
+<li>Apply agents to current design optimization tasks</li>
+<li>Validate agent recommendations against expert judgment</li>
+<li>Refine query patterns based on results</li></p>
+<p><strong>Month 3-6: Production Integration</strong>
+<li>Embed agents into digital twin workflow</li>
+<li>Automate routine analysis tasks</li>
+<li>Build agent query library for recurring needs</li></p>
+<p><strong>Ongoing: Continuous Improvement</strong>
+<li>Track agent performance and accuracy</li>
+<li>Update query templates based on feedback</li>
+<li>Expand agent applications to new use cases</li></p>
+<hr>
+<h2>3. Implementation Roadmap</h2>
+<h3>Phase 1: Proof of Concept (3 months)</h3>
+<p><strong>Objectives:</strong>
+<li>Develop FRED optical simulation framework</li>
+<li>Create Monte Carlo optimization algorithm</li>
+<li>Build initial manufacturing correlation model</li>
+<li>Demonstrate 5 design iterations with 20% performance improvement</li></p>
+<p><strong>Deliverables:</strong>
+<li>Parametric design tool (FRED + MATLAB)</li>
+<li>Initial digital twin architecture</li>
+<li>100-sensor pilot manufacturing run</li>
+<li>Technical feasibility report</li></p>
+<p><strong>Resources:</strong>
+<li>2 optical engineers</li>
+<li>1 software engineer</li>
+<li>1 manufacturing engineer</li>
+<li>$150K equipment/software licenses</li></p>
+<hr>
+<h3>Phase 2: Manufacturing Integration (6 months)</h3>
+<p><strong>Objectives:</strong>
+<li>Deploy process parameter tracking system</li>
+<li>Develop ML quality prediction model</li>
+<li>Implement real-time quality gates</li>
+<li>Achieve 95% quality prediction accuracy</li></p>
+<p><strong>Deliverables:</strong>
+<li>Manufacturing MES integration</li>
+<li>Quality prediction dashboard</li>
+<li>Digital thread database (5,000+ sensors)</li>
+<li>Process optimization recommendations</li></p>
+<p><strong>Resources:</strong>
+<li>1 manufacturing engineer</li>
+<li>2 software engineers</li>
+<li>1 data scientist</li>
+<li>$250K manufacturing equipment upgrades</li></p>
+<hr>
+<h3>Phase 3: Operational Twin Deployment (9 months)</h3>
+<p><strong>Objectives:</strong>
+<li>Vehicle integration and data collection</li>
+<li>Cloud-based twin platform deployment</li>
+<li>Predictive maintenance algorithm development</li>
+<li>Fleet-wide rollout (10,000 vehicles)</li></p>
+<p><strong>Deliverables:</strong>
+<li>CAN bus integration module</li>
+<li>Cloud platform (AWS/Azure)</li>
+<li>Mobile/web dashboard</li>
+<li>Predictive maintenance API</li></p>
+<p><strong>Resources:</strong>
+<li>2 embedded software engineers</li>
+<li>2 cloud/full-stack engineers</li>
+<li>1 data scientist</li>
+<li>$400K cloud infrastructure + development</li></p>
+<hr>
+<h3>Phase 4: Continuous Improvement (Ongoing)</h3>
+<p><strong>Objectives:</strong>
+<li>Long-term performance tracking</li>
+<li>ML model retraining</li>
+<li>Design optimization cycles</li>
+<li>Supplier collaboration and knowledge sharing</li></p>
+<p><strong>Deliverables:</strong>
+<li>Quarterly performance reports</li>
+<li>Annual design improvement recommendations</li>
+<li>Supplier scorecards</li>
+<li>Industry publications/patents</li></p>
+<p><strong>Resources:</strong>
+<li>1 systems engineer (ongoing)</li>
+<li>0.5 FTE data scientist</li>
+<li>$50K/year operating costs</li></p>
+<hr>
+<h2>4. Technical Specifications</h2>
+<h3>Digital Twin System Requirements</h3>
+<p><strong>Compute Infrastructure:</strong>
+<li>Optical simulation: 32-core workstation, 128GB RAM, RTX 4090 GPU</li>
+<li>ML training: Cloud GPU instances (AWS p3.8xlarge or equivalent)</li>
+<li>Production monitoring: Cloud-based (containerized microservices)</li>
+<li>Data storage: 10TB+ for 10-year lifecycle data</li></p>
+<p><strong>Software Stack:</strong>
+<li><strong>Optical:</strong> FRED, Zemax OpticStudio, LightTools</li>
+<li><strong>Optimization:</strong> MATLAB Optimization Toolbox, Python scipy</li>
+<li><strong>ML/AI:</strong> TensorFlow, PyTorch, XGBoost, scikit-learn</li>
+<li><strong>Visualization:</strong> React, TypeScript, Recharts, Three.js</li>
+<li><strong>Cloud:</strong> AWS/Azure, Docker, Kubernetes</li>
+<li><strong>Database:</strong> PostgreSQL (relational), InfluxDB (time-series)</li></p>
+<p><strong>Data Interfaces:</strong>
+<li>Manufacturing: OPC-UA, MQTT</li>
+<li>Vehicle: CAN bus, Ethernet (DoIP)</li>
+<li>Cloud: REST API, WebSocket, MQTT</li>
+<li>Visualization: GraphQL, WebSocket</li></p>
+<hr>
+<h2>5. Business Case</h2>
+<h3>Investment Requirements</h3>
+<p><strong>Capital Expenditure:</strong>
+<li>Software licenses: $150K (FRED, MATLAB, cloud)</li>
+<li>Hardware: $100K (simulation workstations)</li>
+<li>Manufacturing equipment: $250K (sensors, quality inspection)</li>
+<li>Development: $800K (engineering labor, 18 months)</li>
+<li><strong>Total CapEx:</strong> $1.3M</li></p>
+<p><strong>Operating Expenditure (Annual):</strong>
+<li>Cloud infrastructure: $60K</li>
+<li>Software maintenance: $30K</li>
+<li>Engineering support: $120K</li>
+<li><strong>Total OpEx:</strong> $210K/year</li></p>
+<h3>Return on Investment</h3>
+<p><strong>Cost Savings:</strong>
+<li>Physical prototyping reduction: $500K per platform</li>
+<li>Manufacturing yield improvement: $350K per year</li>
+<li>Warranty claim reduction: $200K per year</li>
+<li>Accelerated time-to-market: $1.5M (competitive advantage)</li></p>
+<p><strong>Payback Period:</strong> 14 months  
+<strong>5-Year NPV:</strong> $4.2M (at 8% discount rate)  
+<strong>ROI:</strong> 285%</p>
+<hr>
+<h2>6. Risk Analysis</h2>
+<h3>Technical Risks</h3>
+<p>| Risk | Probability | Impact | Mitigation |
+|------|------------|--------|------------|
+| Optical simulation accuracy | Medium | High | Validate with physical measurements, calibrate models |
+| ML model overfitting | Medium | Medium | Cross-validation, ensemble methods, regular retraining |
+| Manufacturing data quality | High | High | Automated data validation, redundant sensors |
+| Cloud platform reliability | Low | High | Multi-region deployment, 99.9% SLA |
+| CAN bus integration complexity | Medium | Medium | Partner with vehicle integration experts |</p>
+<h3>Business Risks</h3>
+<p>| Risk | Probability | Impact | Mitigation |
+|------|------------|--------|------------|
+| Insufficient ROI | Low | High | Phased investment, early validation gates |
+| Organizational resistance | Medium | Medium | Executive sponsorship, training programs |
+| Supplier collaboration gaps | Medium | Medium | Joint development agreements, IP sharing |
+| Competitive response | High | Low | Patent protection, first-mover advantage |</p>
+<hr>
+<h2>7. Success Metrics</h2>
+<h3>Key Performance Indicators</h3>
+<p><strong>Design Phase:</strong>
+<li>Design iteration time: 40% reduction (target: 6 weeks → 3.5 weeks)</li>
+<li>Physical prototype count: 60% reduction (target: 8 → 3 iterations)</li>
+<li>Design validation confidence: >90%</li></p>
+<p><strong>Manufacturing Phase:</strong>
+<li>Quality prediction accuracy: >95%</li>
+<li>First-pass yield: 92% → 97%</li>
+<li>Defect detection time: Real-time (vs. 2-week end-of-line testing)</li>
+<li>Process optimization cycles: 4 per year</li></p>
+<p><strong>Operational Phase:</strong>
+<li>Field failure prediction accuracy: >85%</li>
+<li>Predictive maintenance lead time: 6-12 months advance warning</li>
+<li>Warranty cost reduction: 30%</li>
+<li>Customer satisfaction: NPS +15 points</li></p>
+<p><strong>Business Metrics:</strong>
+<li>Time-to-market: 18 months → 11 months</li>
+<li>Development cost per platform: $2.5M savings</li>
+<li>ROI: >250% over 5 years</li></p>
+<hr>
+<h2>8. Intellectual Property Strategy</h2>
+<h3>Patent Opportunities</h3>
+<p><strong>Filed/Planned Patents:</strong>
+<li>"Parametric optimization system for automotive optical sensors using Monte Carlo simulation"</li>
+<li>"Manufacturing digital twin with closed-loop quality prediction"</li>
+<li>"Predictive maintenance algorithm for rain/light sensors using fleet data"</li>
+<li>"Real-time calibration drift detection and compensation"</li></p>
+<h3>Trade Secrets</h3>
+<li>Specific ML model architectures and hyperparameters</li>
+<li>Manufacturing process correlation coefficients</li>
+<li>Optical design optimization heuristics</li>
+<li>Customer-specific calibration algorithms</li>
+<hr>
+<h2>9. Next Steps</h2>
+<h3>Immediate Actions (Week 1-2)</h3>
+<li><strong>Stakeholder alignment meeting</strong></li>
+   - Present business case to BCS leadership
+   - Secure budget approval ($1.3M CapEx)
+   - Identify project champion and team
+<li><strong>Technology evaluation</strong></li>
+   - Trial FRED software (30-day evaluation)
+   - Assess cloud platform options (AWS vs Azure)
+   - Review manufacturing MES capabilities
+<li><strong>Supplier engagement</strong></li>
+   - Screen printing equipment vendors
+   - Optical simulation consultants
+   - ML/AI development partners
+<h3>Short-Term (Month 1-3)</h3>
+<li><strong>Proof of concept initiation</strong></li>
+   - Hire optical engineer and software developer
+   - Set up simulation environment
+   - Begin Monte Carlo optimization development
+<li><strong>Manufacturing baseline</strong></li>
+   - Document current process parameters
+   - Establish quality baseline (current yield, defects)
+   - Identify sensor instrumentation points
+<li><strong>Customer validation</strong></li>
+   - Present concept to OEM partners
+   - Gather requirements and use cases
+   - Secure co-development agreements
+<hr>
+<h2>10. References & Resources</h2>
+<h3>Technical Standards</h3>
+<li><strong>ISO 16750:</strong> Environmental conditions and testing for automotive equipment</li>
+<li><strong>SAE J1926:</strong> Truck and bus wiper systems</li>
+<li><strong>ECE R43:</strong> Safety glazing materials (sensor integration)</li>
+<li><strong>ISO 26262:</strong> Functional safety for automotive electronics</li>
+<h3>Simulation Software</h3>
+<li><strong>FRED:</strong> https://photonengr.com/</li>
+<li><strong>Zemax OpticStudio:</strong> https://www.zemax.com/</li>
+<li><strong>LightTools:</strong> https://www.synopsys.com/optical-solutions.html</li>
+<h3>Manufacturing Technology</h3>
+<li><strong>Screen Printing:</strong> DEK, EKRA, Atma equipment</li>
+<li><strong>UV Curing:</strong> Heraeus, IST Metz, UV Technik</li>
+<li><strong>Quality Inspection:</strong> Keyence, Cognex, Omron</li>
+<h3>Cloud Platforms</h3>
+<li><strong>AWS IoT:</strong> https://aws.amazon.com/iot/</li>
+<li><strong>Azure Digital Twins:</strong> https://azure.microsoft.com/en-us/services/digital-twins/</li>
+<li><strong>Google Cloud IoT:</strong> https://cloud.google.com/solutions/iot</li>
+<hr>
+<h2>Appendices</h2>
+<h3>A. Optical Design Parameter Reference</h3>
+<pre><code>Complete parameter matrix for rain/light sensor:
+<li>28 primary design variables</li>
+<li>156 derived performance metrics</li>
+<li>8 environmental test scenarios</li>
+<li>10,000+ Monte Carlo iterations</li>
+<li>50+ manufacturing process parameters</li>
+</code></pre>
+<h3>B. Manufacturing Process Flow</h3>
+<pre><code>1. Substrate preparation (polycarbonate/PMMA)
+<li>Surface treatment (corona/plasma)</li>
+<li>Screen printing (diffuser pattern)</li>
+<li>UV curing (200-400 mJ/cm²)</li>
+<li>LED assembly and bonding</li>
+<li>Photodetector integration</li>
+<li>Optical alignment and calibration</li>
+<li>Housing assembly</li>
+<li>Functional test</li>
+<li>Environmental qualification</li>
+</code></pre>
+<h3>C. Data Schema</h3>
+<pre><code>interface SensorDigitalTwin {
+  sensorId: string;
+  designParameters: DesignParams;
+  manufacturingHistory: ProcessStep[];
+  operationalData: VehicleT elemetry[];
+  performanceMetrics: PerformanceData;
+  predictedLifecycle: LifecycleModel;
+  healthScore: number;
+  maintenanceSchedule: MaintenanceEvent[];
+}
+</code></pre>
+<h3>D. Cost Breakdown</h3>
+<pre><code>Development Phase (18 months):
+<li>Engineering labor: $800K</li>
+<li>Software/licenses: $150K</li>
+<li>Hardware/equipment: $350K</li>
+<li>Total: $1.3M</li>
+<p>Operating Phase (Annual):
+<li>Cloud infrastructure: $60K</li>
+<li>Maintenance: $30K</li>
+<li>Support: $120K</li>
+<li>Total: $210K/year</li>
+</code></pre></p>
+<hr>
+<h2>Document Information</h2>
+<p><strong>Project Code:</strong> dtrl-2024-001  
+<strong>Version:</strong> 1.0  
+<strong>Last Updated:</strong> February 2024  
+<strong>Classification:</strong> BCS Internal - Technical Project  
+<strong>Owner:</strong> BCS Advanced R&D  
+<strong>Contributors:</strong> Sensor Architecture Team, Digital Systems Team</p>
+<p><strong>Related Documents:</strong>
+<li><code>comprehensive-md-report.md</code> - Diffused screen printing technology</li>
+<li><code>parameterized-optimization.txt</code> - FRED simulation methodology</li>
+<li><code>visualization-component.tsx</code> - Dashboard implementation</li>
+<li>BCS project continuity guide (active projects section)</li></ul></p>
+<hr>
+<p><em>End of Document</em></p>
+        <div class="footer">
+            <p>Source: <a href="../digital-twin-rain-light-sensor.md">digital-twin-rain-light-sensor.md</a></p>
+        </div>
+    </div>
+</body>
+</html>

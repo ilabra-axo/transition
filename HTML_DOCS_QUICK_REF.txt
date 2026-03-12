@@ -1,0 +1,65 @@
+================================================================================
+HTML DOCUMENTATION QUICK REFERENCE
+================================================================================
+
+VIEWING DOCS
+------------
+→ Open: html_output/index.html
+
+REBUILD AFTER EDITING MARKDOWN
+-------------------------------
+→ Run: node build-docs.js
+
+INDIVIDUAL COMMANDS
+-------------------
+→ Convert MD to HTML:    node convert-md.js
+→ Rebuild index page:    node create-index.js
+
+KEY FEATURES
+------------
+✓ Every HTML page has "Export as MD" button (top-right)
+✓ All .md links automatically converted to .html
+✓ Mobile-friendly responsive design
+✓ Professional GitHub-style formatting
+✓ Index page with organized navigation
+
+FILE LOCATIONS
+--------------
+Scripts:
+  • build-docs.js         (Main build - runs both)
+  • convert-md.js         (MD → HTML conversion)
+  • create-index.js       (Create index page)
+
+Output:
+  • html_output/          (All generated HTML files)
+  • html_output/index.html (Main navigation page)
+
+WORKFLOW
+--------
+1. Edit any .md file
+2. Run: node build-docs.js
+3. Refresh browser to see changes
+
+TIPS
+----
+→ Use relative links in markdown: [Guide](./GUIDE.md)
+→ Don't edit HTML files directly (they get overwritten)
+→ Keep markdown files as source of truth
+→ Click "Export as MD" to find source files
+
+SHARING
+-------
+→ The html_output/ folder is self-contained
+→ Can be opened in any browser
+→ Can be hosted on web server
+→ Can be zipped and shared
+
+SUPPORT
+-------
+→ Full guide: HTML_DOCS_GUIDE.md
+→ No npm packages required
+→ Works with Node.js v12+
+
+================================================================================
+Quick Command:  node build-docs.js  →  Open: html_output/index.html
+================================================================================
