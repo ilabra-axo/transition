@@ -72,6 +72,71 @@ A digital twin is a virtual replica of the physical rain/light sensor system tha
 
 ## 2. System Architecture
 
+### Architecture Overview
+
+The digital twin system consists of four interconnected layers that span the entire sensor lifecycle from design through end-of-life:
+
+```mermaid
+graph TB
+    subgraph "Design Phase Twin"
+        A[FRED Optical Simulation] --> B[Monte Carlo Optimization]
+        B --> C[Performance Prediction]
+        C --> D[Design Validation]
+    end
+    
+    subgraph "Manufacturing Phase Twin"
+        E[Process Parameter Tracking] --> F[Real-Time Quality Prediction]
+        F --> G[Digital Thread Database]
+        G --> H[Manufacturing Analytics]
+    end
+    
+    subgraph "Operational Phase Twin"
+        I[Vehicle CAN Bus] --> J[Sensor Telemetry]
+        J --> K[Cloud Platform]
+        K --> L[Performance Dashboard]
+        L --> M[Predictive Maintenance]
+    end
+    
+    subgraph "Lifecycle Phase Twin"
+        N[Fleet Analytics] --> O[Failure Mode Analysis]
+        O --> P[Design Feedback Loop]
+        P --> Q[Continuous Improvement]
+    end
+    
+    D -->|Optimized Design| E
+    H -->|Production Data| I
+    M -->|Field Performance| N
+    Q -->|Design Updates| A
+    
+    subgraph "Data Flow & Integration"
+        R[Physical Sensor] -.->|Real-time Data| J
+        R -.->|Manufacturing History| G
+        S[AI/ML Models] -.->|Predictions| C
+        S -.->|Quality Scoring| F
+        S -.->|Degradation Models| M
+        T[BCS Agent Suite] -.->|Analysis & Insights| A
+        T -.->|Optimization| B
+        T -.->|Tech Scouting| O
+    end
+    
+    style A fill:#e3f2fd
+    style E fill:#fff3e0
+    style I fill:#e8f5e9
+    style N fill:#f3e5f5
+    style R fill:#ffebee
+    style S fill:#fce4ec
+    style T fill:#e0f2f1
+```
+
+**Key Integration Points:**
+
+1. **Design → Manufacturing:** Optimized parameters flow into production setup
+2. **Manufacturing → Operations:** Digital thread tracks sensor from factory to field
+3. **Operations → Lifecycle:** Real-time performance feeds long-term analytics
+4. **Lifecycle → Design:** Field insights drive next-generation improvements
+5. **AI/ML Layer:** Continuous prediction and optimization across all phases
+6. **BCS Agents:** Strategic analysis and technology intelligence support
+
 ### 2.1 Design-Phase Digital Twin
 
 #### Parametric Optical Design System
@@ -440,6 +505,265 @@ class SensorDegradationPredictor:
 3. **Root cause analysis:** Correlate failures to manufacturing/design parameters
 4. **Design improvement:** Next-generation sensor optimization
 5. **Predictive validation:** Test improvements in digital twin before production
+
+---
+
+## 2.5 Agentification: AI-Powered Research & Decision Support
+
+### Overview
+
+The digital twin system integrates with the **BCS SDV Agent Suite** to provide intelligent analysis, strategic insights, and automated decision support throughout the sensor development lifecycle. This "agentification" layer transforms raw data into actionable intelligence.
+
+### Agent Integration Architecture
+
+```mermaid
+graph LR
+    subgraph "Digital Twin System"
+        DT[Rain Light Sensor<br/>Digital Twin]
+    end
+    
+    subgraph "BCS Agent Suite"
+        A1[Optical Sensor<br/>Specialist]
+        A2[Signal Processing<br/>Advisor]
+        A3[Virtual Sensor<br/>Designer]
+        A4[Automotive Tech<br/>Scout]
+        A5[SDV Architecture<br/>Validator]
+    end
+    
+    subgraph "Use Cases"
+        UC1[Design Optimization]
+        UC2[Manufacturing Quality]
+        UC3[Cost Reduction]
+        UC4[Technology Roadmap]
+        UC5[System Integration]
+    end
+    
+    DT -->|Design Parameters| A1
+    DT -->|Algorithm Requirements| A2
+    DT -->|Cost Targets| A3
+    DT -->|Technology Trends| A4
+    DT -->|Architecture Context| A5
+    
+    A1 --> UC1
+    A2 --> UC1
+    A2 --> UC2
+    A3 --> UC3
+    A4 --> UC4
+    A5 --> UC5
+    
+    UC1 -.->|Optimized Designs| DT
+    UC2 -.->|Quality Improvements| DT
+    UC3 -.->|Virtual Sensor Options| DT
+    UC4 -.->|Tech Insights| DT
+    UC5 -.->|Integration Validation| DT
+```
+
+### Agent Applications by Development Phase
+
+#### Phase 1: Design & Optimization
+
+**Optical Sensor Specialist Agent:**
+```
+Query: "Analyze rain light sensor optical design with parameters:
+- Light guide: 3.5mm polycarbonate (n=1.49)
+- Diffuser: 0.6mm thickness, 25% particle loading
+- LED: 850nm IR, 45mW, 30° beam angle
+- Photodetector: 5mm² active area, 400-1100nm range
+
+Evaluate performance under conditions: rain (0.1-20mm/hr), ambient 
+light (1-100,000 lux), temperature (-40°C to +85°C). Recommend 
+optimization strategies."
+
+Expected Output:
+- Optical efficiency analysis (current vs. theoretical maximum)
+- Environmental robustness assessment with confidence scores
+- Design improvement recommendations (prioritized)
+- Alternative material suggestions with cost-performance tradeoffs
+```
+
+**Signal Processing Advisor Agent:**
+```
+Query: "Design signal processing algorithms for rain light sensor:
+- Input: 850nm IR photodetector (1kHz sampling)
+- Noise: Ambient light interference, electromagnetic noise
+- Constraints: <50ms detection latency, <2% false positive rate
+- Platform: Automotive-grade MCU (ARM Cortex-M4, 168MHz)
+
+Recommend filtering, feature extraction, and decision algorithms."
+
+Expected Output:
+- Algorithm architecture (bandpass filter + threshold + hysteresis)
+- Computational complexity estimates (MIPS, memory usage)
+- Performance predictions (accuracy, latency, robustness)
+- Implementation pseudocode and validation approach
+```
+
+#### Phase 2: Manufacturing Excellence
+
+**Virtual Sensor Designer Agent:**
+```
+Query: "Evaluate virtual rain sensing using existing vehicle sensors:
+- Available: Windshield wiper current draw, wiper speed, vehicle speed
+- Target: Replace $45 optical rain sensor with $0 software solution
+- Requirements: 90% correlation with optical sensor, ASIL-B safety
+
+Assess feasibility, ML architecture, training data needs, and safety 
+validation strategy."
+
+Expected Output:
+- Feasibility assessment (medium-high confidence for light rain)
+- ML model recommendation (LSTM + gradient boosting ensemble)
+- Training data requirements (50K+ labeled wiper activation events)
+- Cost-benefit analysis ($45 savings vs. $120K development cost)
+- Safety validation roadmap for ASIL-B compliance
+```
+
+#### Phase 3: Technology Intelligence
+
+**Automotive Tech Scout Agent:**
+```
+Query: "Scout emerging technologies for next-gen rain light sensors:
+- Focus areas: Solid-state rain detection, LiDAR integration, 
+  smart glass windshields, neuromorphic sensing
+- Timeframe: 2025-2030 automotive production
+- Output: Patent landscape, startup ecosystem, technology maturity
+
+Include cost trajectories and competitive intelligence."
+
+Expected Output:
+- Patent analysis (50+ recent filings, top assignees, innovation clusters)
+- Startup tracking (15+ companies, funding stages, technology approaches)
+- Technology maturity (TRL 4-7, 3-5 year timeline to production)
+- Cost projections (current $45 → $25-30 by 2028 with solid-state)
+- Strategic recommendations (partner vs. develop vs. acquire)
+```
+
+#### Phase 4: System Validation
+
+**SDV Architecture Validator Agent:**
+```
+Query: "Validate rain light sensor integration in zonal SDV architecture:
+- Architecture: 3 zone controllers + central compute
+- Sensor: CAN bus interface, 10ms update rate, ASIL-B
+- Integration: Zone 1 (front), data to ADAS ECU and body controller
+- Standards: AUTOSAR Adaptive, ISO 26262 Part 11
+
+Assess compliance, identify risks, recommend improvements."
+
+Expected Output:
+- AUTOSAR compliance analysis (Adaptive Platform R22-11)
+- Safety validation (ASIL-B decomposition, redundancy assessment)
+- Architecture risks (CAN bus latency, single point of failure)
+- Integration recommendations (diagnostics, OTA updates)
+- Confidence score: 85% (validated against similar sensor integrations)
+```
+
+### Multi-Agent Workflows
+
+**Example: Complete Sensor Redesign**
+
+```
+Step 1: Automotive Tech Scout
+└─> Identify emerging solid-state rain detection technology
+    └─> Output: 3 viable technologies, patent owners, cost estimates
+
+Step 2: Optical Sensor Specialist
+└─> Evaluate optical design for solid-state approach
+    └─> Output: Feasibility study, design recommendations
+
+Step 3: Signal Processing Advisor
+└─> Design algorithms for new sensor modality
+    └─> Output: Algorithm architecture, performance predictions
+
+Step 4: Virtual Sensor Designer
+└─> Assess hybrid approach (optical + virtual fusion)
+    └─> Output: Cost optimization analysis, safety validation
+
+Step 5: SDV Architecture Validator
+└─> Validate complete system integration
+    └─> Output: Compliance validation, risk assessment
+
+Synthesis: Comprehensive redesign with 30% cost reduction, 
+improved performance, validated safety compliance
+```
+
+### Agent Query Templates
+
+**Design Optimization:**
+```python
+def optimize_sensor_design(digital_twin_data):
+    query = f"""
+    Optimize rain light sensor design using digital twin data:
+    - Current performance: {digital_twin_data['performance_metrics']}
+    - Cost target: {digital_twin_data['cost_target']}
+    - Manufacturing constraints: {digital_twin_data['manufacturing_limits']}
+    - Environmental requirements: {digital_twin_data['environment_specs']}
+    
+    Provide 3 design alternatives with cost-performance tradeoffs.
+    """
+    
+    result = query_agent('optical_sensor_specialist', query)
+    return parse_design_recommendations(result)
+```
+
+**Predictive Maintenance:**
+```python
+def predict_sensor_maintenance(field_data):
+    query = f"""
+    Analyze sensor degradation patterns:
+    - Fleet size: {len(field_data)} sensors
+    - Average age: {field_data['avg_age_months']} months
+    - Failure rate: {field_data['failure_rate']}%
+    - Common failure modes: {field_data['top_failures']}
+    
+    Predict failure probability for next 12 months and recommend 
+    preventive maintenance strategy.
+    """
+    
+    result = query_agent('sensor_fusion_analyst', query)
+    return generate_maintenance_schedule(result)
+```
+
+### Benefits of Agentification
+
+**Speed & Efficiency:**
+- Design iteration time: 6 weeks → 2 weeks (67% reduction)
+- Technology scouting: 2 weeks → 2 days (10x faster)
+- Architecture validation: 4 weeks → 1 week (75% reduction)
+
+**Quality & Insight:**
+- Evidence-based recommendations with source citations
+- Confidence scoring for decision risk assessment
+- Multi-perspective analysis through agent collaboration
+- Continuous learning from field data and outcomes
+
+**Cost Optimization:**
+- Analysis cost: $15K/iteration → $500/iteration (97% reduction)
+- Expert availability: Eliminates bottlenecks
+- Knowledge retention: Preserves institutional expertise
+- Scalability: Parallel analysis of multiple design options
+
+### Implementation Strategy
+
+**Week 1-2: Agent Integration Setup**
+- Configure API access to BCS Agent Suite
+- Define query templates for common use cases
+- Train team on agent capabilities and limitations
+
+**Month 1-3: Pilot Applications**
+- Apply agents to current design optimization tasks
+- Validate agent recommendations against expert judgment
+- Refine query patterns based on results
+
+**Month 3-6: Production Integration**
+- Embed agents into digital twin workflow
+- Automate routine analysis tasks
+- Build agent query library for recurring needs
+
+**Ongoing: Continuous Improvement**
+- Track agent performance and accuracy
+- Update query templates based on feedback
+- Expand agent applications to new use cases
 
 ---
 
