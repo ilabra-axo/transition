@@ -1,0 +1,300 @@
+{
+  "agent_id": "hmi_ux_forecaster",
+  "agent_name": "HMI/UX Experience Forecaster",
+  "version": "1.0.0",
+  "agent_type": "forecasting",
+  "domain": "automotive_hmi",
+  "tags": ["hmi", "ux", "displays", "haptics", "voice", "gesture", "driver_monitoring", "cockpit"],
+  "description": "Forecasts trends in human-machine interface design for software-defined vehicles. Analyzes emerging display technologies, multimodal interaction patterns (voice, gesture, haptics, gaze), driver state monitoring integration, and regulatory compliance. Provides technology adoption timelines and market readiness assessments.",
+  "capabilities": [
+    "HMI technology trend forecasting (1-year, 3-year, 5-year horizons)",
+    "Display technology evolution analysis (micro-LED, OLED, transparent, flexible)",
+    "Multimodal interaction pattern assessment (voice, gesture, haptic, gaze)",
+    "Driver state monitoring (DSM) integration recommendations",
+    "Augmented reality HUD feasibility analysis",
+    "Regulatory compliance assessment (NHTSA distraction guidelines, Euro NCAP)",
+    "User experience benchmarking and competitive analysis",
+    "Technology adoption probability estimation",
+    "Patent landscape analysis for HMI innovations"
+  ],
+  "executor": {
+    "type": "llm",
+    "config": {
+      "provider": "anthropic",
+      "model": "claude-3-5-sonnet-20241022",
+      "temperature": 0.4,
+      "max_tokens": 4096,
+      "system_prompt": "You are an expert automotive HMI/UX forecaster with deep knowledge of cockpit technologies, human factors, and emerging interaction paradigms for software-defined vehicles.\n\nYour expertise includes:\n- Display technologies (OLED, micro-LED, quantum dot, transparent displays, AR HUDs)\n- Interaction modalities (touch, voice, gesture, gaze, haptics, brain-computer interfaces)\n- Driver monitoring systems (DMS/DSM for drowsiness, distraction, attention)\n- Regulatory frameworks (NHTSA visual-manual distraction guidelines, Euro NCAP protocols, UN-ECE regulations)\n- Automotive UI/UX design patterns and best practices\n- Patent trends in automotive HMI (USPTO, EPO, WIPO)\n- OEM cockpit strategies (Mercedes MBUX, BMW iDrive, Tesla minimalism, etc.)\n- Accessibility and inclusive design for diverse user populations\n\nWhen forecasting HMI trends:\n1. Analyze technology maturity using TRL (Technology Readiness Level) assessments\n2. Consider regulatory constraints and timelines for approval\n3. Evaluate cost trajectories and mass-market viability\n4. Assess user acceptance and learning curves\n5. Identify enabling dependencies (compute power, sensor availability, standards)\n6. Distinguish between premium segment adoption vs. mass market penetration\n7. Provide probability estimates with confidence intervals\n8. Cite patents, research papers, OEM announcements, and regulatory filings\n\nOutput Format:\n- **Technology Overview**: Brief description of the HMI technology or trend\n- **Adoption Timeline**: 1-year, 3-year, 5-year forecasts with probabilities\n- **Market Segmentation**: Premium vs. mass market adoption curves\n- **Enabling Factors**: Technical, regulatory, and market prerequisites\n- **Risk Factors**: Barriers to adoption (cost, regulation, user acceptance, technical)\n- **Competitive Landscape**: OEMs and suppliers leading/lagging\n- **Recommendations**: Strategic implications for product planning\n- **Confidence Score**: 0-100% with justification\n- **Sources**: Patents, papers, regulations, industry reports\n\nBe evidence-based and probabilistic. Distinguish between hype and realistic timelines. Flag high-uncertainty areas clearly.",
+      "response_format": "markdown"
+    }
+  },
+  "input_schema": {
+    "type": "object",
+    "properties": {
+      "forecast_query": {
+        "type": "string",
+        "description": "The HMI/UX trend or technology to forecast"
+      },
+      "time_horizon": {
+        "type": "string",
+        "enum": ["1_year", "3_year", "5_year", "10_year"],
+        "description": "Forecast time horizon"
+      },
+      "vehicle_segment": {
+        "type": "string",
+        "enum": ["premium", "mass_market", "commercial", "all"],
+        "description": "Target vehicle market segment (optional)"
+      },
+      "geographic_region": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "enum": ["north_america", "europe", "china", "japan", "global"]
+        },
+        "description": "Geographic markets to consider (optional)"
+      },
+      "analysis_dimensions": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "enum": ["technology_maturity", "regulatory_compliance", "cost_trajectory", "user_acceptance", "competitive_landscape", "patent_activity"]
+        },
+        "description": "Specific analysis dimensions to prioritize (optional)"
+      },
+      "context": {
+        "type": "string",
+        "description": "Additional context (e.g., specific use case, constraints, assumptions)"
+      }
+    },
+    "required": ["forecast_query", "time_horizon"]
+  },
+  "output_schema": {
+    "type": "object",
+    "properties": {
+      "technology_overview": {
+        "type": "object",
+        "properties": {
+          "description": {"type": "string"},
+          "current_state": {"type": "string"},
+          "trl_level": {"type": "integer", "minimum": 1, "maximum": 9},
+          "key_players": {"type": "array", "items": {"type": "string"}}
+        }
+      },
+      "adoption_forecast": {
+        "type": "object",
+        "properties": {
+          "one_year": {
+            "type": "object",
+            "properties": {
+              "probability": {"type": "number", "minimum": 0, "maximum": 100},
+              "market_penetration": {"type": "string"},
+              "key_milestones": {"type": "array", "items": {"type": "string"}}
+            }
+          },
+          "three_year": {
+            "type": "object",
+            "properties": {
+              "probability": {"type": "number", "minimum": 0, "maximum": 100},
+              "market_penetration": {"type": "string"},
+              "key_milestones": {"type": "array", "items": {"type": "string"}}
+            }
+          },
+          "five_year": {
+            "type": "object",
+            "properties": {
+              "probability": {"type": "number", "minimum": 0, "maximum": 100},
+              "market_penetration": {"type": "string"},
+              "key_milestones": {"type": "array", "items": {"type": "string"}}
+            }
+          }
+        }
+      },
+      "market_segmentation": {
+        "type": "object",
+        "properties": {
+          "premium_segment": {"type": "string"},
+          "mass_market_segment": {"type": "string"},
+          "commercial_segment": {"type": "string"},
+          "segment_timeline_delta": {"type": "string"}
+        }
+      },
+      "enabling_factors": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "factor": {"type": "string"},
+            "status": {"type": "string", "enum": ["met", "in_progress", "not_met"]},
+            "expected_timeline": {"type": "string"}
+          }
+        }
+      },
+      "risk_factors": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "risk": {"type": "string"},
+            "category": {"type": "string", "enum": ["technical", "regulatory", "cost", "user_acceptance", "competitive"]},
+            "severity": {"type": "string", "enum": ["high", "medium", "low"]},
+            "mitigation": {"type": "string"}
+          }
+        }
+      },
+      "competitive_landscape": {
+        "type": "object",
+        "properties": {
+          "leaders": {"type": "array", "items": {"type": "string"}},
+          "fast_followers": {"type": "array", "items": {"type": "string"}},
+          "laggards": {"type": "array", "items": {"type": "string"}},
+          "key_partnerships": {"type": "array", "items": {"type": "string"}}
+        }
+      },
+      "patent_analysis": {
+        "type": "object",
+        "properties": {
+          "recent_patents": {"type": "array", "items": {"type": "string"}},
+          "patent_trend": {"type": "string", "enum": ["increasing", "stable", "decreasing"]},
+          "innovation_hotspots": {"type": "array", "items": {"type": "string"}}
+        }
+      },
+      "regulatory_assessment": {
+        "type": "object",
+        "properties": {
+          "compliance_status": {"type": "string"},
+          "pending_regulations": {"type": "array", "items": {"type": "string"}},
+          "regulatory_risk": {"type": "string", "enum": ["high", "medium", "low"]}
+        }
+      },
+      "recommendations": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "recommendation": {"type": "string"},
+            "rationale": {"type": "string"},
+            "priority": {"type": "string", "enum": ["high", "medium", "low"]},
+            "timeline": {"type": "string"}
+          }
+        }
+      },
+      "confidence_score": {
+        "type": "number",
+        "minimum": 0,
+        "maximum": 100
+      },
+      "confidence_justification": {
+        "type": "string"
+      },
+      "sources": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "type": {"type": "string", "enum": ["patent", "research_paper", "regulation", "industry_report", "oem_announcement"]},
+            "reference": {"type": "string"},
+            "date": {"type": "string"}
+          }
+        }
+      }
+    },
+    "required": ["technology_overview", "adoption_forecast", "confidence_score", "sources"]
+  },
+  "data_sources": [
+    {
+      "name": "Patent Databases",
+      "type": "database",
+      "description": "USPTO, EPO, WIPO for automotive HMI patents",
+      "access_method": "api"
+    },
+    {
+      "name": "Automotive HMI Research",
+      "type": "literature",
+      "description": "IEEE, SAE, ACM CHI publications on automotive UX",
+      "access_method": "knowledge_base"
+    },
+    {
+      "name": "NHTSA Guidelines",
+      "type": "regulation",
+      "description": "Visual-manual distraction guidelines",
+      "access_method": "reference"
+    },
+    {
+      "name": "Euro NCAP Protocols",
+      "type": "standard",
+      "description": "Safety assist scoring for HMI features",
+      "access_method": "reference"
+    },
+    {
+      "name": "OEM Press Releases",
+      "type": "news",
+      "description": "Product announcements and technology roadmaps",
+      "access_method": "web_search"
+    }
+  ],
+  "mcp_servers": [
+    {
+      "name": "patent_search",
+      "description": "Search and analyze automotive HMI patents",
+      "optional": true
+    },
+    {
+      "name": "arxiv_search",
+      "description": "Search HCI and automotive UX research papers",
+      "optional": true
+    }
+  ],
+  "performance_estimates": {
+    "average_response_time_seconds": 45,
+    "confidence_accuracy": 75,
+    "cost_per_query_usd": 0.18,
+    "success_rate_percent": 88,
+    "notes": "Response time varies with forecast horizon and depth of patent analysis. Confidence accuracy is lower for long-term forecasts (5+ years) due to market uncertainty."
+  },
+  "example_queries": [
+    {
+      "query": "What is the likelihood that AR navigation HUDs will be standard in premium vehicles by 2027?",
+      "expected_confidence": "medium",
+      "notes": "Established technology with known adoption barriers (cost, safety validation)"
+    },
+    {
+      "query": "Forecast adoption of gaze-based control for infotainment systems over the next 5 years in European market.",
+      "expected_confidence": "medium-low",
+      "notes": "Emerging technology with regulatory uncertainty and user acceptance questions"
+    },
+    {
+      "query": "Will haptic steering wheel feedback for ADAS alerts become standard in mass-market vehicles by 2026?",
+      "expected_confidence": "medium-high",
+      "notes": "Existing technology with clear regulatory drivers (Euro NCAP)"
+    },
+    {
+      "query": "Analyze the competitive landscape for next-generation cockpit displays (curved OLED, 8K resolution) in luxury sedans.",
+      "expected_confidence": "high",
+      "notes": "Active area with multiple OEM announcements and production vehicles"
+    }
+  ],
+  "error_handling": {
+    "emerging_technology": "Provide wider confidence intervals and scenario-based forecasts",
+    "insufficient_data": "Use analogies from similar technology transitions and clearly flag assumptions",
+    "conflicting_signals": "Present multiple scenarios (optimistic, base, pessimistic) with probability weights",
+    "regulatory_uncertainty": "Analyze historical regulatory timelines and provide conditional forecasts"
+  },
+  "limitations": [
+    "Cannot predict disruptive innovations (black swan events)",
+    "Limited visibility into OEM internal roadmaps and strategic decisions",
+    "Patent analysis reflects filing activity, not commercialization certainty",
+    "User acceptance predictions are inherently uncertain",
+    "Regulatory timelines can shift based on political and safety factors",
+    "Cost trajectory forecasts depend on production volume assumptions"
+  ],
+  "related_agents": [
+    "automotive_tech_scout",
+    "sdv_arch_validator",
+    "optical_sensor_specialist"
+  ],
+  "author": "Alena Taranka",
+  "created_date": "2024-02-07",
+  "last_updated": "2024-02-07",
+  "license": "Proprietary - Transition Package",
+  "documentation_url": "../docs/hmi_ux_forecaster.md"
+}

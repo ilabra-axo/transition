@@ -1,0 +1,285 @@
+{
+  "agent_id": "sensor_fusion_analyst",
+  "agent_name": "Sensor Fusion Analyst",
+  "version": "1.0.0",
+  "agent_type": "analysis",
+  "domain": "automotive_sensing",
+  "tags": ["sensor_fusion", "camera", "radar", "lidar", "ultrasonic", "adas", "autonomous_driving"],
+  "description": "Analyzes multi-sensor fusion architectures for autonomous and ADAS systems. Evaluates sensor suite composition, field-of-view coverage, redundancy strategies, temporal synchronization, and degradation modes. Provides recommendations for sensor selection, placement, and fusion algorithms.",
+  "capabilities": [
+    "Sensor suite composition analysis (camera + radar + LiDAR + ultrasonic)",
+    "Field-of-view (FOV) overlap and coverage gap detection",
+    "Temporal synchronization validation",
+    "Sensor degradation and failure mode analysis (FMEA)",
+    "Sensor modality selection optimization",
+    "Redundancy strategy design",
+    "Environmental condition impact assessment",
+    "Cost-performance tradeoff analysis",
+    "Virtual sensor feasibility assessment"
+  ],
+  "executor": {
+    "type": "llm",
+    "config": {
+      "provider": "anthropic",
+      "model": "claude-3-5-sonnet-20241022",
+      "temperature": 0.3,
+      "max_tokens": 4096,
+      "system_prompt": "You are an expert automotive sensor fusion analyst with deep knowledge of multi-modal sensing for ADAS and autonomous driving systems (L2+ through L5).\n\nYour expertise includes:\n- Camera systems (mono, stereo, fisheye, surround-view)\n- Radar (77 GHz, 4D imaging radar, corner vs. long-range)\n- LiDAR (mechanical, solid-state, FMCW, flash)\n- Ultrasonic sensors (parking, close-range)\n- Sensor fusion algorithms (early, late, deep fusion)\n- Environmental robustness (rain, fog, snow, night, glare)\n- Safety architectures (redundancy, graceful degradation)\n- ISO 26262 safety requirements for sensor systems\n\nWhen analyzing sensor architectures:\n1. Evaluate sensor suite composition against use case requirements (highway pilot, urban autonomy, parking, etc.)\n2. Calculate field-of-view coverage and identify blind spots\n3. Assess redundancy for critical perception tasks (object detection, localization, free space)\n4. Analyze failure modes (sensor blocked, degraded, failed) and system response\n5. Consider environmental conditions and their impact on each modality\n6. Evaluate cost-performance tradeoffs\n7. Recommend sensor placement, specifications, and fusion strategies\n8. Provide confidence scores based on available information\n\nOutput Format:\n- **Sensor Suite Assessment**: Overall evaluation of the proposed architecture\n- **Coverage Analysis**: FOV overlap, blind spots, detection range\n- **Redundancy Analysis**: Single points of failure, graceful degradation\n- **Failure Modes**: FMEA-style analysis with severity and mitigation\n- **Environmental Robustness**: Performance under adverse conditions\n- **Recommendations**: Prioritized improvements and alternatives\n- **Confidence Score**: 0-100% with justification\n- **Sources**: Technical rationale, standards, or research citations\n\nBe quantitative when possible (e.g., FOV angles, detection ranges, costs). State assumptions clearly. Recommend further analysis when needed.",
+      "response_format": "markdown"
+    }
+  },
+  "input_schema": {
+    "type": "object",
+    "properties": {
+      "sensor_suite": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "sensor_type": {
+              "type": "string",
+              "enum": ["camera", "radar", "lidar", "ultrasonic", "thermal", "virtual"]
+            },
+            "model": {"type": "string"},
+            "quantity": {"type": "integer"},
+            "placement": {"type": "string"},
+            "fov_horizontal": {"type": "number"},
+            "fov_vertical": {"type": "number"},
+            "range_min": {"type": "number"},
+            "range_max": {"type": "number"},
+            "specifications": {"type": "object"}
+          },
+          "required": ["sensor_type", "quantity"]
+        },
+        "description": "Array of sensors in the proposed suite"
+      },
+      "use_case": {
+        "type": "string",
+        "enum": ["L2_adas", "L2+_highway_pilot", "L3_traffic_jam", "L4_urban", "L4_highway", "L5_full_autonomy", "parking_assist", "surround_view"],
+        "description": "Primary autonomous driving use case"
+      },
+      "safety_requirements": {
+        "type": "object",
+        "properties": {
+          "asil_level": {"type": "string", "enum": ["QM", "ASIL_A", "ASIL_B", "ASIL_C", "ASIL_D"]},
+          "redundancy_required": {"type": "boolean"},
+          "degradation_strategy": {"type": "string"}
+        }
+      },
+      "environmental_conditions": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "enum": ["clear_day", "night", "rain", "heavy_rain", "fog", "snow", "direct_sunlight", "tunnel"]
+        },
+        "description": "Operating conditions to evaluate (optional)"
+      },
+      "constraints": {
+        "type": "object",
+        "properties": {
+          "cost_target_usd": {"type": "number"},
+          "compute_budget": {"type": "string"},
+          "packaging_constraints": {"type": "string"}
+        }
+      },
+      "analysis_focus": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "enum": ["coverage", "redundancy", "cost_optimization", "failure_modes", "environmental_robustness", "virtual_sensor_opportunities"]
+        },
+        "description": "Specific analysis areas to prioritize (optional)"
+      }
+    },
+    "required": ["sensor_suite", "use_case"]
+  },
+  "output_schema": {
+    "type": "object",
+    "properties": {
+      "overall_assessment": {
+        "type": "object",
+        "properties": {
+          "suitability": {"type": "string", "enum": ["excellent", "good", "adequate", "insufficient"]},
+          "summary": {"type": "string"},
+          "key_strengths": {"type": "array", "items": {"type": "string"}},
+          "key_weaknesses": {"type": "array", "items": {"type": "string"}}
+        }
+      },
+      "coverage_analysis": {
+        "type": "object",
+        "properties": {
+          "horizontal_fov_coverage": {"type": "string"},
+          "vertical_fov_coverage": {"type": "string"},
+          "detection_range": {"type": "string"},
+          "blind_spots": {"type": "array", "items": {"type": "string"}},
+          "overlap_regions": {"type": "array", "items": {"type": "string"}}
+        }
+      },
+      "redundancy_analysis": {
+        "type": "object",
+        "properties": {
+          "object_detection_redundancy": {"type": "string"},
+          "localization_redundancy": {"type": "string"},
+          "single_points_of_failure": {"type": "array", "items": {"type": "string"}},
+          "graceful_degradation_capability": {"type": "string"}
+        }
+      },
+      "failure_modes": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "failure_scenario": {"type": "string"},
+            "affected_sensors": {"type": "array", "items": {"type": "string"}},
+            "severity": {"type": "string", "enum": ["critical", "major", "minor"]},
+            "system_response": {"type": "string"},
+            "mitigation": {"type": "string"}
+          }
+        }
+      },
+      "environmental_robustness": {
+        "type": "object",
+        "properties": {
+          "rain_performance": {"type": "string"},
+          "night_performance": {"type": "string"},
+          "fog_performance": {"type": "string"},
+          "overall_robustness": {"type": "string"}
+        }
+      },
+      "cost_analysis": {
+        "type": "object",
+        "properties": {
+          "estimated_hardware_cost_usd": {"type": "number"},
+          "cost_breakdown": {"type": "object"},
+          "cost_optimization_opportunities": {"type": "array", "items": {"type": "string"}}
+        }
+      },
+      "recommendations": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "priority": {"type": "string", "enum": ["high", "medium", "low"]},
+            "category": {"type": "string"},
+            "recommendation": {"type": "string"},
+            "rationale": {"type": "string"},
+            "impact": {"type": "string"}
+          }
+        }
+      },
+      "virtual_sensor_opportunities": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "target_modality": {"type": "string"},
+            "feasibility": {"type": "string", "enum": ["high", "medium", "low"]},
+            "description": {"type": "string"}
+          }
+        }
+      },
+      "confidence_score": {
+        "type": "number",
+        "minimum": 0,
+        "maximum": 100
+      },
+      "confidence_justification": {
+        "type": "string"
+      },
+      "sources": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      }
+    },
+    "required": ["overall_assessment", "coverage_analysis", "recommendations", "confidence_score"]
+  },
+  "data_sources": [
+    {
+      "name": "Sensor Datasheets",
+      "type": "reference",
+      "description": "Camera, radar, LiDAR, ultrasonic sensor specifications from major suppliers",
+      "access_method": "knowledge_base"
+    },
+    {
+      "name": "SAE J3016 Levels of Automation",
+      "type": "standard",
+      "description": "Taxonomy for automated driving systems",
+      "access_method": "reference"
+    },
+    {
+      "name": "ISO 26262 Part 11",
+      "type": "standard",
+      "description": "Semiconductor component requirements",
+      "access_method": "reference"
+    },
+    {
+      "name": "Automotive Sensor Research",
+      "type": "literature",
+      "description": "IEEE, SAE, CVPR publications on sensor fusion",
+      "access_method": "knowledge_base"
+    }
+  ],
+  "mcp_servers": [
+    {
+      "name": "sensor_database",
+      "description": "Database of automotive sensor specifications and pricing",
+      "optional": true
+    }
+  ],
+  "performance_estimates": {
+    "average_response_time_seconds": 25,
+    "confidence_accuracy": 80,
+    "cost_per_query_usd": 0.12,
+    "success_rate_percent": 92,
+    "notes": "Response time increases with larger sensor suites (>10 sensors). Confidence accuracy depends on availability of detailed sensor specifications."
+  },
+  "example_queries": [
+    {
+      "query": "Analyze a sensor suite for L3 highway pilot: 3 front cameras (1 telephoto, 2 wide), 5 radars (1 long-range front, 4 corner), 1 front LiDAR. Target cost: $800. ASIL-B required.",
+      "expected_confidence": "high",
+      "notes": "Well-specified scenario with common sensor configuration"
+    },
+    {
+      "query": "Evaluate cost reduction opportunities for L2+ ADAS by replacing one radar with virtual sensing. Current suite: 4 cameras, 3 radars.",
+      "expected_confidence": "medium",
+      "notes": "Requires assumptions about virtual sensor capabilities and safety validation"
+    },
+    {
+      "query": "Assess environmental robustness of camera-only Tesla FSD approach (8 cameras, no radar/LiDAR) in heavy rain and fog conditions.",
+      "expected_confidence": "high",
+      "notes": "Well-researched topic with published analysis"
+    },
+    {
+      "query": "Design minimal sensor suite for L4 valet parking (≤30 km/h) with $300 budget.",
+      "expected_confidence": "medium-high",
+      "notes": "Constrained scenario with established low-speed automation patterns"
+    }
+  ],
+  "error_handling": {
+    "missing_sensor_specs": "Use typical specifications for sensor class and flag assumptions",
+    "ambiguous_use_case": "Request clarification or provide analysis for multiple scenarios",
+    "insufficient_placement_info": "Assume standard placements and note limitations",
+    "unrealistic_constraints": "Flag conflicts (e.g., L5 autonomy with $100 budget) and explain infeasibility"
+  },
+  "limitations": [
+    "Cannot perform real-world sensor testing or validation",
+    "FOV calculations are approximate without precise mounting geometry",
+    "Cost estimates based on publicly available data (may not reflect OEM negotiated pricing)",
+    "Cannot validate actual fusion algorithm performance without test data",
+    "Environmental performance assessments are qualitative without sensor test data",
+    "Limited knowledge of proprietary sensor technologies"
+  ],
+  "related_agents": [
+    "optical_sensor_specialist",
+    "virtual_sensor_designer",
+    "signal_processing_advisor",
+    "sdv_arch_validator"
+  ],
+  "author": "Alena Taranka",
+  "created_date": "2024-02-07",
+  "last_updated": "2024-02-07",
+  "license": "Proprietary - Transition Package",
+  "documentation_url": "../docs/sensor_fusion_analyst.md"
+}

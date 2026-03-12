@@ -1,0 +1,300 @@
+{
+  "agent_id": "virtual_sensor_designer",
+  "agent_name": "Virtual Sensor Designer",
+  "version": "1.0.0",
+  "agent_type": "design",
+  "domain": "automotive_sensing",
+  "tags": ["virtual_sensor", "software_sensor", "ml", "sensor_fusion", "cost_reduction", "redundancy"],
+  "description": "Designs and evaluates virtual sensors that use software algorithms to infer physical quantities from existing sensor data. Assesses feasibility using physics-based and ML approaches, estimates training data requirements, predicts accuracy and latency, and provides safety validation strategies for automotive applications.",
+  "capabilities": [
+    "Virtual sensor concept generation and design",
+    "Feasibility assessment (physics-based and ML-based approaches)",
+    "Training data requirements estimation",
+    "Accuracy and latency prediction",
+    "Safety validation strategy design (ASIL compliance)",
+    "Cost-benefit analysis for sensor elimination",
+    "Graceful degradation strategy design",
+    "Model architecture recommendations (CNN, transformer, hybrid)",
+    "Edge deployment optimization",
+    "Virtual sensor verification and validation planning"
+  ],
+  "executor": {
+    "type": "llm",
+    "config": {
+      "provider": "anthropic",
+      "model": "claude-3-5-sonnet-20241022",
+      "temperature": 0.4,
+      "max_tokens": 4096,
+      "system_prompt": "You are an expert virtual sensor designer specializing in automotive applications. Virtual sensors use software algorithms (physics-based models, machine learning, or hybrid approaches) to infer physical quantities from existing sensor data, enabling cost reduction, redundancy, and graceful degradation.\n\nYour expertise includes:\n- Physics-based virtual sensors (kinematic models, optical flow, geometric constraints)\n- ML-based virtual sensors (CNNs, transformers, sensor fusion networks)\n- Hybrid approaches combining physics and learning\n- Automotive perception tasks (object detection, depth estimation, free space, localization)\n- Safety validation for virtual sensors (ISO 26262 compliance)\n- Training data collection and annotation strategies\n- Edge deployment (quantization, pruning, hardware acceleration)\n- Performance prediction (accuracy, latency, compute requirements)\n\nWhen designing virtual sensors:\n1. Analyze input sensors and target sensing modality\n2. Evaluate physics-based vs. ML-based vs. hybrid approaches\n3. Assess feasibility based on information content and constraints\n4. Estimate training data requirements (quantity, diversity, annotation)\n5. Predict accuracy, latency, and computational cost\n6. Design safety validation strategy (ASIL decomposition, monitoring, fallback)\n7. Recommend implementation roadmap and validation tests\n8. Quantify cost savings and risk mitigation\n9. Provide confidence scores based on literature and domain knowledge\n\nOutput Format:\n- **Virtual Sensor Concept**: High-level design and approach\n- **Feasibility Assessment**: Technical viability with risk factors\n- **Architecture Recommendation**: Model type, inputs, outputs, processing pipeline\n- **Performance Estimates**: Accuracy, latency, compute, power\n- **Training Strategy**: Data requirements, annotation, validation splits\n- **Safety Validation**: ISO 26262 compliance approach, ASIL decomposition\n- **Implementation Roadmap**: Phases, milestones, validation gates\n- **Cost-Benefit Analysis**: Hardware savings vs. development investment\n- **Confidence Score**: 0-100% with justification\n- **Sources**: Research papers, patents, technical rationale\n\nBe quantitative when possible. Cite relevant research (e.g., MonoDepth for depth from mono camera, BEVFormer for virtual LiDAR). State assumptions clearly and recommend validation experiments.",
+      "response_format": "markdown"
+    }
+  },
+  "input_schema": {
+    "type": "object",
+    "properties": {
+      "target_sensing_modality": {
+        "type": "string",
+        "description": "What the virtual sensor should measure (e.g., 'depth map', 'rear radar', 'side ultrasonic', 'road friction')"
+      },
+      "available_sensors": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "sensor_type": {"type": "string"},
+            "model": {"type": "string"},
+            "specifications": {"type": "object"},
+            "placement": {"type": "string"}
+          }
+        },
+        "description": "Existing sensors that can provide input to the virtual sensor"
+      },
+      "use_case": {
+        "type": "string",
+        "description": "Application context (e.g., 'L2+ highway pilot', 'parking assist', 'blind spot detection')"
+      },
+      "performance_requirements": {
+        "type": "object",
+        "properties": {
+          "accuracy_target": {"type": "string"},
+          "latency_max_ms": {"type": "number"},
+          "detection_range_m": {"type": "number"},
+          "update_rate_hz": {"type": "number"}
+        }
+      },
+      "safety_requirements": {
+        "type": "object",
+        "properties": {
+          "asil_level": {"type": "string", "enum": ["QM", "ASIL_A", "ASIL_B", "ASIL_C", "ASIL_D"]},
+          "redundancy_strategy": {"type": "string"},
+          "monitoring_required": {"type": "boolean"}
+        }
+      },
+      "constraints": {
+        "type": "object",
+        "properties": {
+          "compute_platform": {"type": "string"},
+          "power_budget_watts": {"type": "number"},
+          "development_timeline_months": {"type": "number"},
+          "cost_savings_target_usd": {"type": "number"}
+        }
+      },
+      "approach_preference": {
+        "type": "string",
+        "enum": ["physics_based", "ml_based", "hybrid", "recommend"],
+        "description": "Preferred implementation approach (optional)"
+      }
+    },
+    "required": ["target_sensing_modality", "available_sensors", "use_case"]
+  },
+  "output_schema": {
+    "type": "object",
+    "properties": {
+      "virtual_sensor_concept": {
+        "type": "object",
+        "properties": {
+          "name": {"type": "string"},
+          "description": {"type": "string"},
+          "approach": {"type": "string", "enum": ["physics_based", "ml_based", "hybrid"]},
+          "key_innovation": {"type": "string"}
+        }
+      },
+      "feasibility_assessment": {
+        "type": "object",
+        "properties": {
+          "overall_feasibility": {"type": "string", "enum": ["high", "medium", "low", "not_feasible"]},
+          "technical_viability": {"type": "string"},
+          "risk_factors": {"type": "array", "items": {"type": "string"}},
+          "critical_assumptions": {"type": "array", "items": {"type": "string"}}
+        }
+      },
+      "architecture_recommendation": {
+        "type": "object",
+        "properties": {
+          "model_type": {"type": "string"},
+          "input_sensors": {"type": "array", "items": {"type": "string"}},
+          "preprocessing": {"type": "string"},
+          "core_algorithm": {"type": "string"},
+          "postprocessing": {"type": "string"},
+          "output_format": {"type": "string"}
+        }
+      },
+      "performance_estimates": {
+        "type": "object",
+        "properties": {
+          "accuracy_estimate": {"type": "string"},
+          "latency_ms": {"type": "number"},
+          "compute_requirements": {"type": "string"},
+          "power_consumption_watts": {"type": "number"},
+          "comparison_to_hardware_sensor": {"type": "string"}
+        }
+      },
+      "training_strategy": {
+        "type": "object",
+        "properties": {
+          "data_collection_method": {"type": "string"},
+          "dataset_size_estimate": {"type": "string"},
+          "annotation_requirements": {"type": "string"},
+          "training_duration_estimate": {"type": "string"},
+          "validation_approach": {"type": "string"}
+        }
+      },
+      "safety_validation": {
+        "type": "object",
+        "properties": {
+          "asil_compliance_strategy": {"type": "string"},
+          "monitoring_mechanisms": {"type": "array", "items": {"type": "string"}},
+          "fallback_behavior": {"type": "string"},
+          "validation_test_matrix": {"type": "array", "items": {"type": "string"}},
+          "certification_path": {"type": "string"}
+        }
+      },
+      "implementation_roadmap": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "phase": {"type": "string"},
+            "duration": {"type": "string"},
+            "deliverables": {"type": "array", "items": {"type": "string"}},
+            "validation_criteria": {"type": "string"}
+          }
+        }
+      },
+      "cost_benefit_analysis": {
+        "type": "object",
+        "properties": {
+          "hardware_cost_savings_usd": {"type": "number"},
+          "development_cost_usd": {"type": "number"},
+          "roi_estimate": {"type": "string"},
+          "break_even_volume": {"type": "number"},
+          "non_monetary_benefits": {"type": "array", "items": {"type": "string"}}
+        }
+      },
+      "recommendations": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "priority": {"type": "string", "enum": ["high", "medium", "low"]},
+            "recommendation": {"type": "string"},
+            "rationale": {"type": "string"}
+          }
+        }
+      },
+      "confidence_score": {
+        "type": "number",
+        "minimum": 0,
+        "maximum": 100
+      },
+      "confidence_justification": {
+        "type": "string"
+      },
+      "sources": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "type": {"type": "string", "enum": ["research_paper", "patent", "industry_report", "technical_standard"]},
+            "reference": {"type": "string"},
+            "relevance": {"type": "string"}
+          }
+        }
+      }
+    },
+    "required": ["virtual_sensor_concept", "feasibility_assessment", "architecture_recommendation", "performance_estimates", "confidence_score"]
+  },
+  "data_sources": [
+    {
+      "name": "Computer Vision Research",
+      "type": "literature",
+      "description": "CVPR, ICCV, ECCV papers on depth estimation, sensor simulation, multi-modal learning",
+      "access_method": "knowledge_base"
+    },
+    {
+      "name": "Automotive ML Patents",
+      "type": "patent_database",
+      "description": "USPTO, EPO patents on virtual sensors, camera-based depth, radar simulation",
+      "access_method": "knowledge_base"
+    },
+    {
+      "name": "ISO 26262",
+      "type": "standard",
+      "description": "Functional safety requirements for virtual sensor validation",
+      "access_method": "reference"
+    },
+    {
+      "name": "Sensor Simulation Platforms",
+      "type": "tools",
+      "description": "CARLA, AirSim, LGSVL for virtual sensor development and validation",
+      "access_method": "reference"
+    }
+  ],
+  "skills": [
+    {
+      "name": "depth_estimation_calculator",
+      "description": "Calculates theoretical depth estimation accuracy from camera geometry",
+      "optional": true
+    },
+    {
+      "name": "ml_performance_estimator",
+      "description": "Estimates ML model performance based on architecture and dataset size",
+      "optional": true
+    }
+  ],
+  "performance_estimates": {
+    "average_response_time_seconds": 35,
+    "confidence_accuracy": 75,
+    "cost_per_query_usd": 0.18,
+    "success_rate_percent": 88,
+    "notes": "Response time varies with complexity of virtual sensor concept. Confidence accuracy depends on similarity to existing research. Novel virtual sensor concepts have higher uncertainty."
+  },
+  "example_queries": [
+    {
+      "query": "Design a virtual rear radar using 2 rear cameras and vehicle CAN data (speed, yaw rate). Target: detect vehicles up to 100m, ASIL-B compliance. Hardware cost savings target: $150/vehicle.",
+      "expected_confidence": "medium-high",
+      "notes": "Well-researched area (camera-based radar simulation) with established ML approaches"
+    },
+    {
+      "query": "Evaluate feasibility of eliminating front corner radars by using front camera + long-range radar with virtual sensing. Use case: L2+ highway pilot.",
+      "expected_confidence": "medium",
+      "notes": "Requires tradeoff analysis between cost savings and safety validation complexity"
+    },
+    {
+      "query": "Design virtual ultrasonic sensor for parking using fisheye cameras. Performance requirement: <10cm accuracy at 0-3m range, <100ms latency.",
+      "expected_confidence": "high",
+      "notes": "Common application with published research (MonoDepth, MiDaS, etc.)"
+    },
+    {
+      "query": "Create virtual road friction coefficient sensor using camera (road surface), radar (spray detection), and vehicle dynamics (slip, yaw). ASIL-C required.",
+      "expected_confidence": "low-medium",
+      "notes": "Complex physics, limited published work, high safety requirements increase uncertainty"
+    }
+  ],
+  "error_handling": {
+    "insufficient_input_sensors": "Explain information gap and recommend minimum sensor suite for feasibility",
+    "unrealistic_performance_targets": "Flag infeasibility and explain physical/computational limits",
+    "missing_safety_requirements": "Request clarification or provide analysis for multiple ASIL levels",
+    "novel_sensing_modality": "Acknowledge limited prior art and recommend proof-of-concept validation"
+  },
+  "limitations": [
+    "Cannot validate actual ML model performance without training and testing",
+    "Cost estimates are approximate without detailed engineering analysis",
+    "Performance predictions based on published research may not transfer to production systems",
+    "Cannot perform formal safety analysis (requires tool-based verification)",
+    "Limited knowledge of proprietary virtual sensor implementations by OEMs",
+    "Accuracy estimates assume high-quality training data availability",
+    "Cannot account for corner cases without extensive scenario analysis"
+  ],
+  "related_agents": [
+    "sensor_fusion_analyst",
+    "optical_sensor_specialist",
+    "signal_processing_advisor",
+    "sdv_arch_validator"
+  ],
+  "author": "Alena Taranka",
+  "created_date": "2024-02-07",
+  "last_updated": "2024-02-07",
+  "license": "Proprietary - Transition Package",
+  "documentation_url": "../docs/virtual_sensor_designer.md"
+}

@@ -1,0 +1,372 @@
+-- FRED Optical Engineering Script
+-- Freeform Lens Optimization for Homogeneous Illumination
+-- This script creates and optimizes a freeform lens to achieve uniform illumination from a single RGB LED
+
+-- Clear the document and set up analysis parameters
+ClearDocument()
+SetUnits("mm", "W")
+SetRayTraceParameters(100000, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+
+-- ===============================================================
+-- Configuration Parameters
+-- ===============================================================
+local config = {
+    -- Target illumination area
+    target = {
+        size_x = 50,             -- Width of target area in mm
+        size_y = 50,             -- Height of target area in mm
+        distance = 30,           -- Distance from lens to target plane
+        desired_uniformity = 0.8  -- Desired min/max ratio
+    },
+    
+    -- LED parameters
+    led = {
+        power = 0.1,             -- Total power in watts
+        size = 1.0,              -- LED emitter size in mm
+        rgb_ratio = {0.3, 0.6, 0.1}, -- R:G:B power ratio
+        divergence = 120         -- Full emission angle in degrees
+    },
+    
+    -- Lens parameters
+    lens = {
+        diameter = 20,           -- Lens diameter in mm
+        thickness = 10,          -- Max thickness of lens in mm
+        material = "PMMA",       -- Lens material
+        control_points = 7,      -- Number of control points for freeform surface
+        min_thickness = 1.0      -- Minimum lens thickness in mm
+    },
+    
+    -- Optimization parameters
+    optimization = {
+        max_iterations = 100,
+        convergence_threshold = 0.01,
+        uniformity_weight = 0.7,
+        efficiency_weight = 0.3,
+        grid_size = 32           -- Number of grid points for analysis
+    }
+}
+
+-- ===============================================================
+-- Create coordinate systems
+-- ===============================================================
+CreateCoordinateSystem("Global", T_IDENTITY(), "", "")
+CreateCoordinateSystem("LED_System", T_TRANSLATE(0, 0, 0), "Global", "")
+CreateCoordinateSystem("Lens_System", T_TRANSLATE(0, 0, 5), "Global", "")
+CreateCoordinateSystem("Target_System", T_TRANSLATE(0, 0, 5 + config.target.distance), "Global", "")
+
+-- ===============================================================
+-- Create materials
+-- ===============================================================
+-- Create lens material (PMMA)
+if not MaterialExists(config.lens.material) then
+    CreateMaterial(config.lens.material, "", "")
+    SetMaterialIndex(config.lens.material, 1.49)
+    SetMaterialExtinction(config.lens.material, 0.000)
+    SetMaterialDispersion(config.lens.material, 0.01)
+end
+
+-- ===============================================================
+-- Create RGB LED source
+-- ===============================================================
+local led_source = CreateSource("RGB_LED", "LED_System", "")
+SetSourceRays(led_source, config.optimization.grid_size * config.optimization.grid_size * 100)
+SetSourceDirection(led_source, 0, 0, 1)
+SetSourceWavelength(led_source, 0.630, 0.530, 0.470) -- RGB wavelengths
+-- Set power distribution for R, G, B
+SetSourcePowerDistribution(led_source, "Custom", {
+    {0.630, config.led.rgb_ratio[1]},
+    {0.530, config.led.rgb_ratio[2]},
+    {0.470, config.led.rgb_ratio[3]}
+})
+SetSourcePower(led_source, config.led.power)
+SetSourceType(led_source, "Uniform")
+SetSourceSize(led_source, "Circle", config.led.size / 2)
+SetSourceEmit(led_source, "Lambertian", config.led.divergence / 2)
+
+-- ===============================================================
+-- Create initial freeform lens
+-- ===============================================================
+-- Helper function to create the initial freeform lens
+function createFreeformLens(controlPoints)
+    -- Create lens entity
+    local lens = CreatePrimitive("Freeform_Lens", "Lens_System", "", "")
+    SetPrimitiveMaterial(lens, config.lens.material)
+    
+    -- Create the basic lens shape first (we'll optimize the freeform surface later)
+    SetPrimitiveType(lens, "Cylinder")
+    SetPrimitiveParameters(lens, config.lens.diameter/2, config.lens.thickness)
+    SetPrimitivePosition(lens, 0, 0, 0)
+    
+    -- Now we'll create a freeform surface to replace the front surface
+    local freeformSurface = CreateSurface("Freeform_Surface", "Lens_System", "", "")
+    
+    -- Setup initial control points grid for the freeform surface
+    -- This creates a base aspheric surface with additional control points
+    local cp = controlPoints or {}
+    if #cp == 0 then
+        -- Initialize with a simple aspheric-like surface if no control points provided
+        local numPoints = config.lens.control_points
+        local radius = config.lens.diameter / 2
+        
+        -- Create radial grid of control points
+        for i = 0, numPoints-1 do
+            local r = radius * i / (numPoints-1)
+            -- Parabolic initial shape
+            local z = config.lens.thickness * (1 - (r/radius)^2 * 0.8)
+            
+            -- Add control point with appropriate position
+            table.insert(cp, {r, 0, z})  -- X-axis
+            table.insert(cp, {0, r, z})  -- Y-axis
+            table.insert(cp, {-r, 0, z}) -- -X-axis
+            table.insert(cp, {0, -r, z}) -- -Y-axis
+            
+            -- Add diagonal points if not the center point
+            if i > 0 then
+                local diag = r * 0.7071 -- r * cos(45°)
+                table.insert(cp, {diag, diag, z})
+                table.insert(cp, {-diag, diag, z})
+                table.insert(cp, {-diag, -diag, z})
+                table.insert(cp, {diag, -diag, z})
+            end
+        end
+    end
+    
+    -- Set the surface as a freeform with the control points
+    SetSurfaceType(freeformSurface, "BSpline")
+    SetSurfaceParameters(freeformSurface, cp)
+    
+    -- Replace the front surface of the lens with the freeform surface
+    SetPrimitiveTrimCurve(lens, "Front", freeformSurface, "Circle", config.lens.diameter/2)
+    
+    return lens, cp
+end
+
+-- Create initial lens with default control points
+local lens, controlPoints = createFreeformLens({})
+
+-- ===============================================================
+-- Create target detector for analysis
+-- ===============================================================
+local detector = CreateDetector("Illumination_Detector", "Target_System", "", "")
+SetDetectorType(detector, "Surface")
+SetDetectorSurface(detector, "Rectangle", config.target.size_x, config.target.size_y)
+SetDetectorPosition(detector, 0, 0, 0)
+SetDetectorDirection(detector, 0, 0, 1)
+SetDetectorAnalysis(detector, "Irradiance", "Color", config.optimization.grid_size, config.optimization.grid_size)
+
+-- ===============================================================
+-- Lens Optimization Functions
+-- ===============================================================
+-- Evaluate the current lens design
+function evaluateDesign()
+    -- Trace rays
+    TraceRays()
+    
+    -- Analyze detector
+    AnalyzeDetector(detector)
+    local stats = GetDetectorStatistics(detector, "Irradiance")
+    
+    -- Calculate metrics
+    local uniformity = stats.min / stats.max
+    local efficiency = stats.sum / config.led.power
+    
+    -- Calculate weighted score
+    local score = config.optimization.uniformity_weight * uniformity +
+                  config.optimization.efficiency_weight * efficiency
+    
+    return {
+        uniformity = uniformity,
+        efficiency = efficiency,
+        score = score,
+        max_irradiance = stats.max,
+        min_irradiance = stats.min,
+        avg_irradiance = stats.mean
+    }
+end
+
+-- Perturb a control point in the optimization process
+function perturbControlPoint(points, index, amount)
+    local newPoints = {}
+    for i, point in ipairs(points) do
+        if i == index then
+            -- Only perturb the z-coordinate (height)
+            newPoints[i] = {point[1], point[2], point[3] + amount}
+        else
+            newPoints[i] = {point[1], point[2], point[3]}
+        end
+    end
+    return newPoints
+end
+
+-- Enforce minimum lens thickness
+function enforceMinThickness(points)
+    local minZ = config.lens.min_thickness
+    for i, point in ipairs(points) do
+        if point[3] < minZ then
+            points[i][3] = minZ
+        end
+    end
+    return points
+end
+
+-- ===============================================================
+-- Main Optimization Loop
+-- ===============================================================
+print("Starting freeform lens optimization...")
+print("Target uniformity: " .. config.target.desired_uniformity)
+print("Iteration, Uniformity, Efficiency, Score")
+
+local bestScore = 0
+local bestPoints = {}
+local iteration = 0
+local converged = false
+
+-- Initial evaluation
+local result = evaluateDesign()
+bestScore = result.score
+bestPoints = controlPoints
+
+-- Main optimization loop
+while iteration < config.optimization.max_iterations and not converged do
+    iteration = iteration + 1
+    local improved = false
+    
+    -- Try to perturb each control point
+    for i = 1, #controlPoints do
+        -- Try positive perturbation
+        local stepSize = config.lens.thickness * 0.05 * (1 - iteration/config.optimization.max_iterations)
+        local posPoints = perturbControlPoint(controlPoints, i, stepSize)
+        posPoints = enforceMinThickness(posPoints)
+        
+        -- Update lens with new control points
+        SetSurfaceParameters("Freeform_Surface", posPoints)
+        
+        -- Evaluate new design
+        local posResult = evaluateDesign()
+        
+        if posResult.score > bestScore then
+            bestScore = posResult.score
+            bestPoints = posPoints
+            improved = true
+            
+            print(string.format("%d, %.4f, %.4f, %.4f", 
+                iteration, posResult.uniformity, posResult.efficiency, posResult.score))
+                
+            -- Update control points for next iteration
+            controlPoints = posPoints
+            break
+        end
+        
+        -- Try negative perturbation
+        local negPoints = perturbControlPoint(controlPoints, i, -stepSize)
+        negPoints = enforceMinThickness(negPoints)
+        
+        -- Update lens with new control points
+        SetSurfaceParameters("Freeform_Surface", negPoints)
+        
+        -- Evaluate new design
+        local negResult = evaluateDesign()
+        
+        if negResult.score > bestScore then
+            bestScore = negResult.score
+            bestPoints = negPoints
+            improved = true
+            
+            print(string.format("%d, %.4f, %.4f, %.4f", 
+                iteration, negResult.uniformity, negResult.efficiency, negResult.score))
+                
+            -- Update control points for next iteration
+            controlPoints = negPoints
+            break
+        end
+    end
+    
+    -- If no improvement was found, reduce step size or end optimization
+    if not improved then
+        -- Check for convergence
+        if iteration > 10 then
+            converged = true
+            print("Optimization converged at iteration " .. iteration)
+        end
+    end
+    
+    -- Check if uniformity target is met
+    if result.uniformity >= config.target.desired_uniformity then
+        print("Target uniformity achieved. Stopping optimization.")
+        break
+    end
+end
+
+-- Apply best design found
+SetSurfaceParameters("Freeform_Surface", bestPoints)
+TraceRays()
+AnalyzeDetector(detector)
+
+-- ===============================================================
+-- Results Analysis and Visualization
+-- ===============================================================
+-- Final evaluation
+local finalResult = evaluateDesign()
+
+-- Display final results
+print("\nFinal Optimization Results:")
+print("Uniformity: " .. finalResult.uniformity)
+print("Efficiency: " .. finalResult.efficiency)
+print("Overall Score: " .. finalResult.score)
+print("Min Irradiance: " .. finalResult.min_irradiance .. " W/mm²")
+print("Max Irradiance: " .. finalResult.max_irradiance .. " W/mm²")
+print("Avg Irradiance: " .. finalResult.avg_irradiance .. " W/mm²")
+
+-- Save visualization images
+SaveImage("freeform_lens_3d.png", "Freeform_Lens", "3D", 800, 600)
+SaveImage("illumination_pattern.png", detector, "Irradiance", 800, 600)
+
+-- Create illumination uniformity heatmap
+ShowDetectorAnalysis(detector, "Irradiance")
+CreateIrradianceContourPlot(detector, 10)
+
+-- Generate cross-sectional view of lens design
+CreateCrossSectionView("Freeform_Lens", {0, 0, 0}, {1, 0, 0}, "lens_cross_section.png")
+
+-- ===============================================================
+-- Export Final Design
+-- ===============================================================
+-- Export freeform surface for manufacturing
+ExportSurfaceData("Freeform_Surface", "freeform_lens_export.xyz", "XYZ")
+
+-- Save optical prescription
+CreateReport("Freeform_Lens_Report.html", "RGB LED Freeform Lens for Homogeneous Illumination")
+AddReportSection("Design Configuration")
+AddReportTable("LED Parameters", {
+    {"Parameter", "Value"},
+    {"Power", string.format("%.1f mW", config.led.power * 1000)},
+    {"Size", string.format("%.1f mm", config.led.size)},
+    {"RGB Ratio", string.format("R:G:B = %.1f:%.1f:%.1f", 
+        config.led.rgb_ratio[1], config.led.rgb_ratio[2], config.led.rgb_ratio[3])},
+    {"Beam Angle", string.format("%.1f degrees", config.led.divergence)}
+})
+
+AddReportTable("Lens Parameters", {
+    {"Parameter", "Value"},
+    {"Diameter", string.format("%.1f mm", config.lens.diameter)},
+    {"Max Thickness", string.format("%.1f mm", config.lens.thickness)},
+    {"Material", config.lens.material},
+    {"Refractive Index", "1.49"}
+})
+
+AddReportSection("Performance Results")
+AddReportTable("Illumination Performance", {
+    {"Metric", "Value", "Target"},
+    {"Uniformity", string.format("%.2f", finalResult.uniformity), 
+        string.format("≥ %.2f", config.target.desired_uniformity)},
+    {"Efficiency", string.format("%.1f%%", finalResult.efficiency * 100), "Maximum"},
+    {"Min Irradiance", string.format("%.6f W/mm²", finalResult.min_irradiance), "N/A"},
+    {"Max Irradiance", string.format("%.6f W/mm²", finalResult.max_irradiance), "N/A"},
+    {"Avg Irradiance", string.format("%.6f W/mm²", finalResult.avg_irradiance), "N/A"}
+})
+
+AddReportImage("illumination_pattern.png", "Irradiance Distribution on Target")
+AddReportImage("freeform_lens_3d.png", "3D View of Optimized Freeform Lens")
+AddReportImage("lens_cross_section.png", "Lens Cross-Section")
+
+print("Optimization complete. Results saved and report generated.")

@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Automotive Haptic Glove System Architecture</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            backdrop-filter: blur(10px);
+        }
+        
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 30px;
+            font-size: 2.5em;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .system-overview {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        
+        .schematic-container {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 20px;
+            border: 2px solid #e9ecef;
+        }
+        
+        .component-list {
+            background: linear-gradient(135deg, #74b9ff 0%, #0984e3 100%);
+            color: white;
+            border-radius: 10px;
+            padding: 20px;
+        }
+        
+        .component-list h3 {
+            margin-top: 0;
+            color: white;
+        }
+        
+        .component-list ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .component-list li {
+            background: rgba(255,255,255,0.1);
+            margin: 8px 0;
+            padding: 10px;
+            border-radius: 5px;
+            border-left: 4px solid #00cec9;
+        }
+        
+        .glove-detail {
+            margin: 30px 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #fd79a8 0%, #e84393 100%);
+            border-radius: 10px;
+            color: white;
+        }
+        
+        .sensor-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+        
+        .sensor-card {
+            background: white;
+            color: #333;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        
+        .sensor-card h4 {
+            margin-top: 0;
+            color: #2d3436;
+        }
+        
+        .data-flow {
+            margin: 30px 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #00b894 0%, #00a085 100%);
+            border-radius: 10px;
+            color: white;
+        }
+        
+        .flow-diagram {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            margin: 20px 0;
+        }
+        
+        .flow-node {
+            background: rgba(255,255,255,0.2);
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            min-width: 150px;
+            margin: 10px;
+            border: 2px solid rgba(255,255,255,0.3);
+        }
+        
+        .arrow {
+            font-size: 24px;
+            color: #00cec9;
+        }
+        
+        .hud-interface {
+            margin-top: 30px;
+            padding: 20px;
+            background: linear-gradient(135deg, #6c5ce7 0%, #5a51a8 100%);
+            border-radius: 10px;
+            color: white;
+        }
+        
+        .hud-display {
+            background: rgba(0,0,0,0.7);
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+            font-family: 'Courier New', monospace;
+            border: 2px solid #00cec9;
+        }
+        
+        .metric {
+            display: inline-block;
+            background: rgba(0,206,201,0.2);
+            padding: 5px 10px;
+            margin: 5px;
+            border-radius: 15px;
+            border: 1px solid #00cec9;
+        }
+        
+        .tech-specs {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+        
+        .spec-card {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            border-left: 5px solid #74b9ff;
+        }
+        
+        .spec-card h4 {
+            margin-top: 0;
+            color: #2d3436;
+        }
+        
+        @media (max-width: 768px) {
+            .system-overview {
+                grid-template-columns: 1fr;
+            }
+            
+            .flow-diagram {
+                flex-direction: column;
+            }
+            
+            .flow-node {
+                margin: 5px 0;
+            }
+            
+            .arrow {
+                transform: rotate(90deg);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🚗 Automotive Haptic Glove System Architecture</h1>
+        
+        <div class="system-overview">
+            <div class="schematic-container">
+                <h3>🔧 System Block Diagram</h3>
+                <svg width="100%" height="400" viewBox="0 0 500 400">
+                    <!-- Glove Components -->
+                    <rect x="20" y="20" width="120" height="80" fill="#74b9ff" stroke="#0984e3" stroke-width="2" rx="5"/>
+                    <text x="80" y="45" text-anchor="middle" fill="white" font-size="12" font-weight="bold">HAPTIC GLOVE</text>
+                    <text x="80" y="60" text-anchor="middle" fill="white" font-size="10">• Force Feedback</text>
+                    <text x="80" y="75" text-anchor="middle" fill="white" font-size="10">• Tactile Sensors</text>
+                    <text x="80" y="90" text-anchor="middle" fill="white" font-size="10">• Biometric Sensors</text>
+                    
+                    <!-- Wireless Communication -->
+                    <rect x="190" y="40" width="100" height="40" fill="#00b894" stroke="#00a085" stroke-width="2" rx="5"/>
+                    <text x="240" y="55" text-anchor="middle" fill="white" font-size="12" font-weight="bold">Wireless</text>
+                    <text x="240" y="70" text-anchor="middle" fill="white" font-size="10">Bluetooth 5.2</text>
+                    
+                    <!-- Vehicle ECU -->
+                    <rect x="340" y="20" width="120" height="80" fill="#e17055" stroke="#d63031" stroke-width="2" rx="5"/>
+                    <text x="400" y="45" text-anchor="middle" fill="white" font-size="12" font-weight="bold">VEHICLE ECU</text>
+                    <text x="400" y="60" text-anchor="middle" fill="white" font-size="10">• CAN Bus Interface</text>
+                    <text x="400" y="75" text-anchor="middle" fill="white" font-size="10">• Sensor Fusion</text>
+                    <text x="400" y="90" text-anchor="middle" fill="white" font-size="10">• Safety Logic</text>
+                    
+                    <!-- Car Sensors -->
+                    <rect x="20" y="150" width="120" height="100" fill="#fd79a8" stroke="#e84393" stroke-width="2" rx="5"/>
+                    <text x="80" y="175" text-anchor="middle" fill="white" font-size="12" font-weight="bold">CAR SENSORS</text>
+                    <text x="80" y="190" text-anchor="middle" fill="white" font-size="9">• Engine RPM</text>
+                    <text x="80" y="205" text-anchor="middle" fill="white" font-size="9">• Speed</text>
+                    <text x="80" y="220" text-anchor="middle" fill="white" font-size="9">• Brake Pressure</text>
+                    <text x="80" y="235" text-anchor="middle" fill="white" font-size="9">• Lane Detection</text>
+                    
+                    <!-- HUD Display -->
+                    <rect x="340" y="150" width="120" height="80" fill="#6c5ce7" stroke="#5a51a8" stroke-width="2" rx="5"/>
+                    <text x="400" y="175" text-anchor="middle" fill="white" font-size="12" font-weight="bold">HUD DISPLAY</text>
+                    <text x="400" y="190" text-anchor="middle" fill="white" font-size="10">• Health Metrics</text>
+                    <text x="400" y="205" text-anchor="middle" fill="white" font-size="10">• Driver Status</text>
+                    <text x="400" y="220" text-anchor="middle" fill="white" font-size="10">• Alerts</text>
+                    
+                    <!-- Processing Unit -->
+                    <rect x="190" y="150" width="100" height="60" fill="#fdcb6e" stroke="#e17055" stroke-width="2" rx="5"/>
+                    <text x="240" y="170" text-anchor="middle" fill="white" font-size="12" font-weight="bold">AI PROCESSOR</text>
+                    <text x="240" y="185" text-anchor="middle" fill="white" font-size="10">Real-time</text>
+                    <text x="240" y="200" text-anchor="middle" fill="white" font-size="10">Analytics</text>
+                    
+                    <!-- Power Management -->
+                    <rect x="20" y="300" width="120" height="60" fill="#a29bfe" stroke="#6c5ce7" stroke-width="2" rx="5"/>
+                    <text x="80" y="320" text-anchor="middle" fill="white" font-size="12" font-weight="bold">POWER MGMT</text>
+                    <text x="80" y="335" text-anchor="middle" fill="white" font-size="10">• Battery</text>
+                    <text x="80" y="350" text-anchor="middle" fill="white" font-size="10">• Charging</text>
+                    
+                    <!-- Cloud Analytics -->
+                    <rect x="340" y="300" width="120" height="60" fill="#00cec9" stroke="#00b894" stroke-width="2" rx="5"/>
+                    <text x="400" y="320" text-anchor="middle" fill="white" font-size="12" font-weight="bold">CLOUD</text>
+                    <text x="400" y="335" text-anchor="middle" fill="white" font-size="10">• Data Analytics</text>
+                    <text x="400" y="350" text-anchor="middle" fill="white" font-size="10">• ML Training</text>
+                    
+                    <!-- Arrows -->
+                    <path d="M 140 60 L 190 60" stroke="#2d3436" stroke-width="2" marker-end="url(#arrowhead)"/>
+                    <path d="M 290 60 L 340 60" stroke="#2d3436" stroke-width="2" marker-end="url(#arrowhead)"/>
+                    <path d="M 140 200 L 190 180" stroke="#2d3436" stroke-width="2" marker-end="url(#arrowhead)"/>
+                    <path d="M 290 180 L 340 190" stroke="#2d3436" stroke-width="2" marker-end="url(#arrowhead)"/>
+                    <path d="M 400 100 L 400 150" stroke="#2d3436" stroke-width="2" marker-end="url(#arrowhead)"/>
+                    <path d="M 240 210 L 240 270" stroke="#2d3436" stroke-width="2" marker-end="url(#arrowhead)"/>
+                    <path d="M 240 270 L 400 300" stroke="#2d3436" stroke-width="2" marker-end="url(#arrowhead)"/>
+                    
+                    <defs>
+                        <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+                            <polygon points="0 0, 10 3.5, 0 7" fill="#2d3436"/>
+                        </marker>
+                    </defs>
+                </svg>
+            </div>
+            
+            <div class="component-list">
+                <h3>🔍 Key System Components</h3>
+                <ul>
+                    <li><strong>Haptic Actuators:</strong> Piezoelectric, ERM, LRA motors</li>
+                    <li><strong>Biometric Sensors:</strong> PPG, ECG, GSR, Temperature</li>
+                    <li><strong>Motion Tracking:</strong> 9-DOF IMU, Flex sensors</li>
+                    <li><strong>Wireless Comm:</strong> Bluetooth 5.2, WiFi 6</li>
+                    <li><strong>Power System:</strong> Li-Po battery, Wireless charging</li>
+                    <li><strong>Processing:</strong> ARM Cortex-M4, AI accelerator</li>
+                    <li><strong>Safety Systems:</strong> Redundant sensors, Fail-safe modes</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="glove-detail">
+            <h3>🧤 Haptic Glove Detailed Architecture</h3>
+            <div class="sensor-grid">
+                <div class="sensor-card">
+                    <h4>👆 Fingertip Sensors</h4>
+                    <p><strong>Tactile:</strong> Pressure, texture, temperature</p>
+                    <p><strong>Force:</strong> 3-axis force measurement</p>
+                    <p><strong>Resolution:</strong> 0.1N force, 0.5°C thermal</p>
+                </div>
+                <div class="sensor-card">
+                    <h4>❤️ Biometric Suite</h4>
+                    <p><strong>PPG:</strong> Heart rate, SpO2, stress</p>
+                    <p><strong>GSR:</strong> Skin conductance, emotion</p>
+                    <p><strong>Temp:</strong> Body temperature monitoring</p>
+                </div>
+                <div class="sensor-card">
+                    <h4>🏃 Motion Tracking</h4>
+                    <p><strong>IMU:</strong> 9-DOF orientation tracking</p>
+                    <p><strong>Flex:</strong> Finger joint angles</p>
+                    <p><strong>Rate:</strong> 1000Hz sampling frequency</p>
+                </div>
+                <div class="sensor-card">
+                    <h4>⚡ Haptic Feedback</h4>
+                    <p><strong>Force:</strong> Up to 5N per finger</p>
+                    <p><strong>Tactile:</strong> 20 actuators per glove</p>
+                    <p><strong>Thermal:</strong> ±10°C temperature feedback</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="data-flow">
+            <h3>📊 Data Flow Architecture</h3>
+            <div class="flow-diagram">
+                <div class="flow-node">
+                    <strong>Car Sensors</strong><br>
+                    RPM, Speed, Brakes<br>
+                    Lane Detection
+                </div>
+                <div class="arrow">→</div>
+                <div class="flow-node">
+                    <strong>ECU Processing</strong><br>
+                    Sensor Fusion<br>
+                    Safety Logic
+                </div>
+                <div class="arrow">→</div>
+                <div class="flow-node">
+                    <strong>Haptic Output</strong><br>
+                    Force Feedback<br>
+                    Tactile Cues
+                </div>
+            </div>
+            <div class="flow-diagram">
+                <div class="flow-node">
+                    <strong>Glove Biometrics</strong><br>
+                    Heart Rate, Stress<br>
+                    Temperature
+                </div>
+                <div class="arrow">→</div>
+                <div class="flow-node">
+                    <strong>AI Analysis</strong><br>
+                    Health Assessment<br>
+                    Alert Generation
+                </div>
+                <div class="arrow">→</div>
+                <div class="flow-node">
+                    <strong>HUD Display</strong><br>
+                    Health Status<br>
+                    Driver Alerts
+                </div>
+            </div>
+        </div>
+        
+        <div class="hud-interface">
+            <h3>🖥️ HUD Interface Display</h3>
+            <div class="hud-display">
+                <div>DRIVER HEALTH STATUS</div>
+                <div style="margin: 10px 0;">
+                    <span class="metric">❤️ HR: 72 BPM</span>
+                    <span class="metric">🌡️ TEMP: 36.5°C</span>
+                    <span class="metric">😌 STRESS: LOW</span>
+                </div>
+                <div style="margin: 10px 0;">
+                    <span class="metric">👁️ ALERTNESS: 95%</span>
+                    <span class="metric">🤲 GRIP: OPTIMAL</span>
+                </div>
+                <div style="color: #00b894;">STATUS: ALL SYSTEMS NORMAL</div>
+            </div>
+        </div>
+        
+        <div class="tech-specs">
+            <div class="spec-card">
+                <h4>⚙️ Technical Specifications</h4>
+                <ul>
+                    <li><strong>Processor:</strong> ARM Cortex-M4 @ 120MHz</li>
+                    <li><strong>Memory:</strong> 512KB Flash, 128KB RAM</li>
+                    <li><strong>Sensors:</strong> 25+ integrated sensors</li>
+                    <li><strong>Latency:</strong> &lt;5ms haptic response</li>
+                    <li><strong>Battery:</strong> 8-hour continuous operation</li>
+                    <li><strong>Range:</strong> 30m Bluetooth connectivity</li>
+                </ul>
+            </div>
+            
+            <div class="spec-card">
+                <h4>🛡️ Safety Features</h4>
+                <ul>
+                    <li><strong>Fail-Safe:</strong> Automatic system shutdown</li>
+                    <li><strong>Redundancy:</strong> Dual sensor systems</li>
+                    <li><strong>Monitoring:</strong> Real-time health checks</li>
+                    <li><strong>Emergency:</strong> Instant alert systems</li>
+                    <li><strong>Standards:</strong> ISO 26262 compliant</li>
+                    <li><strong>Testing:</strong> FMEA validated design</li>
+                </ul>
+            </div>
+            
+            <div class="spec-card">
+                <h4>🌐 Connectivity</h4>
+                <ul>
+                    <li><strong>Primary:</strong> Bluetooth 5.2 LE</li>
+                    <li><strong>Backup:</strong> WiFi 6 (802.11ax)</li>
+                    <li><strong>Vehicle:</strong> CAN-FD interface</li>
+                    <li><strong>Cloud:</strong> 4G/5G cellular</li>
+                    <li><strong>Security:</strong> AES-256 encryption</li>
+                    <li><strong>OTA:</strong> Remote firmware updates</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

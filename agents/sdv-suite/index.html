@@ -1,0 +1,849 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BCS Knowledge Transfer | SDV Agent Suite</title>
+    <meta
+      name="description"
+      content="Knowledge transfer package for BCS Automotive Interface Solutions. AI-powered research agents for HMI, sensor architecture, and SDV development."
+    />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      :root {
+        --bg: #ffffff;
+        --text: #1a1a1a;
+        --muted: #666666;
+        --border: #e0e0e0;
+        --accent: #0066cc;
+        --light-bg: #f8f8f8;
+      }
+
+      body {
+        font-family: "Courier New", "Monaco", "Menlo", monospace;
+        line-height: 1.6;
+        color: var(--text);
+        background: var(--bg);
+        font-size: 14px;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 40px 20px;
+      }
+
+      header {
+        border-bottom: 1px solid var(--border);
+        padding-bottom: 30px;
+        margin-bottom: 50px;
+      }
+
+      .tagline {
+        font-size: 12px;
+        color: var(--muted);
+        margin-bottom: 30px;
+        line-height: 1.8;
+      }
+
+      h1 {
+        font-size: 18px;
+        font-weight: 600;
+        margin-bottom: 15px;
+        letter-spacing: -0.5px;
+      }
+
+      h2 {
+        font-size: 14px;
+        font-weight: 600;
+        margin: 50px 0 20px 0;
+        text-transform: lowercase;
+        letter-spacing: 0.5px;
+      }
+
+      .meta {
+        font-size: 11px;
+        color: var(--muted);
+        margin-bottom: 30px;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 30px 0;
+        font-size: 13px;
+      }
+
+      th {
+        text-align: left;
+        font-weight: 600;
+        padding: 12px 16px;
+        border-bottom: 1px solid var(--border);
+        color: var(--muted);
+        font-size: 11px;
+        text-transform: lowercase;
+      }
+
+      td {
+        padding: 16px;
+        border-bottom: 1px solid var(--border);
+        vertical-align: top;
+      }
+
+      tr:hover {
+        background: var(--light-bg);
+      }
+
+      .status {
+        display: inline-block;
+        padding: 2px 8px;
+        font-size: 11px;
+        border-radius: 2px;
+        background: var(--light-bg);
+        color: var(--muted);
+      }
+
+      .status.ready {
+        background: #e8f5e9;
+        color: #2e7d32;
+      }
+
+      .status.framework {
+        background: #fff3e0;
+        color: #f57c00;
+      }
+
+      .status.high {
+        background: #ffebee;
+        color: #c62828;
+      }
+
+      .status.medium {
+        background: #fff3e0;
+        color: #f57c00;
+      }
+
+      .status.complete {
+        background: #e8f5e9;
+        color: #2e7d32;
+      }
+
+      .code-id {
+        font-weight: 600;
+        color: var(--text);
+        font-size: 12px;
+        margin-right: 10px;
+      }
+
+      a {
+        color: var(--accent);
+        text-decoration: none;
+      }
+
+      a:hover {
+        text-decoration: underline;
+      }
+
+      .section {
+        margin: 60px 0;
+      }
+
+      .stats {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 20px;
+        margin: 30px 0;
+        padding: 30px;
+        background: var(--light-bg);
+        border: 1px solid var(--border);
+      }
+
+      .stat {
+        text-align: center;
+      }
+
+      .stat-value {
+        font-size: 24px;
+        font-weight: 600;
+        margin-bottom: 5px;
+      }
+
+      .stat-label {
+        font-size: 11px;
+        color: var(--muted);
+        text-transform: lowercase;
+      }
+
+      .doc-list {
+        list-style: none;
+        margin: 20px 0;
+      }
+
+      .doc-list li {
+        padding: 12px 0;
+        border-bottom: 1px solid var(--border);
+      }
+
+      .doc-list li:last-child {
+        border-bottom: none;
+      }
+
+      .doc-title {
+        font-weight: 600;
+        margin-right: 10px;
+      }
+
+      .doc-desc {
+        color: var(--muted);
+        font-size: 12px;
+      }
+
+      .workflow {
+        background: var(--light-bg);
+        padding: 20px;
+        margin: 15px 0;
+        border-left: 3px solid var(--accent);
+        font-size: 12px;
+        line-height: 1.8;
+      }
+
+      footer {
+        margin-top: 80px;
+        padding-top: 30px;
+        border-top: 1px solid var(--border);
+        font-size: 11px;
+        color: var(--muted);
+      }
+
+      .symbol {
+        color: var(--muted);
+        margin-right: 8px;
+      }
+
+      .grid-2 {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 40px;
+        margin: 30px 0;
+      }
+
+      @media (max-width: 768px) {
+        body {
+          padding: 20px 15px;
+          font-size: 13px;
+        }
+
+        .stats {
+          grid-template-columns: 1fr 1fr;
+        }
+
+        .grid-2 {
+          grid-template-columns: 1fr;
+        }
+
+        table {
+          font-size: 12px;
+        }
+
+        td,
+        th {
+          padding: 10px;
+        }
+      }
+
+      .nav {
+        margin-bottom: 30px;
+      }
+
+      .nav a {
+        margin-right: 20px;
+        font-size: 12px;
+        color: var(--muted);
+      }
+
+      .nav a:hover {
+        color: var(--accent);
+      }
+
+      .quick-links {
+        margin: 30px 0;
+        padding: 20px;
+        background: var(--light-bg);
+        border: 1px solid var(--border);
+      }
+
+      .quick-links h3 {
+        font-size: 12px;
+        font-weight: 600;
+        margin-bottom: 15px;
+        text-transform: lowercase;
+      }
+
+      .quick-links ul {
+        list-style: none;
+      }
+
+      .quick-links li {
+        margin: 8px 0;
+        font-size: 12px;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Header -->
+    <header>
+      <div class="tagline">
+        BCS Automotive Interface Solutions — Knowledge Transfer Package<br />
+        @ the intersection of advanced HMI systems, sensor architecture, and
+        software-defined vehicles
+      </div>
+
+      <h1>SDV Connected Car Agent Suite</h1>
+
+      <div class="meta">
+        from: Alena Taranka — Senior Sensor Architect<br />
+        to: BCS Engineering & Project Teams<br />
+        date: February 2024<br />
+        version: 1.0.0<br />
+        status: operational
+      </div>
+
+      <p
+        style="
+          max-width: 800px;
+          margin-bottom: 20px;
+          font-size: 13px;
+          line-height: 1.7;
+        "
+      >
+        Rather than leaving documentation, I'm leaving AI agents that capture my
+        research process. These tools help BCS continue delivering innovative
+        HMI and sensor solutions to OEM partners.
+      </p>
+
+      <div class="nav">
+        <a href="#agents">agents</a>
+        <a href="#projects">bcs projects</a>
+        <a href="#usage">usage examples</a>
+        <a href="#docs">documentation</a>
+        <a href="#stats">performance</a>
+      </div>
+    </header>
+
+    <!-- Stats -->
+    <div class="stats">
+      <div class="stat">
+        <div class="stat-value">8</div>
+        <div class="stat-label">research agents</div>
+      </div>
+      <div class="stat">
+        <div class="stat-value">50-60%</div>
+        <div class="stat-label">time savings</div>
+      </div>
+      <div class="stat">
+        <div class="stat-value">3 years</div>
+        <div class="stat-label">bcs knowledge</div>
+      </div>
+      <div class="stat">
+        <div class="stat-value">5/8</div>
+        <div class="stat-label">production ready</div>
+      </div>
+    </div>
+
+    <!-- Agents Section -->
+    <section id="agents" class="section">
+      <h2>## research agents</h2>
+      <p style="color: var(--muted); font-size: 12px; margin-bottom: 20px">
+        AI-powered research assistants for automotive R&D workflows
+      </p>
+
+      <table>
+        <thead>
+          <tr>
+            <th>id</th>
+            <th>agent</th>
+            <th>bcs application</th>
+            <th>domain</th>
+            <th>status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="code-id">sav</span></td>
+            <td>
+              <strong>SDV Architecture Validator</strong><br />
+              <span style="font-size: 12px; color: var(--muted)">
+                AUTOSAR validation, zonal architecture, ASIL compliance
+              </span>
+            </td>
+            <td style="font-size: 12px">OEM architecture reviews</td>
+            <td style="font-size: 12px">system architecture</td>
+            <td><span class="status ready">● ready</span></td>
+          </tr>
+          <tr>
+            <td><span class="code-id">sfa</span></td>
+            <td>
+              <strong>Sensor Fusion Analyst</strong><br />
+              <span style="font-size: 12px; color: var(--muted)">
+                Multi-sensor integration, FOV analysis, redundancy
+              </span>
+            </td>
+            <td style="font-size: 12px">Customer sensor suite design</td>
+            <td style="font-size: 12px">sensing & integration</td>
+            <td><span class="status ready">● ready</span></td>
+          </tr>
+          <tr>
+            <td><span class="code-id">hmi</span></td>
+            <td>
+              <strong>HMI/UX Forecaster</strong><br />
+              <span style="font-size: 12px; color: var(--muted)">
+                Display technology trends, interaction patterns, regulatory
+              </span>
+            </td>
+            <td style="font-size: 12px">Interior innovation roadmaps</td>
+            <td style="font-size: 12px">human-machine interface</td>
+            <td><span class="status ready">● ready</span></td>
+          </tr>
+          <tr>
+            <td><span class="code-id">vsd</span></td>
+            <td>
+              <strong>Virtual Sensor Designer</strong><br />
+              <span style="font-size: 12px; color: var(--muted)">
+                ML-based sensing, cost optimization, safety validation
+              </span>
+            </td>
+            <td style="font-size: 12px">Cost optimization projects</td>
+            <td style="font-size: 12px">software sensing</td>
+            <td><span class="status ready">● ready</span></td>
+          </tr>
+          <tr>
+            <td><span class="code-id">ats</span></td>
+            <td>
+              <strong>Automotive Tech Scout</strong><br />
+              <span style="font-size: 12px; color: var(--muted)">
+                Patent tracking, startup monitoring, technology maturity
+              </span>
+            </td>
+            <td style="font-size: 12px">Connected car innovation</td>
+            <td style="font-size: 12px">technology intelligence</td>
+            <td><span class="status ready">● ready</span></td>
+          </tr>
+          <tr>
+            <td><span class="code-id">spa</span></td>
+            <td>
+              <strong>Signal Processing Advisor</strong><br />
+              <span style="font-size: 12px; color: var(--muted)">
+                Algorithm selection, real-time optimization, compute
+              </span>
+            </td>
+            <td style="font-size: 12px">Signal processing workflows</td>
+            <td style="font-size: 12px">algorithms & compute</td>
+            <td><span class="status framework">○ framework</span></td>
+          </tr>
+          <tr>
+            <td><span class="code-id">oss</span></td>
+            <td>
+              <strong>Optical Sensor Specialist</strong><br />
+              <span style="font-size: 12px; color: var(--muted)">
+                Camera/LiDAR design, lens optimization, calibration
+              </span>
+            </td>
+            <td style="font-size: 12px">Camera/LiDAR integration</td>
+            <td style="font-size: 12px">optical systems</td>
+            <td><span class="status framework">○ framework</span></td>
+          </tr>
+          <tr>
+            <td><span class="code-id">cst</span></td>
+            <td>
+              <strong>Connectivity Standards Tracker</strong><br />
+              <span style="font-size: 12px; color: var(--muted)">
+                V2X evolution, automotive Ethernet, OTA architecture
+              </span>
+            </td>
+            <td style="font-size: 12px">V2X and OTA projects</td>
+            <td style="font-size: 12px">connectivity & networking</td>
+            <td><span class="status framework">○ framework</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- BCS Projects -->
+    <section id="projects" class="section">
+      <h2>## ongoing bcs projects</h2>
+      <p style="color: var(--muted); font-size: 12px; margin-bottom: 20px">
+        Active work and recommended handoff strategies
+      </p>
+
+      <table>
+        <thead>
+          <tr>
+            <th>id</th>
+            <th>project</th>
+            <th>customer</th>
+            <th>phase</th>
+            <th>priority</th>
+            <th>agents</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="code-id">sg</span></td>
+            <td>
+              <strong>Smart Glass HMI Concept</strong><br />
+              <span style="font-size: 12px; color: var(--muted)">
+                Windshield-integrated AR display for premium vehicles
+              </span>
+            </td>
+            <td style="font-size: 12px">Tier 1 OEM</td>
+            <td style="font-size: 12px">concept design</td>
+            <td><span class="status high">● high</span></td>
+            <td style="font-size: 12px">hmi, oss</td>
+          </tr>
+          <tr>
+            <td><span class="code-id">sf</span></td>
+            <td>
+              <strong>Sensor Fusion Architecture</strong><br />
+              <span style="font-size: 12px; color: var(--muted)">
+                Independent validation of L2+ sensor suite
+              </span>
+            </td>
+            <td style="font-size: 12px">Premium OEM</td>
+            <td style="font-size: 12px">review & validation</td>
+            <td><span class="status high">● high</span></td>
+            <td style="font-size: 12px">sfa, sav</td>
+          </tr>
+          <tr>
+            <td><span class="code-id">cc</span></td>
+            <td>
+              <strong>Connected Car Portfolio</strong><br />
+              <span style="font-size: 12px; color: var(--muted)">
+                Technology intelligence and innovation tracking
+              </span>
+            </td>
+            <td style="font-size: 12px">Internal (BCS)</td>
+            <td style="font-size: 12px">quarterly updates</td>
+            <td><span class="status high">● high</span></td>
+            <td style="font-size: 12px">ats, hmi, cst</td>
+          </tr>
+          <tr>
+            <td><span class="code-id">vs</span></td>
+            <td>
+              <strong>Virtual Sensor Feasibility</strong><br />
+              <span style="font-size: 12px; color: var(--muted)">
+                ML-based sensor replacement studies
+              </span>
+            </td>
+            <td style="font-size: 12px">Multiple</td>
+            <td style="font-size: 12px">various stages</td>
+            <td><span class="status medium">○ medium</span></td>
+            <td style="font-size: 12px">vsd, sfa</td>
+          </tr>
+          <tr>
+            <td><span class="code-id">rm</span></td>
+            <td>
+              <strong>2025-2027 Tech Roadmap</strong><br />
+              <span style="font-size: 12px; color: var(--muted)">
+                Strategic technology planning for BCS portfolio
+              </span>
+            </td>
+            <td style="font-size: 12px">Internal (BCS)</td>
+            <td style="font-size: 12px">draft in progress</td>
+            <td><span class="status medium">○ medium</span></td>
+            <td style="font-size: 12px">multi-agent</td>
+          </tr>
+          <tr>
+            <td><span class="code-id">as</span></td>
+            <td>
+              <strong>Agent System Development</strong><br />
+              <span style="font-size: 12px; color: var(--muted)">
+                This knowledge transfer package
+              </span>
+            </td>
+            <td style="font-size: 12px">Internal (BCS)</td>
+            <td style="font-size: 12px">operational</td>
+            <td><span class="status complete">✓ complete</span></td>
+            <td style="font-size: 12px">all agents</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- Usage Examples -->
+    <section id="usage" class="section">
+      <h2>## usage examples</h2>
+      <p style="color: var(--muted); font-size: 12px; margin-bottom: 20px">
+        How BCS can apply agents to real customer projects
+      </p>
+
+      <div style="margin-top: 30px">
+        <h3 style="font-size: 13px; font-weight: 600; margin-bottom: 10px">
+          scenario 1: customer rfq response — sensor suite design
+        </h3>
+        <p style="font-size: 12px; color: var(--muted); margin-bottom: 10px">
+          OEM requests sensor architecture for L2+ highway pilot with $600 cost
+          target
+        </p>
+        <div class="workflow">
+          before: 2-3 weeks manual research and iteration<br /><br />
+          with agents:<br />
+          1. sfa → baseline sensor suite design (1 day)<br />
+          2. vsd → cost optimization opportunities (1 day)<br />
+          3. sav → safety validation & ASIL compliance (1 day)<br /><br />
+          result: 3 days vs 3 weeks, higher quality analysis
+        </div>
+      </div>
+
+      <div style="margin-top: 40px">
+        <h3 style="font-size: 13px; font-weight: 600; margin-bottom: 10px">
+          scenario 2: technology roadmap — interior hmi innovation
+        </h3>
+        <p style="font-size: 12px; color: var(--muted); margin-bottom: 10px">
+          Customer wants 3-5 year cockpit technology roadmap with investment
+          priorities
+        </p>
+        <div class="workflow">
+          before: weeks of patent searches, competitive analysis, manual
+          synthesis<br /><br />
+          with agents:<br />
+          1. ats → patent landscape & startup ecosystem (2-3 days)<br />
+          2. hmi → technology adoption timelines (2 days)<br />
+          3. oss → display technology evolution (1 day)<br /><br />
+          result: 10x faster with evidence-based confidence scores
+        </div>
+      </div>
+
+      <div style="margin-top: 40px">
+        <h3 style="font-size: 13px; font-weight: 600; margin-bottom: 10px">
+          scenario 3: architecture review — sdv platform validation
+        </h3>
+        <p style="font-size: 12px; color: var(--muted); margin-bottom: 10px">
+          OEM needs independent review of software-defined vehicle architecture
+        </p>
+        <div class="workflow">
+          before: multi-week expert review, manual standards checking<br /><br />
+          with agents:<br />
+          1. sav → AUTOSAR/ISO 26262 compliance validation<br />
+          2. cst → E/E architecture standards review<br />
+          3. spa → compute allocation & signal processing<br /><br />
+          result: consistent methodology, comprehensive standards coverage
+        </div>
+      </div>
+    </section>
+
+    <!-- Getting Started -->
+    <section class="section">
+      <h2>## getting started — bcs team</h2>
+
+      <div class="grid-2">
+        <div>
+          <h3 style="font-size: 12px; font-weight: 600; margin-bottom: 15px">
+            week 1: familiarization
+          </h3>
+          <ul style="list-style: none; font-size: 12px; line-height: 2">
+            <li>
+              <span class="symbol">→</span> read main README and transition
+              dashboard
+            </li>
+            <li>
+              <span class="symbol">→</span> browse project continuity guide
+            </li>
+            <li><span class="symbol">→</span> understand work area mapping</li>
+            <li>
+              <span class="symbol">→</span> test one agent with sample query
+            </li>
+          </ul>
+        </div>
+        <div>
+          <h3 style="font-size: 12px; font-weight: 600; margin-bottom: 15px">
+            week 2-4: integration
+          </h3>
+          <ul style="list-style: none; font-size: 12px; line-height: 2">
+            <li>
+              <span class="symbol">→</span> apply agents to active customer
+              project
+            </li>
+            <li>
+              <span class="symbol">→</span> measure time savings and quality
+            </li>
+            <li>
+              <span class="symbol">→</span> customize for recurring BCS use
+              cases
+            </li>
+            <li><span class="symbol">→</span> share findings with team</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Performance Stats -->
+    <section id="stats" class="section">
+      <h2>## performance metrics</h2>
+      <p style="color: var(--muted); font-size: 12px; margin-bottom: 20px">
+        Agent system capabilities and efficiency gains
+      </p>
+
+      <table>
+        <thead>
+          <tr>
+            <th>metric</th>
+            <th>traditional approach</th>
+            <th>with agents</th>
+            <th>improvement</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Technology assessment</td>
+            <td>40-80 hours</td>
+            <td>20-30 hours</td>
+            <td style="color: #2e7d32; font-weight: 600">50-60% faster</td>
+          </tr>
+          <tr>
+            <td>Architecture review</td>
+            <td>4-8 weeks</td>
+            <td>2-3 weeks</td>
+            <td style="color: #2e7d32; font-weight: 600">50% reduction</td>
+          </tr>
+          <tr>
+            <td>Patent landscape report</td>
+            <td>2-3 weeks</td>
+            <td>2-3 days</td>
+            <td style="color: #2e7d32; font-weight: 600">10x faster</td>
+          </tr>
+          <tr>
+            <td>Sensor suite iterations</td>
+            <td>5-8 cycles</td>
+            <td>2-3 cycles</td>
+            <td style="color: #2e7d32; font-weight: 600">60% fewer</td>
+          </tr>
+          <tr>
+            <td>Cost per analysis</td>
+            <td>$8,000-15,000</td>
+            <td>$500-2,000</td>
+            <td style="color: #2e7d32; font-weight: 600">85-90% lower</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- Documentation -->
+    <section id="docs" class="section">
+      <h2>## documentation</h2>
+      <p style="color: var(--muted); font-size: 12px; margin-bottom: 20px">
+        Complete package for BCS team onboarding and agent usage
+      </p>
+
+      <ul class="doc-list">
+        <li>
+          <span class="doc-title">README.md</span>
+          <span class="symbol">→</span>
+          <span class="doc-desc"
+            >master index for entire knowledge transfer package</span
+          >
+        </li>
+        <li>
+          <span class="doc-title">TRANSITION_DASHBOARD.md</span>
+          <span class="symbol">→</span>
+          <span class="doc-desc"
+            >work areas mapped to artifacts, CV bullet points, project
+            handoffs</span
+          >
+        </li>
+        <li>
+          <span class="doc-title">BCS_PROJECT_CONTINUITY_GUIDE.md</span>
+          <span class="symbol">→</span>
+          <span class="doc-desc"
+            >active projects, customer contacts, next steps, risk
+            mitigation</span
+          >
+        </li>
+        <li>
+          <span class="doc-title">QUICK_REFERENCE.md</span>
+          <span class="symbol">→</span>
+          <span class="doc-desc"
+            >cheat sheet with query patterns and troubleshooting</span
+          >
+        </li>
+        <li>
+          <span class="doc-title">SDV_AGENT_SYSTEM_DESIGN.md</span>
+          <span class="symbol">→</span>
+          <span class="doc-desc"
+            >multi-agent architecture, workflows, ontology</span
+          >
+        </li>
+        <li>
+          <span class="doc-title">complete-smart-glass-report.md</span>
+          <span class="symbol">→</span>
+          <span class="doc-desc"
+            >comprehensive optical HMI research — flagship artifact</span
+          >
+        </li>
+        <li>
+          <span class="doc-title">PROMPT_ENGINEERING_GUIDE.md</span>
+          <span class="symbol">→</span>
+          <span class="doc-desc"
+            >how to create BCS-specific agents and modify existing ones</span
+          >
+        </li>
+        <li>
+          <span class="doc-title">agents/sdv-suite/cards/*.json</span>
+          <span class="symbol">→</span>
+          <span class="doc-desc"
+            >individual agent specifications with examples and schemas</span
+          >
+        </li>
+      </ul>
+    </section>
+
+    <!-- Quick Links Box -->
+    <div class="quick-links">
+      <h3>quick actions</h3>
+      <ul>
+        <li>
+          <span class="symbol">⌘</span>
+          <a href="../README.md">read main README</a>
+        </li>
+        <li>
+          <span class="symbol">⌘</span>
+          <a href="../../TRANSITION_DASHBOARD.md">view transition dashboard</a>
+        </li>
+        <li>
+          <span class="symbol">⌘</span>
+          <a href="../../BCS_PROJECT_CONTINUITY_GUIDE.md"
+            >check project continuity guide</a
+          >
+        </li>
+        <li>
+          <span class="symbol">⌘</span>
+          <a href="../QUICK_REFERENCE.md">open quick reference</a>
+        </li>
+        <li>
+          <span class="symbol">⌘</span> <a href="cards/">browse agent cards</a>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+      <p style="margin-bottom: 10px">
+        <strong>BCS Knowledge Transfer Package</strong> | version 1.0.0 |
+        february 2024
+      </p>
+      <p style="margin-bottom: 10px">
+        handoff from Alena Taranka to BCS Automotive Interface Solutions team
+      </p>
+      <p style="margin-bottom: 20px; line-height: 1.7">
+        "Rather than leaving documentation, I'm leaving tools that think like I
+        think about problems. These agents are yours to use, modify, and
+        extend."
+      </p>
+      <p>
+        thank you for the opportunity to contribute to BCS's mission. these
+        agents will
+      </p>
+    </footer>
+  </body>
+</html>

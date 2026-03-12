@@ -1,0 +1,204 @@
+{
+  "agent_id": "sdv_arch_validator",
+  "agent_name": "SDV Architecture Validator",
+  "version": "1.0.0",
+  "agent_type": "analysis",
+  "domain": "software_defined_vehicles",
+  "tags": ["sdv", "architecture", "validation", "autosar", "safety", "asil"],
+  "description": "Validates software-defined vehicle system architectures against industry standards, safety requirements, and emerging best practices. Analyzes AUTOSAR Adaptive architectures, zonal designs, domain controller topologies, and service-oriented architecture patterns.",
+  "capabilities": [
+    "AUTOSAR Adaptive architecture validation",
+    "Zonal architecture assessment",
+    "ASIL compliance checking (ISO 26262)",
+    "Service-oriented architecture (SOA) pattern analysis",
+    "Domain controller topology evaluation",
+    "Migration path analysis (Classic to Adaptive AUTOSAR)",
+    "Multi-supplier integration validation",
+    "Architecture optimization recommendations"
+  ],
+  "executor": {
+    "type": "llm",
+    "config": {
+      "provider": "anthropic",
+      "model": "claude-3-5-sonnet-20241022",
+      "temperature": 0.2,
+      "max_tokens": 4096,
+      "system_prompt": "You are an expert software-defined vehicle (SDV) architecture analyst with deep knowledge of AUTOSAR (Classic and Adaptive), ISO 26262 functional safety, zonal architectures, domain controllers, and service-oriented automotive software design.\n\nYour role is to validate vehicle system architectures by:\n1. Analyzing architecture diagrams, specifications, and requirements\n2. Checking compliance with AUTOSAR Adaptive Platform, ISO 26262 (ASIL levels), and ASPICE standards\n3. Identifying architectural risks, gaps, and anti-patterns\n4. Recommending optimizations for performance, safety, cost, and maintainability\n5. Providing evidence-based assessments with confidence scores\n\nWhen analyzing architectures:\n- Reference specific standards (e.g., ISO 26262-6 for software architecture, AUTOSAR AP R22-11)\n- Consider safety integrity levels (ASIL A/B/C/D) and their implications\n- Evaluate service discovery, deployment, and communication patterns\n- Assess computational resource allocation and network bandwidth\n- Flag potential single points of failure\n- Consider cybersecurity requirements (ISO/SAE 21434, UNR 155)\n\nAlways structure your output as:\n- **Overall Assessment**: Pass / Pass with Warnings / Fail\n- **Compliance Analysis**: Standards adherence (AUTOSAR, ISO 26262, etc.)\n- **Identified Issues**: Critical, Major, Minor (with severity)\n- **Recommendations**: Prioritized list of improvements\n- **Confidence Score**: 0-100% with justification\n- **Sources**: Cite standards, best practices, or technical rationale\n\nBe precise, objective, and evidence-based. When uncertain, state assumptions clearly and recommend further validation steps.",
+      "response_format": "markdown"
+    }
+  },
+  "input_schema": {
+    "type": "object",
+    "properties": {
+      "architecture_description": {
+        "type": "string",
+        "description": "Textual description, XML, or JSON representation of the vehicle architecture"
+      },
+      "architecture_type": {
+        "type": "string",
+        "enum": ["autosar_classic", "autosar_adaptive", "zonal", "domain_controller", "hybrid"],
+        "description": "Primary architecture paradigm"
+      },
+      "safety_requirements": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "component": {"type": "string"},
+            "asil_level": {"type": "string", "enum": ["QM", "ASIL_A", "ASIL_B", "ASIL_C", "ASIL_D"]},
+            "requirement": {"type": "string"}
+          }
+        },
+        "description": "Safety integrity requirements (optional)"
+      },
+      "validation_focus": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "enum": ["safety", "performance", "cost", "scalability", "cybersecurity", "standards_compliance"]
+        },
+        "description": "Specific validation areas to prioritize (optional)"
+      },
+      "context": {
+        "type": "string",
+        "description": "Additional context (e.g., vehicle class, target market, development phase)"
+      }
+    },
+    "required": ["architecture_description", "architecture_type"]
+  },
+  "output_schema": {
+    "type": "object",
+    "properties": {
+      "overall_assessment": {
+        "type": "string",
+        "enum": ["pass", "pass_with_warnings", "fail"]
+      },
+      "compliance_analysis": {
+        "type": "object",
+        "properties": {
+          "autosar_compliance": {"type": "string"},
+          "iso_26262_compliance": {"type": "string"},
+          "aspice_alignment": {"type": "string"},
+          "other_standards": {"type": "array", "items": {"type": "string"}}
+        }
+      },
+      "issues": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "severity": {"type": "string", "enum": ["critical", "major", "minor"]},
+            "category": {"type": "string"},
+            "description": {"type": "string"},
+            "impact": {"type": "string"},
+            "location": {"type": "string"}
+          }
+        }
+      },
+      "recommendations": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "priority": {"type": "string", "enum": ["high", "medium", "low"]},
+            "recommendation": {"type": "string"},
+            "rationale": {"type": "string"},
+            "effort_estimate": {"type": "string"}
+          }
+        }
+      },
+      "confidence_score": {
+        "type": "number",
+        "minimum": 0,
+        "maximum": 100
+      },
+      "confidence_justification": {
+        "type": "string"
+      },
+      "sources": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "type": {"type": "string", "enum": ["standard", "best_practice", "technical_rationale"]},
+            "reference": {"type": "string"}
+          }
+        }
+      }
+    },
+    "required": ["overall_assessment", "issues", "recommendations", "confidence_score"]
+  },
+  "data_sources": [
+    {
+      "name": "AUTOSAR Specifications",
+      "type": "documentation",
+      "description": "AUTOSAR Adaptive Platform R22-11, Classic Platform R4.4",
+      "access_method": "reference"
+    },
+    {
+      "name": "ISO 26262",
+      "type": "standard",
+      "description": "Functional Safety standard for automotive systems",
+      "access_method": "reference"
+    },
+    {
+      "name": "ISO/SAE 21434",
+      "type": "standard",
+      "description": "Cybersecurity engineering for automotive systems",
+      "access_method": "reference"
+    },
+    {
+      "name": "Automotive SPICE (ASPICE)",
+      "type": "process_standard",
+      "description": "Process assessment model for automotive software",
+      "access_method": "reference"
+    }
+  ],
+  "performance_estimates": {
+    "average_response_time_seconds": 30,
+    "confidence_accuracy": 85,
+    "cost_per_query_usd": 0.15,
+    "success_rate_percent": 95,
+    "notes": "Response time varies with architecture complexity. Complex multi-domain architectures may take 45-60 seconds."
+  },
+  "example_queries": [
+    {
+      "query": "Validate a zonal architecture with 3 zone controllers and 1 central compute unit for an L3 autonomous vehicle. Safety requirement: ASIL-D for autonomous driving functions.",
+      "expected_confidence": "high",
+      "notes": "Well-defined scenario with clear safety requirements"
+    },
+    {
+      "query": "Review migration strategy from AUTOSAR Classic to Adaptive for a domain controller managing ADAS sensors (4 cameras, 2 radars, 1 LiDAR).",
+      "expected_confidence": "medium-high",
+      "notes": "Migration analysis requires assumptions about existing architecture"
+    },
+    {
+      "query": "Analyze service-oriented architecture for over-the-air (OTA) software updates with redundant ECUs and rollback capability.",
+      "expected_confidence": "high",
+      "notes": "OTA architecture patterns are well-established in AUTOSAR Adaptive"
+    }
+  ],
+  "error_handling": {
+    "missing_input": "Request clarification on architecture type and description",
+    "ambiguous_requirements": "State assumptions and provide conditional analysis",
+    "unknown_standards": "Focus on general best practices and flag need for domain expertise",
+    "incomplete_information": "Perform partial validation and highlight gaps requiring additional data"
+  },
+  "limitations": [
+    "Cannot validate actual implementation code, only architectural designs",
+    "Limited to publicly available standards (cannot access proprietary OEM specs)",
+    "Performance estimates are theoretical without real-world profiling data",
+    "Cannot perform formal verification or model checking",
+    "Relies on LLM knowledge cutoff; newest standards may not be fully covered"
+  ],
+  "related_agents": [
+    "sensor_fusion_analyst",
+    "connectivity_standards_tracker",
+    "signal_processing_advisor"
+  ],
+  "author": "Alena Taranka",
+  "created_date": "2024-02-07",
+  "last_updated": "2024-02-07",
+  "license": "Proprietary - Transition Package",
+  "documentation_url": "../docs/sdv_arch_validator.md"
+}
