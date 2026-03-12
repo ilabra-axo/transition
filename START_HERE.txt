@@ -5,9 +5,13 @@ BCS KNOWLEDGE TRANSFER PACKAGE - START HERE
 GETTING STARTED (3 SIMPLE STEPS):
 
 1. DOWNLOAD THE PACKAGE
-   - Go to: agents/sdv-suite/downloads.html
-   - Click "Download Complete Package (ZIP)"
+   - Go to: https://github.com/ilabra-axo/transition
+   - Click the green "Code" button
+   - Select "Download ZIP"
    - Extract the ZIP file to your computer
+
+   Direct download link:
+   https://github.com/ilabra-axo/transition/archive/refs/heads/main.zip
 
 2. VIEW THE PRESENTATION
    - Open: presentation.html in your web browser
