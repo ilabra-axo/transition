@@ -158,7 +158,7 @@ Unlike traditional knowledge bases or documentation, this suite uses **agentic d
 The agent suite captures **9+ years of specialized experience** in:
 - Automotive sensor physics and metrology
 - ADAS/AD system architecture
-- HMI design for smart glass and displays
+- HMI design for rain light sensor and displays
 - Cross-domain signal processing
 - ISO 26262 functional safety
 

@@ -456,7 +456,7 @@ When agents disagree:
 
 ### Use Case 3: New Product Concept Validation
 
-**Scenario:** Evaluate feasibility of a smart glass HUD with AR navigation.
+**Scenario:** Evaluate feasibility of a rain light sensor HUD with AR navigation.
 
 **Agents Involved:**
 - HMI/UX Forecaster (market readiness, regulatory)

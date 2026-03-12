@@ -81,7 +81,7 @@ transition/agents/
 | # | Agent ID | Domain | Priority | Notes |
 |---|----------|--------|----------|-------|
 | 6 | `signal_processing_advisor` | Algorithm Selection | High | Template structure defined |
-| 7 | `optical_sensor_specialist` | Camera & LiDAR Systems | High | Based on smart glass report experience |
+| 7 | `optical_sensor_specialist` | Camera & LiDAR Systems | High | Based on rain light sensor report experience |
 | 8 | `connectivity_standards_tracker` | V2X & Networking | Medium | Standards-focused agent |
 
 ---
@@ -166,7 +166,7 @@ Follow the detailed guide in [sdv-suite/README.md](sdv-suite/README.md#quick-sta
 - **[../PROMPT_ENGINEERING_GUIDE.md](../PROMPT_ENGINEERING_GUIDE.md)**  
   Guide for creating and refining agent prompts (referenced by this suite)
 
-- **[../complete-smart-glass-report.md](../complete-smart-glass-report.md)**  
+- **[../digital-twin-rain-light-sensor.md](../digital-twin-rain-light-sensor.md)**  
   Research foundation for optical sensor and HMI expertise
 
 - **[../cv_markdown (1).md](../cv_markdown%20(1).md)**  

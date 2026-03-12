@@ -1,0 +1,441 @@
+-- Parameterized FRED Optimization with Monte Carlo Simulation
+-- For Smart Illuminated Button Design
+-- This script explores design space and predicts user preferences
+
+-- Clear the document and set up analysis parameters
+ClearDocument()
+SetRayTraceParameters(20000, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+SetUnits("mm", "W")
+
+-- Define optimization parameter ranges
+local params = {
+    -- Light guide parameters
+    lightGuideThickness = {min = 2.0, max = 5.0, step = 0.5},
+    lightGuideIndex = {min = 1.45, max = 1.53, step = 0.02},
+    
+    -- Diffuser parameters
+    diffuserThickness = {min = 0.2, max = 1.0, step = 0.2},
+    diffuserScatter = {min = 0.7, max = 0.95, step = 0.05},
+    
+    -- LED parameters
+    ledPower = {min = 0.03, max = 0.08, step = 0.01},
+    ledSize = {min = 1.5, max = 3.0, step = 0.5},
+    
+    -- Button cap parameters
+    buttonIconSize = {min = 3.0, max = 6.0, step = 1.0},
+    buttonOpacity = {min = 0.7, max = 0.95, step = 0.05}
+}
+
+-- User perception and cognition data (representative sample)
+-- These coefficients represent importance weights for various aspects of button design
+local userModels = {
+    {
+        name = "Young Driver",
+        count = 120,  -- Number of users in this segment
+        preferences = {
+            brightness = {mean = 0.8, stddev = 0.15},
+            uniformity = {mean = 0.6, stddev = 0.2},
+            contrast = {mean = 0.9, stddev = 0.1},
+            powerEfficiency = {mean = 0.4, stddev = 0.2}
+        }
+    },
+    {
+        name = "Senior Driver",
+        count = 80,
+        preferences = {
+            brightness = {mean = 0.7, stddev = 0.2},
+            uniformity = {mean = 0.85, stddev = 0.1},
+            contrast = {mean = 0.75, stddev = 0.15},
+            powerEfficiency = {mean = 0.5, stddev = 0.15}
+        }
+    },
+    {
+        name = "Professional Driver",
+        count = 100,
+        preferences = {
+            brightness = {mean = 0.65, stddev = 0.15},
+            uniformity = {mean = 0.9, stddev = 0.05},
+            contrast = {mean = 0.8, stddev = 0.1},
+            powerEfficiency = {mean = 0.7, stddev = 0.15}
+        }
+    }
+}
+
+-- Function to generate a random normal value
+function randomNormal(mean, stddev)
+    -- Box-Muller transform for normal distribution
+    local u1 = math.random()
+    local u2 = math.random()
+    
+    if u1 < 1e-10 then
+        u1 = 1e-10
+    end
+    
+    local z0 = math.sqrt(-2.0 * math.log(u1)) * math.cos(2.0 * math.pi * u2)
+    return mean + z0 * stddev
+end
+
+-- Function to create the button model with specific parameters
+function createButtonModel(config)
+    -- Create coordinate systems
+    CreateCoordinateSystem("Button_System", T_IDENTITY(), "", "")
+    CreateCoordinateSystem("LED_System", T_TRANSLATE(0, 0, -5), "Button_System", "")
+    
+    -- Create materials
+    -- Light guide material
+    CreateMaterial("Acrylic", "", "")
+    SetMaterialIndex("Acrylic", config.lightGuideIndex)
+    
+    -- Diffuser material
+    CreateMaterial("Diffuser", "", "")
+    SetMaterialScatter("Diffuser", "Lambertian", config.diffuserScatter)
+    SetMaterialIndex("Diffuser", 1.5)
+    
+    -- Button cap material
+    CreateMaterial("ButtonCap", "", "")
+    SetMaterialIndex("ButtonCap", 1.4)
+    SetMaterialAbsorb("ButtonCap", config.buttonOpacity)
+    
+    -- Create LED source
+    local ledSource = CreateSource("LED_Source", "LED_System", "")
+    SetSourceRays(ledSource, 100000)
+    SetSourceDirection(ledSource, 0, 0, 1)
+    SetSourceWavelength(ledSource, 0.460, 0.550, 0.640) -- RGB components
+    SetSourcePower(ledSource, config.ledPower)
+    SetSourceType(ledSource, "Uniform")
+    SetSourceSize(ledSource, "Rectangle", config.ledSize, config.ledSize)
+    SetSourceEmit(ledSource, "Lambertian")
+    
+    -- Create light guide
+    local lightGuide = CreatePrimitive("LightGuide", "Button_System", "", "")
+    SetPrimitiveType(lightGuide, "Box")
+    SetPrimitiveParameters(lightGuide, 10, 10, config.lightGuideThickness)
+    SetPrimitivePosition(lightGuide, 0, 0, 0)
+    SetPrimitiveMaterial(lightGuide, "Acrylic")
+    
+    -- Create diffuser layer
+    local diffuser = CreatePrimitive("Diffuser", "Button_System", "", "")
+    SetPrimitiveType(diffuser, "Box")
+    SetPrimitiveParameters(diffuser, 10, 10, config.diffuserThickness)
+    SetPrimitivePosition(diffuser, 0, 0, config.lightGuideThickness/2 + config.diffuserThickness/2)
+    SetPrimitiveMaterial(diffuser, "Diffuser")
+    
+    -- Create button cap with cutout for icon
+    local buttonCap = CreatePrimitive("ButtonCap", "Button_System", "", "")
+    SetPrimitiveType(buttonCap, "Box")
+    SetPrimitiveParameters(buttonCap, 10, 10, 1)
+    local buttonCapZ = config.lightGuideThickness/2 + config.diffuserThickness + 0.5
+    SetPrimitivePosition(buttonCap, 0, 0, buttonCapZ)
+    SetPrimitiveMaterial(buttonCap, "ButtonCap")
+    
+    -- Create icon cutout (simplified as square for parametric exploration)
+    local iconCutout = CreatePrimitive("IconCutout", "Button_System", "", "")
+    SetPrimitiveType(iconCutout, "Box")
+    SetPrimitiveParameters(iconCutout, config.buttonIconSize, config.buttonIconSize, 1.1)
+    SetPrimitivePosition(iconCutout, 0, 0, buttonCapZ)
+    
+    -- Create the boolean operation for the cutout
+    SetBooleanOperation("FinalButton", "DIFFERENCE", buttonCap, iconCutout)
+    
+    -- Create detector for analyzing illumination
+    local detector = CreateDetector("IlluminationDetector", "Button_System", "", "")
+    SetDetectorType(detector, "Surface")
+    SetDetectorSurface(detector, "Rectangle", 10, 10)
+    SetDetectorPosition(detector, 0, 0, buttonCapZ + 1)
+    SetDetectorDirection(detector, 0, 0, 1)
+    SetDetectorAnalysis(detector, "Irradiance", "Color", 256, 256)
+    
+    return detector
+end
+
+-- Function to evaluate design performance
+function evaluateDesign(detector)
+    -- Get detector analysis results
+    local stats = GetDetectorStatistics(detector, "Irradiance")
+    
+    -- Calculate performance metrics
+    local results = {}
+    
+    -- Brightness (average irradiance)
+    results.brightness = stats.mean / 0.01  -- Normalize to [0,1] range assuming 0.01 W/mm² is max expected
+    if results.brightness > 1 then results.brightness = 1 end
+    
+    -- Uniformity (min/max ratio)
+    results.uniformity = stats.min / stats.max
+    
+    -- Contrast (between illuminated and dark areas - simplified calculation)
+    local brightAreas = GetRegionStatistics(detector, "Irradiance", "Threshold", stats.mean * 0.8, 999)
+    local darkAreas = GetRegionStatistics(detector, "Irradiance", "Threshold", 0, stats.mean * 0.2)
+    results.contrast = (brightAreas.mean - darkAreas.mean) / (brightAreas.mean + darkAreas.mean)
+    
+    -- Power efficiency (brightness per watt of LED power)
+    results.powerEfficiency = results.brightness / ledPower
+    
+    return results
+end
+
+-- Function to calculate user preference score for a given design
+function calculateUserPreference(design, userPreferences)
+    local score = 0
+    
+    -- Calculate weighted sum of preferences
+    score = score + design.brightness * userPreferences.brightness
+    score = score + design.uniformity * userPreferences.uniformity
+    score = score + design.contrast * userPreferences.contrast
+    score = score + design.powerEfficiency * userPreferences.powerEfficiency
+    
+    return score
+end
+
+-- Main optimization routine
+-- Create results storage
+local allResults = {}
+
+-- Define number of Monte Carlo iterations per design point
+local monteCarloIterations = 100
+
+-- Run parameterized exploration
+print("Starting parameterized design exploration...")
+print("Configuration, Brightness, Uniformity, Contrast, PowerEfficiency, UserScore")
+
+-- Random sampling of design space
+for iteration = 1, 50 do  -- 50 design points to explore
+    local config = {}
+    
+    -- Randomly select values for each parameter from its range
+    config.lightGuideThickness = params.lightGuideThickness.min + 
+        math.random() * (params.lightGuideThickness.max - params.lightGuideThickness.min)
+    config.lightGuideIndex = params.lightGuideIndex.min + 
+        math.random() * (params.lightGuideIndex.max - params.lightGuideIndex.min)
+    config.diffuserThickness = params.diffuserThickness.min + 
+        math.random() * (params.diffuserThickness.max - params.diffuserThickness.min)
+    config.diffuserScatter = params.diffuserScatter.min + 
+        math.random() * (params.diffuserScatter.max - params.diffuserScatter.min)
+    config.ledPower = params.ledPower.min + 
+        math.random() * (params.ledPower.max - params.ledPower.min)
+    config.ledSize = params.ledSize.min + 
+        math.random() * (params.ledSize.max - params.ledSize.min)
+    config.buttonIconSize = params.buttonIconSize.min + 
+        math.random() * (params.buttonIconSize.max - params.buttonIconSize.min)
+    config.buttonOpacity = params.buttonOpacity.min + 
+        math.random() * (params.buttonOpacity.max - params.buttonOpacity.min)
+    
+    -- Create button model with current configuration
+    local detector = createButtonModel(config)
+    
+    -- Trace rays and analyze
+    TraceRays()
+    
+    -- Evaluate design performance
+    local designPerformance = evaluateDesign(detector)
+    
+    -- Run Monte Carlo simulation for user preferences
+    local totalUserScore = 0
+    local totalUsers = 0
+    
+    for _, userModel in ipairs(userModels) do
+        local userGroupScore = 0
+        
+        -- For each user in group, generate random preference values based on distribution
+        for userInstance = 1, monteCarloIterations do
+            local userPrefs = {
+                brightness = randomNormal(userModel.preferences.brightness.mean, userModel.preferences.brightness.stddev),
+                uniformity = randomNormal(userModel.preferences.uniformity.mean, userModel.preferences.uniformity.stddev),
+                contrast = randomNormal(userModel.preferences.contrast.mean, userModel.preferences.contrast.stddev),
+                powerEfficiency = randomNormal(userModel.preferences.powerEfficiency.mean, userModel.preferences.powerEfficiency.stddev)
+            }
+            
+            -- Clamp preferences to [0,1] range
+            for k, v in pairs(userPrefs) do
+                if v < 0 then userPrefs[k] = 0 end
+                if v > 1 then userPrefs[k] = 1 end
+            end
+            
+            -- Calculate preference score for this user
+            local score = calculateUserPreference(designPerformance, userPrefs)
+            userGroupScore = userGroupScore + score
+        end
+        
+        -- Average score for this user group, weighted by group size
+        totalUserScore = totalUserScore + (userGroupScore / monteCarloIterations) * userModel.count
+        totalUsers = totalUsers + userModel.count
+    }
+    
+    -- Calculate overall user preference score
+    local avgUserScore = totalUserScore / totalUsers
+    
+    -- Store results
+    local result = {
+        config = config,
+        performance = designPerformance,
+        userScore = avgUserScore
+    }
+    table.insert(allResults, result)
+    
+    -- Print current result
+    print(string.format("Config %d: B=%.2f, U=%.2f, C=%.2f, PE=%.2f, Score=%.3f", 
+        iteration,
+        designPerformance.brightness,
+        designPerformance.uniformity,
+        designPerformance.contrast,
+        designPerformance.powerEfficiency,
+        avgUserScore))
+    
+    -- Clear document for next iteration
+    if iteration < 50 then
+        ClearDocument()
+    end
+end
+
+-- Sort results by user preference score
+table.sort(allResults, function(a, b) return a.userScore > b.userScore end)
+
+-- Output top 5 configurations
+print("\nTop 5 Button Configurations:")
+for i = 1, 5 do
+    local r = allResults[i]
+    print(string.format("%d. User Score: %.3f", i, r.userScore))
+    print(string.format("   Light Guide: %.2f mm, n=%.2f", r.config.lightGuideThickness, r.config.lightGuideIndex))
+    print(string.format("   Diffuser: %.2f mm, scatter=%.2f", r.config.diffuserThickness, r.config.diffuserScatter))
+    print(string.format("   LED: %.2f mW, size=%.1f mm", r.config.ledPower * 1000, r.config.ledSize))
+    print(string.format("   Button: icon=%.1f mm, opacity=%.2f", r.config.buttonIconSize, r.config.buttonOpacity))
+    print(string.format("   Performance: B=%.2f, U=%.2f, C=%.2f, PE=%.2f", 
+        r.performance.brightness, r.performance.uniformity, r.performance.contrast, r.performance.powerEfficiency))
+    print("")
+end
+
+-- Generate visualization of parameter space
+-- Here we could generate 2D or 3D plots to visualize the design space
+-- For FRED, we'd typically export the data and visualize in external tools
+
+-- Create the optimal button design based on highest user preference score
+local optimalConfig = allResults[1].config
+ClearDocument()
+local detector = createButtonModel(optimalConfig)
+TraceRays()
+AnalyzeDetector(detector)
+
+-- Save visualization of optimal design
+SaveImage("optimal_button_design.png", detector, "Irradiance", 800, 800)
+
+-- Generate sensitivity analysis for top configuration
+print("\nSensitivity Analysis for Optimal Configuration:")
+local sensitivityParams = {"lightGuideThickness", "diffuserScatter", "ledPower", "buttonIconSize"}
+
+for _, param in ipairs(sensitivityParams) do
+    local baseValue = optimalConfig[param]
+    local deltaValues = {-0.2, -0.1, 0.1, 0.2} -- Relative changes to test
+    
+    print("Parameter: " .. param)
+    print("Base value: " .. baseValue)
+    print("Delta, ScoreChange")
+    
+    for _, delta in ipairs(deltaValues) do
+        -- Skip if parameter would go out of bounds
+        local testValue = baseValue * (1 + delta)
+        local min = params[param].min
+        local max = params[param].max
+        
+        if testValue >= min and testValue <= max then
+            -- Create test configuration
+            local testConfig = {}
+            for k, v in pairs(optimalConfig) do
+                testConfig[k] = v
+            end
+            testConfig[param] = testValue
+            
+            -- Test this configuration
+            ClearDocument()
+            local testDetector = createButtonModel(testConfig)
+            TraceRays()
+            local testPerformance = evaluateDesign(testDetector)
+            
+            -- Calculate user score for this test configuration
+            local testTotalScore = 0
+            local testTotalUsers = 0
+            
+            for _, userModel in ipairs(userModels) do
+                local userGroupScore = 0
+                
+                for userInstance = 1, 20 do -- Reduced iterations for sensitivity analysis
+                    local userPrefs = {
+                        brightness = randomNormal(userModel.preferences.brightness.mean, userModel.preferences.brightness.stddev),
+                        uniformity = randomNormal(userModel.preferences.uniformity.mean, userModel.preferences.uniformity.stddev),
+                        contrast = randomNormal(userModel.preferences.contrast.mean, userModel.preferences.contrast.stddev),
+                        powerEfficiency = randomNormal(userModel.preferences.powerEfficiency.mean, userModel.preferences.powerEfficiency.stddev)
+                    }
+                    
+                    -- Clamp preferences to [0,1] range
+                    for k, v in pairs(userPrefs) do
+                        if v < 0 then userPrefs[k] = 0 end
+                        if v > 1 then userPrefs[k] = 1 end
+                    end
+                    
+                    local score = calculateUserPreference(testPerformance, userPrefs)
+                    userGroupScore = userGroupScore + score
+                end
+                
+                testTotalScore = testTotalScore + (userGroupScore / 20) * userModel.count
+                testTotalUsers = testTotalUsers + userModel.count
+            end
+            
+            local testScore = testTotalScore / testTotalUsers
+            local scoreChange = testScore - allResults[1].userScore
+            
+            print(string.format("%.2f, %.4f", delta, scoreChange))
+        end
+    end
+    print("")
+end
+
+-- Create final report
+CreateReport("Button_Optimization_Report.html", "Smart Illuminated Button Optimization")
+AddReportSection("Optimization Parameters")
+AddReportTable("Parameter Ranges", {
+    {"Parameter", "Minimum", "Maximum"},
+    {"Light Guide Thickness", params.lightGuideThickness.min, params.lightGuideThickness.max},
+    {"Light Guide Index", params.lightGuideIndex.min, params.lightGuideIndex.max},
+    {"Diffuser Thickness", params.diffuserThickness.min, params.diffuserThickness.max},
+    {"Diffuser Scatter", params.diffuserScatter.min, params.diffuserScatter.max},
+    {"LED Power (W)", params.ledPower.min, params.ledPower.max},
+    {"LED Size (mm)", params.ledSize.min, params.ledSize.max},
+    {"Button Icon Size (mm)", params.buttonIconSize.min, params.buttonIconSize.max},
+    {"Button Opacity", params.buttonOpacity.min, params.buttonOpacity.max}
+})
+
+AddReportSection("User Models")
+for _, model in ipairs(userModels) do
+    AddReportTable(model.name .. " Preferences", {
+        {"Preference", "Mean", "Standard Deviation"},
+        {"Brightness", model.preferences.brightness.mean, model.preferences.brightness.stddev},
+        {"Uniformity", model.preferences.uniformity.mean, model.preferences.uniformity.stddev},
+        {"Contrast", model.preferences.contrast.mean, model.preferences.contrast.stddev},
+        {"Power Efficiency", model.preferences.powerEfficiency.mean, model.preferences.powerEfficiency.stddev}
+    })
+end
+
+AddReportSection("Optimal Configuration")
+AddReportImage("optimal_button_design.png", "Optimal Button Design Irradiance")
+AddReportTable("Optimal Parameters", {
+    {"Parameter", "Value"},
+    {"Light Guide Thickness", string.format("%.2f mm", optimalConfig.lightGuideThickness)},
+    {"Light Guide Index", string.format("%.2f", optimalConfig.lightGuideIndex)},
+    {"Diffuser Thickness", string.format("%.2f mm", optimalConfig.diffuserThickness)},
+    {"Diffuser Scatter", string.format("%.2f", optimalConfig.diffuserScatter)},
+    {"LED Power", string.format("%.2f mW", optimalConfig.ledPower * 1000)},
+    {"LED Size", string.format("%.2f mm", optimalConfig.ledSize)},
+    {"Button Icon Size", string.format("%.2f mm", optimalConfig.buttonIconSize)},
+    {"Button Opacity", string.format("%.2f", optimalConfig.buttonOpacity)}
+})
+
+AddReportSection("Performance Metrics")
+AddReportTable("Performance of Optimal Design", {
+    {"Metric", "Value"},
+    {"Brightness", string.format("%.2f", allResults[1].performance.brightness)},
+    {"Uniformity", string.format("%.2f", allResults[1].performance.uniformity)},
+    {"Contrast", string.format("%.2f", allResults[1].performance.contrast)},
+    {"Power Efficiency", string.format("%.2f", allResults[1].performance.powerEfficiency)},
+    {"User Preference Score", string.format("%.3f", allResults[1].userScore)}
+})
+
+print("Optimization complete. Report saved as Button_Optimization_Report.html")

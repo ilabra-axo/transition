@@ -298,7 +298,7 @@ transition/
 │       └── cards/*.json               ← Agent definitions
 │
 └── [Research Artifacts]
-    ├── complete-smart-glass-report.md
+    ├── digital-twin-rain-light-sensor.md
     ├── patent_research.md
     └── ...
 ```
@@ -611,7 +611,7 @@ transition/agents/sdv-suite/cards/*.json
 transition/BCS_PROJECT_CONTINUITY_GUIDE.md
 
 # Research artifacts
-transition/complete-smart-glass-report.md
+transition/digital-twin-rain-light-sensor.md
 ```
 
 ---

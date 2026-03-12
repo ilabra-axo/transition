@@ -92,10 +92,10 @@ R2 must hit aggressive price targets while maintaining ADAS capabilities compara
 ### Application Area 2: R1 Gen 2 HMI Innovation
 
 **Challenge:**
-Differentiate Gen 2 R1 interior with innovative HMI that aligns with "adventure" brand positioning. Explore ambient lighting, smart glass, haptic feedback for rugged use cases.
+Differentiate Gen 2 R1 interior with innovative HMI that aligns with "adventure" brand positioning. Explore ambient lighting, rain light sensor, haptic feedback for rugged use cases.
 
 **Applicable Work:**
-- Smart glass research and optical HMI systems
+- rain light sensor research and optical HMI systems
 - Ambient lighting HW/SW integration (Daimler experience)
 - Multimodal interaction prototyping
 
@@ -104,18 +104,18 @@ Differentiate Gen 2 R1 interior with innovative HMI that aligns with "adventure"
 | Step | Agent | Deliverable | Timeline |
 |------|-------|-------------|----------|
 | 1 | HMI/UX Forecaster | 2026-2028 cockpit technology roadmap | Week 1-3 |
-| 2 | Automotive Tech Scout | Smart glass supplier ecosystem | Week 2-4 |
+| 2 | Automotive Tech Scout | rain light sensor supplier ecosystem | Week 2-4 |
 | 3 | Optical Sensor Specialist | Windshield HUD feasibility | Week 4-6 |
 | 4 | Signal Processing Advisor | Ambient lighting control algorithms | Week 6-8 |
 
 **Expected Business Impact:**
 - **Brand Differentiation:** Unique HMI features for adventure context
 - **Premium Positioning:** Justify Gen 2 price premium ($5-8k)
-- **Technology Leadership:** First-to-market opportunities in smart glass
+- **Technology Leadership:** First-to-market opportunities in rain light sensor
 - **User Experience:** Outdoor-optimized displays and controls
 
 **Artifacts to Leverage:**
-- `complete-smart-glass-report.md` - Comprehensive smart glass research
+- `digital-twin-rain-light-sensor.md` - Comprehensive rain light sensor research
 - `haptic_glove_system.html` - Multimodal interaction prototypes
 - `hmi_ux_forecaster.json` - Technology adoption forecasting
 
@@ -228,7 +228,7 @@ Validate DreamDrive Pro sensor suite (14 cameras, 5 radars, 1 LiDAR) for L3 high
 Evolve the award-winning Glass Cockpit for next-generation Air and Gravity. Explore curved OLED, 8K displays, AR elements while maintaining minimalist aesthetic.
 
 **Applicable Work:**
-- Smart glass and advanced display research
+- rain light sensor and advanced display research
 - Premium HMI design patterns (Daimler S-Class experience)
 - Optical integration and calibration
 
@@ -330,7 +330,7 @@ Evolution of Virtual Cockpit for next decade. Integration with AR-HUD, gesture c
 
 **Applicable Work:**
 - HMI innovation from BCS and Daimler
-- Smart glass and display technology research
+- rain light sensor and display technology research
 - Multimodal interaction design
 
 **Agent Deployment:**
@@ -452,7 +452,7 @@ Next generation of projection-based Digital Light. Integration with AR navigatio
 Evolution of Hyperscreen for next S-Class and EQS refresh. OLED, haptic feedback, AI personalization, seamless integration.
 
 **Applicable Work:**
-- Smart glass and advanced display research
+- rain light sensor and advanced display research
 - Ambient lighting integration
 - Premium HMI design patterns
 
@@ -604,7 +604,7 @@ Evolution of Hyperscreen for next S-Class and EQS refresh. OLED, haptic feedback
 
 **Application Focus:**
 - Sensor fusion software products
-- Smart glass and display technologies
+- rain light sensor and display technologies
 - ADAS supplier strategy
 - Manufacturing and quality optimization
 
@@ -615,7 +615,7 @@ Evolution of Hyperscreen for next S-Class and EQS refresh. OLED, haptic feedback
 
 **Expected Impact:**
 - Next-generation sensor fusion middleware
-- Smart glass product portfolio
+- rain light sensor product portfolio
 - OEM partner technology roadmaps
 
 ---

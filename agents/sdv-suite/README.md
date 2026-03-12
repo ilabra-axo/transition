@@ -293,7 +293,7 @@ Based on Claude 3.5 Sonnet (as of 2024-02-07):
 
 ### 3. New Product Concept Validation
 
-**Scenario:** Evaluate smart glass AR-HUD feasibility
+**Scenario:** Evaluate rain light sensor AR-HUD feasibility
 
 **Agents:**
 - HMI/UX Forecaster (market readiness)

@@ -34,7 +34,7 @@ As I transition out of BCS Automotive Interface Solutions, I'm leaving you with 
 ✨ **AI-powered research agents** that embody the analytical processes I developed during my time at BCS  
 🔧 **Reusable frameworks** you can integrate into BCS's ongoing R&D workflows  
 🧠 **Structured knowledge** covering HMI systems, sensor architecture, and SDV integration  
-📚 **Comprehensive artifacts** from smart glass research, sensor fusion, and connected car innovation
+📚 **Comprehensive artifacts** from rain light sensor research, sensor fusion, and connected car innovation
 
 **Core Philosophy:** Rather than static documentation, I've captured my research process as AI agents you can use, modify, and extend for future BCS projects.
 
@@ -45,7 +45,7 @@ As I transition out of BCS Automotive Interface Solutions, I'm leaving you with 
 This package consolidates work from my primary focus areas at BCS:
 
 ### 1. **Advanced HMI Solutions** (Interior Functional Design)
-- Smart glass research and optical HMI systems
+- rain light sensor research and optical HMI systems
 - Multimodal interaction (haptic, visual, ambient lighting)
 - Next-generation cockpit technologies for OEM partners
 
@@ -75,7 +75,7 @@ This package consolidates work from my primary focus areas at BCS:
 | **Want to deploy locally?** | [DEPLOYMENT_GUIDE.md](DEPLOYMENT_GUIDE.md) | [Quick Reference](agents/QUICK_REFERENCE.md) | 15 min |
 | **Project Manager** | [Executive Summary](agents/SDV_AGENT_SUITE_EXECUTIVE_SUMMARY.md) | [Transition Dashboard](TRANSITION_DASHBOARD.md) | 30 min |
 | **Sensor Engineer** | [Transition Dashboard](TRANSITION_DASHBOARD.md) | [Sensor Fusion Analyst](agents/sdv-suite/cards/sensor_fusion_analyst.json) | 45 min |
-| **HMI Designer** | [Smart Glass Report](complete-smart-glass-report.md) | [HMI/UX Forecaster](agents/sdv-suite/cards/hmi_ux_forecaster.json) | 60 min |
+| **HMI Designer** | [rain light sensor Report](digital-twin-rain-light-sensor.md) | [HMI/UX Forecaster](agents/sdv-suite/cards/hmi_ux_forecaster.json) | 60 min |
 | **System Architect** | [SDV System Design](agents/sdv-suite/SDV_AGENT_SYSTEM_DESIGN.md) | [Architecture Validator](agents/sdv-suite/cards/sdv_arch_validator.json) | 90 min |
 | **New Team Member** | [Transition Dashboard](TRANSITION_DASHBOARD.md) | [Quick Reference](agents/QUICK_REFERENCE.md) | 2-3 hours |
 
@@ -109,7 +109,7 @@ transition/
 │           └── automotive_tech_scout.json
 │
 ├── BCS_Research_Artifacts/                ← Project documentation
-│   ├── complete-smart-glass-report.md     ← Optical HMI research (comprehensive)
+│   ├── digital-twin-rain-light-sensor.md     ← Optical HMI research (comprehensive)
 │   ├── comprehensive-md-report.md         ← Technical methodologies
 │   ├── comprehensive-project-docs.md      ← BCS project portfolio
 │   ├── market_analysis.md                 ← Market intelligence
@@ -181,7 +181,7 @@ Benefits for BCS:
    - Shared ontology for automotive domain
    - How to customize for BCS needs
 
-5. **[Complete Smart Glass Report](complete-smart-glass-report.md)**
+5. **[Complete rain light sensor Report](digital-twin-rain-light-sensor.md)**
    - Foundation for optical HMI projects
    - Technology assessment frameworks
    - Applicable to customer windshield HMI projects
@@ -222,7 +222,7 @@ Benefits for BCS:
 **What the team can do now:**
 1. Deploy **HMI/UX Forecaster** for technology trends
 2. Use **Automotive Tech Scout** for patent landscape
-3. Reference **Smart Glass Report** for technical depth
+3. Reference **rain light sensor Report** for technical depth
 4. **Time savings:** 10x faster patent/trend analysis
 
 **Guide:** See [Transition Dashboard - HMI Work Area](TRANSITION_DASHBOARD.md#work-area-1-bcs)
@@ -257,7 +257,7 @@ Benefits for BCS:
 
 **Day 3-4: Explore Project Artifacts**
 1. Review ongoing projects in [Project Continuity Guide](BCS_PROJECT_CONTINUITY_GUIDE.md)
-2. Read [Smart Glass Report](complete-smart-glass-report.md) (flagship research)
+2. Read [rain light sensor Report](digital-twin-rain-light-sensor.md) (flagship research)
 3. Browse [Patent Research](patent_research.md) (connected car innovation)
 
 **Day 5: Test an Agent**
@@ -387,7 +387,7 @@ Create customer-specific agent variants:
 Detailed handoff information in: [BCS Project Continuity Guide](BCS_PROJECT_CONTINUITY_GUIDE.md)
 
 **High Priority:**
-- [ ] Smart glass HMI concept for Tier 1 OEM
+- [ ] rain light sensor HMI concept for Tier 1 OEM
 - [ ] Sensor fusion architecture review for premium OEM
 - [ ] Connected car innovation portfolio update
 - [ ] Virtual sensor feasibility studies
@@ -398,7 +398,7 @@ Detailed handoff information in: [BCS Project Continuity Guide](BCS_PROJECT_CONT
 - [ ] SDV architecture best practices documentation
 
 **Completed / Handoff Ready:**
-- [x] Smart glass research report (this package)
+- [x] rain light sensor research report (this package)
 - [x] Agent system development (operational)
 - [x] HMI prototype documentation
 

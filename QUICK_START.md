@@ -110,7 +110,7 @@ python test.py
 
 **Documentation:**
 - Complete BCS transition materials
-- Smart glass research report
+- rain light sensor research report
 - Patent & market analysis
 - Multi-agent workflow examples
 

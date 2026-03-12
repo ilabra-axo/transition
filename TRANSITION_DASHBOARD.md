@@ -53,7 +53,7 @@ transition/
 │           ├── virtual_sensor_designer.json
 │           └── automotive_tech_scout.json
 │
-├── complete-smart-glass-report.md   ← Optical HMI research artifact
+├── digital-twin-rain-light-sensor.md   ← Optical HMI research artifact
 ├── comprehensive-md-report.md       ← Technical documentation
 ├── comprehensive-project-docs.md    ← Project portfolio
 ├── market_analysis.md               ← Market intelligence
@@ -76,7 +76,7 @@ transition/
 #### 1️⃣ "Led holistic interior functional design and prototyping for Advanced Human Interface Solutions (HMI)"
 
 **Artifacts in Repository:**
-- `complete-smart-glass-report.md` - Comprehensive smart glass HMI research
+- `digital-twin-rain-light-sensor.md` - Comprehensive rain light sensor HMI research
 - `haptic_glove_system.html` - Multimodal interaction prototype
 - `agents/sdv-suite/cards/hmi_ux_forecaster.json` - HMI trend forecasting agent
 
@@ -88,7 +88,7 @@ transition/
 
 | Client | Relevant Work | Application |
 |--------|---------------|-------------|
-| **Rivian** | Smart glass research, HMI prototyping | R1T/R1S interior innovation, Adventure Gear integration |
+| **Rivian** | rain light sensor research, HMI prototyping | R1T/R1S interior innovation, Adventure Gear integration |
 | **Audi** | Multimodal interaction, ambient lighting | Virtual Cockpit evolution, e-tron UX |
 | **Mercedes** | Optical HMI systems, sensor fusion | MBUX Hyperscreen, AR-HUD development |
 
@@ -213,7 +213,7 @@ transition/
 #### 1️⃣ "Developed future automotive lighting concepts for interior and exterior applications"
 
 **Artifacts in Repository:**
-- `complete-smart-glass-report.md` - Optical materials and smart glass
+- `digital-twin-rain-light-sensor.md` - Optical materials and rain light sensor
 - `freeform-lens-diagram.svg` - Optical design visualizations
 - `freeform-lens-optimization.txt` - Lens optimization methodologies
 
@@ -347,7 +347,7 @@ transition/
 #### 3️⃣ "Selected, calibrated, and integrated sensors for temperature, pressure, pH, CO₂, optical density"
 
 **Artifacts in Repository:**
-- `complete-smart-glass-report.md` - Sensor selection methodologies
+- `digital-twin-rain-light-sensor.md` - Sensor selection methodologies
 - **Sensor Fusion Analyst** embodies multi-modal sensor expertise
 
 **Agent Applications:**
@@ -379,9 +379,9 @@ transition/
 
 | Education Component | Repository Artifact | Agent Application |
 |---------------------|---------------------|-------------------|
-| **M.Sc. Advanced Optical Technologies** | `complete-smart-glass-report.md` | Optical Sensor Specialist |
+| **M.Sc. Advanced Optical Technologies** | `digital-twin-rain-light-sensor.md` | Optical Sensor Specialist |
 | Optical Metrology | Sensor fusion methodologies | Sensor Fusion Analyst |
-| Optical Materials & Systems | Smart glass analysis | HMI/UX Forecaster |
+| Optical Materials & Systems | rain light sensor analysis | HMI/UX Forecaster |
 | Dynamic Light Scattering | Signal processing expertise | Signal Processing Advisor |
 | Photonics & Laser Physics | Optical design foundation | Optical Sensor Specialist |
 | **Dipl.-Phys. Physics** | All agents (theoretical foundation) | System-level thinking |
@@ -417,7 +417,7 @@ transition/
 | Fleet data strategy | Signal Processing Advisor + IoT frameworks | Real-time analytics architecture |
 
 **Artifacts to Share:**
-- Smart glass report (for windshield HMI)
+- rain light sensor report (for windshield HMI)
 - Virtual sensor design methodologies
 - SDV architecture patterns
 
@@ -464,7 +464,7 @@ transition/
 
 **Artifacts to Share:**
 - Daimler lighting legacy knowledge
-- Smart glass HMI research
+- rain light sensor HMI research
 - Premium HMI pattern library
 
 ---
@@ -706,7 +706,7 @@ Workflow:
 3. Open `agents/INDEX.md` for agent overview
 
 **Day 3-4: Explore Artifacts**
-1. Read `complete-smart-glass-report.md` (HMI deep dive)
+1. Read `digital-twin-rain-light-sensor.md` (HMI deep dive)
 2. Browse `comprehensive-project-docs.md` (project methodologies)
 3. Review `patent_research.md` (IP landscape thinking)
 
