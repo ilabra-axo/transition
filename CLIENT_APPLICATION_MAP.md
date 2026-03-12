@@ -96,7 +96,7 @@ Differentiate Gen 2 R1 interior with innovative HMI that aligns with "adventure"
 
 **Applicable Work:**
 - rain light sensor research and optical HMI systems
-- Ambient lighting HW/SW integration (Daimler experience)
+- Ambient lighting HW/SW integration
 - Multimodal interaction prototyping
 
 **Agent Deployment:**
@@ -229,7 +229,7 @@ Evolve the award-winning Glass Cockpit for next-generation Air and Gravity. Expl
 
 **Applicable Work:**
 - rain light sensor and advanced display research
-- Premium HMI design patterns (Daimler S-Class experience)
+- Premium HMI design patterns
 - Optical integration and calibration
 
 **Agent Deployment:**
@@ -329,7 +329,7 @@ Artemis represents Audi's SDV future but faces complexity and timeline challenge
 Evolution of Virtual Cockpit for next decade. Integration with AR-HUD, gesture control, driver monitoring, and ambient UX.
 
 **Applicable Work:**
-- HMI innovation from BCS and Daimler
+- HMI innovation from BCS
 - rain light sensor and display technology research
 - Multimodal interaction design
 
@@ -416,7 +416,7 @@ MB.OS represents massive investment and strategic importance. Independent valida
 - **Competitive Positioning:** Benchmark vs BMW OS, Audi software
 - **Timeline Realism:** Honest assessment of rollout feasibility
 
-**Note:** Careful handling of Daimler legacy knowledge, focus on publicly available information and general expertise.
+**Note:** Focus on publicly available information and general automotive expertise.
 
 ---
 
@@ -426,7 +426,7 @@ MB.OS represents massive investment and strategic importance. Independent valida
 Next generation of projection-based Digital Light. Integration with AR navigation, road condition communication, pedestrian interaction.
 
 **Applicable Work:**
-- Automotive lighting innovation (Daimler experience)
+- Automotive lighting innovation
 - Optical system design and simulation
 - HMI projection technologies
 
