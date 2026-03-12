@@ -1,0 +1,30 @@
+================================================================================
+BCS KNOWLEDGE TRANSFER PACKAGE - START HERE
+================================================================================
+
+GETTING STARTED (3 SIMPLE STEPS):
+
+1. DOWNLOAD THE PACKAGE
+   - Go to: agents/sdv-suite/downloads.html
+   - Click "Download Complete Package (ZIP)"
+   - Extract the ZIP file to your computer
+
+2. VIEW THE PRESENTATION
+   - Open: presentation.html in your web browser
+   - Use arrow keys or buttons to navigate through 12 slides
+   - This gives you a complete overview of what's included
+
+3. EXPLORE THE DOCUMENTATION
+   - Open: html_output/index.html in your web browser
+   - Browse all 21 documentation files organized by category
+   - Click "export as .md" on any page to edit the source files
+
+THAT'S IT!
+
+The presentation explains what you have.
+The documentation library gives you access to everything.
+All files work directly in your browser - no installation needed.
+
+Questions? Check DEPLOYMENT_GUIDE.md for detailed setup instructions.
+
+================================================================================
