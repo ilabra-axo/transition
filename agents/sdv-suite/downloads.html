@@ -1,0 +1,529 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Downloads | BCS Knowledge Transfer Package</title>
+    <meta
+      name="description"
+      content="Download BCS transition documentation, agent cards, and research artifacts."
+    />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      :root {
+        --bg: #ffffff;
+        --text: #1a1a1a;
+        --muted: #666666;
+        --border: #e0e0e0;
+        --accent: #0066cc;
+        --light-bg: #f8f8f8;
+      }
+
+      body {
+        font-family: "Courier New", "Monaco", "Menlo", monospace;
+        line-height: 1.6;
+        color: var(--text);
+        background: var(--bg);
+        font-size: 14px;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 40px 20px;
+      }
+
+      header {
+        border-bottom: 1px solid var(--border);
+        padding-bottom: 30px;
+        margin-bottom: 50px;
+      }
+
+      .tagline {
+        font-size: 12px;
+        color: var(--muted);
+        margin-bottom: 30px;
+        line-height: 1.8;
+      }
+
+      h1 {
+        font-size: 18px;
+        font-weight: 600;
+        margin-bottom: 15px;
+        letter-spacing: -0.5px;
+      }
+
+      h2 {
+        font-size: 14px;
+        font-weight: 600;
+        margin: 50px 0 20px 0;
+        text-transform: lowercase;
+        letter-spacing: 0.5px;
+      }
+
+      .meta {
+        font-size: 11px;
+        color: var(--muted);
+        margin-bottom: 30px;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 30px 0;
+        font-size: 13px;
+      }
+
+      th {
+        text-align: left;
+        font-weight: 600;
+        padding: 12px 16px;
+        border-bottom: 1px solid var(--border);
+        color: var(--muted);
+        font-size: 11px;
+        text-transform: lowercase;
+      }
+
+      td {
+        padding: 16px;
+        border-bottom: 1px solid var(--border);
+        vertical-align: top;
+      }
+
+      tr:hover {
+        background: var(--light-bg);
+      }
+
+      a {
+        color: var(--accent);
+        text-decoration: none;
+      }
+
+      a:hover {
+        text-decoration: underline;
+      }
+
+      .download-btn {
+        display: inline-block;
+        padding: 4px 12px;
+        background: var(--light-bg);
+        border: 1px solid var(--border);
+        border-radius: 2px;
+        font-size: 11px;
+        color: var(--text);
+        text-decoration: none;
+        transition: background 0.2s;
+      }
+
+      .download-btn:hover {
+        background: var(--accent);
+        color: white;
+        text-decoration: none;
+      }
+
+      .file-size {
+        font-size: 11px;
+        color: var(--muted);
+      }
+
+      .category {
+        background: var(--light-bg);
+        padding: 20px;
+        margin: 40px 0 20px 0;
+        border-left: 3px solid var(--accent);
+      }
+
+      .category h3 {
+        font-size: 13px;
+        font-weight: 600;
+        margin-bottom: 5px;
+      }
+
+      .category p {
+        font-size: 11px;
+        color: var(--muted);
+      }
+
+      .nav {
+        margin-bottom: 30px;
+      }
+
+      .nav a {
+        margin-right: 20px;
+        font-size: 12px;
+        color: var(--muted);
+      }
+
+      .nav a:hover {
+        color: var(--accent);
+      }
+
+      footer {
+        margin-top: 80px;
+        padding-top: 30px;
+        border-top: 1px solid var(--border);
+        font-size: 11px;
+        color: var(--muted);
+      }
+
+      .quick-download {
+        background: var(--light-bg);
+        padding: 20px;
+        margin: 30px 0;
+        border: 1px solid var(--border);
+      }
+
+      .quick-download h3 {
+        font-size: 12px;
+        font-weight: 600;
+        margin-bottom: 15px;
+      }
+
+      .quick-download a {
+        display: block;
+        margin: 8px 0;
+        font-size: 12px;
+      }
+
+      @media (max-width: 768px) {
+        body {
+          padding: 20px 15px;
+          font-size: 13px;
+        }
+
+        table {
+          font-size: 12px;
+        }
+
+        td,
+        th {
+          padding: 10px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Header -->
+    <header>
+      <div class="tagline">
+        BCS Automotive Interface Solutions — Knowledge Transfer Package<br />
+        Downloads & Documentation Access
+      </div>
+
+      <h1>Download Center</h1>
+
+      <div class="meta">
+        complete package for BCS team onboarding and agent usage<br />
+        all files available for download · markdown format · plain text accessible
+      </div>
+
+      <div class="nav">
+        <a href="index.html">← back to main site</a>
+        <a href="#core-docs">core documentation</a>
+        <a href="#agents">agent cards</a>
+        <a href="#research">research artifacts</a>
+        <a href="#guides">guides</a>
+      </div>
+    </header>
+
+    <!-- Quick Downloads -->
+    <div class="quick-download">
+      <h3>quick access — essential documents</h3>
+      <a href="../../README.md" download>⌘ README.md — start here</a>
+      <a href="../../QUICK_START.md" download>⌘ QUICK_START.md — 5-minute setup</a>
+      <a href="../../digital-twin-rain-light-sensor.md" download>⌘ digital-twin-rain-light-sensor.md — flagship project</a>
+      <a href="../../DEPLOYMENT_GUIDE.md" download>⌘ DEPLOYMENT_GUIDE.md — complete installation</a>
+    </div>
+
+    <!-- Core Documentation -->
+    <div class="category" id="core-docs">
+      <h3>## core documentation</h3>
+      <p>Main transition materials and onboarding guides</p>
+    </div>
+
+    <table>
+      <thead>
+        <tr>
+          <th>file</th>
+          <th>description</th>
+          <th>size</th>
+          <th>download</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>README.md</strong></td>
+          <td style="font-size: 12px">
+            Master index for entire knowledge transfer package. BCS context, quick deploy, navigation guide.
+          </td>
+          <td class="file-size">~25 KB</td>
+          <td><a href="../../README.md" download class="download-btn">download</a></td>
+        </tr>
+        <tr>
+          <td><strong>TRANSITION_DASHBOARD.md</strong></td>
+          <td style="font-size: 12px">
+            Work areas mapped to artifacts, CV bullet points, customer context, project handoffs.
+          </td>
+          <td class="file-size">~90 KB</td>
+          <td><a href="../../TRANSITION_DASHBOARD.md" download class="download-btn">download</a></td>
+        </tr>
+        <tr>
+          <td><strong>BCS_PROJECT_CONTINUITY_GUIDE.md</strong></td>
+          <td style="font-size: 12px">
+            Active projects, customer contacts, next steps, risk mitigation strategies.
+          </td>
+          <td class="file-size">~75 KB</td>
+          <td><a href="../../BCS_PROJECT_CONTINUITY_GUIDE.md" download class="download-btn">download</a></td>
+        </tr>
+        <tr>
+          <td><strong>CLIENT_APPLICATION_MAP.md</strong></td>
+          <td style="font-size: 12px">
+            How BCS applies this work to customers: Rivian, Audi, Mercedes, BMW. Business applications and ROI.
+          </td>
+          <td class="file-size">~82 KB</td>
+          <td><a href="../../CLIENT_APPLICATION_MAP.md" download class="download-btn">download</a></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- Research Projects -->
+    <div class="category" id="research">
+      <h3>## research artifacts</h3>
+      <p>Technical reports, market analysis, and flagship projects</p>
+    </div>
+
+    <table>
+      <thead>
+        <tr>
+          <th>file</th>
+          <th>description</th>
+          <th>size</th>
+          <th>download</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>digital-twin-rain-light-sensor.md</strong></td>
+          <td style="font-size: 12px">
+            <strong>FLAGSHIP PROJECT:</strong> Comprehensive digital twin with</strong> FRED simulation, Monte Carlo optimization,
+            manufacturing integration, Mermaid architecture diagrams, agentification framework.
+          </td>
+          <td class="file-size">~95 KB</td>
+          <td><a href="../../digital-twin-rain-light-sensor.md" download class="download-btn">download</a></td>
+        </tr>
+        <tr>
+          <td><strong>comprehensive-md-report.md</strong></td>
+          <td style="font-size: 12px">
+            Diffused screen printing technologies for automotive light distribution. 28 companies analyzed, competitive landscape.
+          </td>
+          <td class="file-size">~45 KB</td>
+          <td><a href="../../comprehensive-md-report.md" download class="download-btn">download</a></td>
+        </tr>
+        <tr>
+          <td><strong>patent_research.md</strong></td>
+          <td style="font-size: 12px">
+            Patent landscape analysis for automotive sensors and HMI technologies.
+          </td>
+          <td class="file-size">~15 KB</td>
+          <td><a href="../../patent_research.md" download class="download-btn">download</a></td>
+        </tr>
+        <tr>
+          <td><strong>market_analysis.md</strong></td>
+          <td style="font-size: 12px">
+            Market intelligence and competitive analysis for automotive interface solutions.
+          </td>
+          <td class="file-size">~12 KB</td>
+          <td><a href="../../market_analysis.md" download class="download-btn">download</a></td>
+        </tr>
+        <tr>
+          <td><strong>comprehensive-project-docs.md</strong></td>
+          <td style="font-size: 12px">
+            BCS project portfolio documentation and methodologies.
+          </td>
+          <td class="file-size">~18 KB</td>
+          <td><a href="../../comprehensive-project-docs.md" download class="download-btn">download</a></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- Agent System -->
+    <div class="category" id="agents">
+      <h3>## agent system documentation</h3>
+      <p>AI research agents for automotive R&D workflows</p>
+    </div>
+
+    <table>
+      <thead>
+        <tr>
+          <th>file</th>
+          <th>description</th>
+          <th>size</th>
+          <th>download</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>SDV_AGENT_SUITE_EXECUTIVE_SUMMARY.md</strong></td>
+          <td style="font-size: 12px">
+            Executive overview, value proposition, use cases, ROI analysis.
+          </td>
+          <td class="file-size">~45 KB</td>
+          <td><a href="../SDV_AGENT_SUITE_EXECUTIVE_SUMMARY.md" download class="download-btn">download</a></td>
+        </tr>
+        <tr>
+          <td><strong>SDV_AGENT_SYSTEM_DESIGN.md</strong></td>
+          <td style="font-size: 12px">
+            Multi-agent architecture, workflows, shared ontology, design principles.
+          </td>
+          <td class="file-size">~62 KB</td>
+          <td><a href="SDV_AGENT_SYSTEM_DESIGN.md" download class="download-btn">download</a></td>
+        </tr>
+        <tr>
+          <td><strong>QUICK_REFERENCE.md</strong></td>
+          <td style="font-size: 12px">
+            Query patterns, troubleshooting, practical usage guide, cheat sheet.
+          </td>
+          <td class="file-size">~35 KB</td>
+          <td><a href="../QUICK_REFERENCE.md" download class="download-btn">download</a></td>
+        </tr>
+        <tr>
+          <td><strong>Agent Cards (JSON)</strong></td>
+          <td style="font-size: 12px">
+            Individual agent specifications: sdv_arch_validator, sensor_fusion_analyst, hmi_ux_forecaster,
+            virtual_sensor_designer, automotive_tech_scout (5 production-ready agents).
+          </td>
+          <td class="file-size">~150 KB total</td>
+          <td><a href="cards/" class="download-btn">browse</a></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- Setup Guides -->
+    <div class="category" id="guides">
+      <h3>## setup & deployment guides</h3>
+      <p>Installation, configuration, and usage instructions</p>
+    </div>
+
+    <table>
+      <thead>
+        <tr>
+          <th>file</th>
+          <th>description</th>
+          <th>size</th>
+          <th>download</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>QUICK_START.md</strong></td>
+          <td style="font-size: 12px">
+            One-page guide: Download → View website → Run first agent (5 minutes).
+          </td>
+          <td class="file-size">~8 KB</td>
+          <td><a href="../../QUICK_START.md" download class="download-btn">download</a></td>
+        </tr>
+        <tr>
+          <td><strong>DEPLOYMENT_GUIDE.md</strong></td>
+          <td style="font-size: 12px">
+            Comprehensive setup: Local deployment, API configuration, Python setup, troubleshooting (700+ lines).
+          </td>
+          <td class="file-size">~72 KB</td>
+          <td><a href="../../DEPLOYMENT_GUIDE.md" download class="download-btn">download</a></td>
+        </tr>
+        <tr>
+          <td><strong>PROMPT_ENGINEERING_GUIDE.md</strong></td>
+          <td style="font-size: 12px">
+            How to create BCS-specific agents, modify prompts, best practices, templates.
+          </td>
+          <td class="file-size">~55 KB</td>
+          <td><a href="../../PROMPT_ENGINEERING_GUIDE.md" download class="download-btn">download</a></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- Technical Artifacts -->
+    <div class="category">
+      <h3>## technical artifacts</h3>
+      <p>Code, simulations, and visualizations</p>
+    </div>
+
+    <table>
+      <thead>
+        <tr>
+          <th>file</th>
+          <th>description</th>
+          <th>size</th>
+          <th>download</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>parameterized-optimization.txt</strong></td>
+          <td style="font-size: 12px">
+            FRED optical simulation script with Monte Carlo optimization for sensor design.
+          </td>
+          <td class="file-size">~25 KB</td>
+          <td><a href="../../parameterized-optimization.txt" download class="download-btn">download</a></td>
+        </tr>
+        <tr>
+          <td><strong>visualization-component.tsx</strong></td>
+          <td style="font-size: 12px">
+            React/TypeScript dashboard components for digital twin visualization.
+          </td>
+          <td class="file-size">~18 KB</td>
+          <td><a href="../../visualization-component.tsx" download class="download-btn">download</a></td>
+        </tr>
+        <tr>
+          <td><strong>freeform-lens-optimization.txt</strong></td>
+          <td style="font-size: 12px">
+            Optical lens optimization methodologies and simulation approaches.
+          </td>
+          <td class="file-size">~8 KB</td>
+          <td><a href="../../freeform-lens-optimization.txt" download class="download-btn">download</a></td>
+        </tr>
+        <tr>
+          <td><strong>haptic_glove_system.html</strong></td>
+          <td style="font-size: 12px">
+            Multimodal interaction prototype documentation (HTML format).
+          </td>
+          <td class="file-size">~22 KB</td>
+          <td><a href="../../haptic_glove_system.html" class="download-btn">view</a></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- Download Instructions -->
+    <div style="margin-top: 60px; padding: 30px; background: var(--light-bg); border: 1px solid var(--border)">
+      <h3 style="font-size: 13px; font-weight: 600; margin-bottom: 15px">how to use downloaded files</h3>
+      <p style="font-size: 12px; line-height: 1.8; color: var(--muted); margin-bottom: 10px">
+        <strong>Markdown files (.md):</strong> Open with any text editor (VS Code, Sublime, Notepad++)
+        or use a Markdown viewer. GitHub Desktop and many IDEs have built-in Markdown preview.
+      </p>
+      <p style="font-size: 12px; line-height: 1.8; color: var(--muted); margin-bottom: 10px">
+        <strong>JSON files (.json):</strong> Agent card specifications. Open with text editor or load
+        into your agent execution framework.
+      </p>
+      <p style="font-size: 12px; line-height: 1.8; color: var(--muted)">
+        <strong>Code files (.txt, .tsx):</strong> Technical implementations. Use appropriate IDE
+        (VS Code for TypeScript, any editor for Lua/Python scripts).
+      </p>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+      <p style="margin-bottom: 10px">
+        <strong>BCS Knowledge Transfer Package</strong> | version 1.0.0 | february 2024
+      </p>
+      <p style="margin-bottom: 10px">
+        total package size: ~800 KB · 26 files · complete documentation
+      </p>
+      <p>
+        <a href="index.html">← back to main site</a> |
+        <a href="../../README.md" download>download README</a> |
+        <a href="https://github.com/ilabra-axo/transition" target="_blank">view on github</a>
+      </p>
+    </footer>
+  </body>
+</html>
