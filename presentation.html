@@ -1,0 +1,1004 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BCS Knowledge Transfer | Transition Presentation</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      :root {
+        --bg: #ffffff;
+        --text: #1a1a1a;
+        --muted: #666666;
+        --border: #e0e0e0;
+        --accent: #0066cc;
+        --light-bg: #f8f8f8;
+      }
+
+      body {
+        font-family: "Courier New", "Monaco", "Menlo", monospace;
+        line-height: 1.6;
+        color: var(--text);
+        background: var(--bg);
+        overflow: hidden;
+      }
+
+      .slide-container {
+        width: 100vw;
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 40px;
+      }
+
+      .slide {
+        display: none;
+        max-width: 1200px;
+        width: 100%;
+        height: 100%;
+        flex-direction: column;
+      }
+
+      .slide.active {
+        display: flex;
+      }
+
+      .slide-header {
+        border-bottom: 1px solid var(--border);
+        padding-bottom: 20px;
+        margin-bottom: 40px;
+      }
+
+      .slide-number {
+        font-size: 11px;
+        color: var(--muted);
+        margin-bottom: 10px;
+      }
+
+      h1 {
+        font-size: 32px;
+        font-weight: 600;
+        margin-bottom: 15px;
+        letter-spacing: -0.5px;
+      }
+
+      h2 {
+        font-size: 18px;
+        font-weight: 600;
+        margin-bottom: 20px;
+        letter-spacing: -0.5px;
+        text-transform: lowercase;
+      }
+
+      h3 {
+        font-size: 14px;
+        font-weight: 600;
+        margin-bottom: 15px;
+        text-transform: lowercase;
+      }
+
+      .tagline {
+        font-size: 13px;
+        color: var(--muted);
+        line-height: 1.8;
+        max-width: 800px;
+      }
+
+      .slide-content {
+        flex: 1;
+        overflow-y: auto;
+      }
+
+      .grid-2 {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 40px;
+        margin: 30px 0;
+      }
+
+      .grid-3 {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 30px;
+        margin: 30px 0;
+      }
+
+      .card {
+        background: var(--light-bg);
+        padding: 20px;
+        border: 1px solid var(--border);
+      }
+
+      .card h3 {
+        margin-bottom: 10px;
+      }
+
+      .card p {
+        font-size: 12px;
+        color: var(--muted);
+        line-height: 1.7;
+      }
+
+      .stats {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 20px;
+        margin: 30px 0;
+      }
+
+      .stat {
+        text-align: center;
+        padding: 20px;
+        background: var(--light-bg);
+        border: 1px solid var(--border);
+      }
+
+      .stat-value {
+        font-size: 24px;
+        font-weight: 600;
+        color: var(--accent);
+        margin-bottom: 5px;
+      }
+
+      .stat-label {
+        font-size: 11px;
+        color: var(--muted);
+        text-transform: lowercase;
+      }
+
+      ul {
+        list-style: none;
+        margin: 20px 0;
+      }
+
+      li {
+        padding: 12px 0;
+        border-bottom: 1px solid var(--border);
+        font-size: 13px;
+        line-height: 1.7;
+      }
+
+      li:last-child {
+        border-bottom: none;
+      }
+
+      .symbol {
+        color: var(--muted);
+        margin-right: 10px;
+      }
+
+      .highlight {
+        background: var(--light-bg);
+        padding: 20px;
+        margin: 20px 0;
+        border-left: 3px solid var(--accent);
+        font-size: 13px;
+        line-height: 1.8;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 20px 0;
+        font-size: 12px;
+      }
+
+      th {
+        text-align: left;
+        font-weight: 600;
+        padding: 10px 12px;
+        border-bottom: 1px solid var(--border);
+        color: var(--muted);
+        font-size: 11px;
+        text-transform: lowercase;
+        background: var(--light-bg);
+      }
+
+      td {
+        padding: 12px;
+        border-bottom: 1px solid var(--border);
+        vertical-align: top;
+      }
+
+      .controls {
+        position: fixed;
+        bottom: 40px;
+        right: 40px;
+        font-size: 11px;
+        color: var(--muted);
+        background: var(--bg);
+        padding: 15px 20px;
+        border: 1px solid var(--border);
+      }
+
+      .btn {
+        display: inline-block;
+        padding: 8px 16px;
+        background: var(--light-bg);
+        border: 1px solid var(--border);
+        border-radius: 2px;
+        font-size: 12px;
+        color: var(--text);
+        text-decoration: none;
+        margin: 5px;
+        cursor: pointer;
+        font-family: inherit;
+      }
+
+      .btn:hover {
+        background: var(--accent);
+        color: white;
+        border-color: var(--accent);
+      }
+
+      a {
+        color: var(--accent);
+        text-decoration: none;
+      }
+
+      a:hover {
+        text-decoration: underline;
+      }
+
+      .artifact-list {
+        display: grid;
+        gap: 15px;
+        margin: 20px 0;
+      }
+
+      .artifact {
+        display: flex;
+        align-items: baseline;
+        padding: 15px;
+        background: var(--light-bg);
+        border: 1px solid var(--border);
+        font-size: 12px;
+      }
+
+      .artifact-name {
+        font-weight: 600;
+        margin-right: 15px;
+        min-width: 200px;
+      }
+
+      .artifact-desc {
+        color: var(--muted);
+        line-height: 1.6;
+      }
+
+      @media (max-width: 768px) {
+        .grid-2,
+        .grid-3,
+        .stats {
+          grid-template-columns: 1fr;
+        }
+
+        h1 {
+          font-size: 24px;
+        }
+
+        .controls {
+          bottom: 20px;
+          right: 20px;
+          left: 20px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Slide 1: Title -->
+    <div class="slide-container">
+      <div class="slide active">
+        <div class="slide-header">
+          <div class="slide-number">01 / 12</div>
+          <h1>BCS Knowledge Transfer Package</h1>
+          <p class="tagline">
+            AI-powered research agents & comprehensive documentation for automotive
+            interface solutions
+          </p>
+        </div>
+        <div class="slide-content">
+          <div class="stats">
+            <div class="stat">
+              <div class="stat-value">8</div>
+              <div class="stat-label">research agents</div>
+            </div>
+            <div class="stat">
+              <div class="stat-value">21</div>
+              <div class="stat-label">documentation files</div>
+            </div>
+            <div class="stat">
+              <div class="stat-value">3</div>
+              <div class="stat-label">BCS work areas</div>
+            </div>
+            <div class="stat">
+              <div class="stat-value">50-60%</div>
+              <div class="stat-label">time savings</div>
+            </div>
+          </div>
+          <div class="highlight">
+            <strong>from:</strong> Alena Taranka — Senior Sensor Architect<br />
+            <strong>to:</strong> BCS Engineering & Project Teams<br />
+            <strong>date:</strong> February 2024<br />
+            <strong>status:</strong> production ready
+          </div>
+          <p style="font-size: 13px; color: var(--muted); margin-top: 30px">
+            Rather than leaving documentation, I'm leaving AI agents that capture my
+            research process. These tools help BCS continue delivering innovative HMI
+            and sensor solutions to OEM partners.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 2: Overview -->
+    <div class="slide-container">
+      <div class="slide">
+        <div class="slide-header">
+          <div class="slide-number">02 / 12</div>
+          <h1>what is this package?</h1>
+        </div>
+        <div class="slide-content">
+          <div class="grid-2">
+            <div class="card">
+              <h3>🤖 agent-based knowledge transfer</h3>
+              <p>
+                8 specialized AI research assistants that embody automotive R&D
+                expertise. Query them like consulting a domain expert.
+              </p>
+            </div>
+            <div class="card">
+              <h3>📚 comprehensive documentation</h3>
+              <p>
+                Complete markdown library covering BCS projects, sensor architecture,
+                HMI systems, and transition knowledge.
+              </p>
+            </div>
+            <div class="card">
+              <h3>🗂️ project continu</h3>ity</h3>
+              <p>
+                Active project handoffs, customer contacts, and risk mitigation
+                strategies for seamless transition.
+              </p>
+            </div>
+            <div class="card">
+              <h3>🎯 client applications</h3>
+              <p>
+                Mapped agent deployments for Mercedes, Rivian, Lucid, Audi, and other
+                OEM partners.
+              </p>
+            </div>
+          </div>
+          <div class="highlight" style="margin-top: 40px">
+            <strong>philosophy:</strong> capture the research process, not just the
+            results. these agents think like an experienced sensor architect about
+            automotive problems.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 3: Agent System -->
+    <div class="slide-container">
+      <div class="slide">
+        <div class="slide-header">
+          <div class="slide-number">03 / 12</div>
+          <h1>research agent portfolio</h1>
+        </div>
+        <div class="slide-content">
+          <table>
+            <thead>
+              <tr>
+                <th>agent</th>
+                <th>domain</th>
+                <th>maturity</th>
+                <th>use cases</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>SDV Architecture Validator</strong></td>
+                <td>System architecture</td>
+                <td></td>✅ Complete</td>
+                <td>Zonal architecture, E/E validation</td>
+              </tr>
+              <tr>
+                <td><strong>Sensor Fusion Analyst</strong></td>
+                <td>Multi-sensor integration</td>
+                <td>✅ Complete</td>
+                <td>ADAS/AD sensor selection</td>
+              </tr>
+              <tr>
+                <td><strong>HMI/UX Forecaster</strong></td>
+                <td>Human-machine interface</td>
+                <td>✅ Complete</td>
+                <td>Display tech, interaction design</td>
+              </tr>
+              <tr>
+                <td><strong>Virtual Sensor Designer</strong></td>
+                <td>Software-based sensing</td>
+                <td>✅ Complete</td>
+                <td>Camera + AI sensor replacement</td>
+              </tr>
+              <tr>
+                <td><strong>Automotive Tech Scout</strong></td>
+                <td>Technology intelligence</td>
+                <td>✅ Complete</td>
+                <td>Market trends, supplier landscape</td>
+              </tr>
+              <tr>
+                <td><strong>Signal Processing Advisor</strong></td>
+                <td>Algorithm selection</td>
+                <td>🚧 Development</td>
+                <td>Real-time processing, filtering</td>
+              </tr>
+              <tr>
+                <td><strong>Optical Sensor Specialist</strong></td>
+                <td>Camera & LiDAR</td>
+                <td>🚧 Development</td>
+                <td>Optical design, calibration</td>
+              </tr>
+              <tr>
+                <td><strong>Connectivity Standards Tracker</strong></td>
+                <td>V2X & networking</td>
+                <td>🚧 Development</td>
+                <td>Protocol selection, compliance</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 4: BCS Work Areas -->
+    <div class="slide-container">
+      <div class="slide">
+        <div class="slide-header">
+          <div class="slide-number">04 / 12</div>
+          <h1>BCS work areas (2022-present)</h1>
+        </div>
+        <div class="slide-content">
+          <div class="grid-3">
+            <div class="card">
+              <h3>advanced HMI & sensor architecture</h3>
+              <p style="margin-bottom: 15px">
+                Software-defined vehicle systems, rain/light sensors, multimodal HMI,
+                zonal E/E architecture
+              </p>
+              <p style="font-size: 11px; color: var(--accent)">
+                <strong>timeline:</strong> 2022-present
+              </p>
+            </div>
+            <div class="card">
+              <h3>IoT & process control</h3>
+              <p style="margin-bottom: 15px">
+                Industrial automation, sensor networks, edge computing, predictive
+                maintenance systems
+              </p>
+              <p style="font-size: 11px; color: var(--accent)">
+                <strong>timeline:</strong> 2020-present
+              </p>
+            </div>
+            <div class="card">
+              <h3>research foundations</h3>
+              <p style="margin-bottom: 15px">
+                Signal processing, stochastic systems, control theory, Kalman
+                filtering, optimization
+              </p>
+              <p style="font-size: 11px; color: var(--accent)">
+                <strong>timeline:</strong> academic foundation
+              </p>
+            </div>
+          </div>
+          <div class="highlight" style="margin-top: 40px">
+            <strong>client focus:</strong> Mercedes-Benz, Rivian, Lucid Motors, Audi,
+            BMW, Porsche, Tesla, NIO, Polestar
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 5: Key Artifacts - Documentation -->
+    <div class="slide-container">
+      <div class="slide">
+        <div class="slide-header">
+          <div class="slide-number">05 / 12</div>
+          <h1>key artifacts: core documentation</h1>
+        </div>
+        <div class="slide-content">
+          <div class="artifact-list">
+            <div class="artifact">
+              <div class="artifact-name">README.md</div>
+              <div class="artifact-desc">
+                Master index for entire knowledge transfer package. Start here for
+                navigation and quick reference.
+              </div>
+            </div>
+            <div class="artifact">
+              <div class="artifact-name">TRANSITION_DASHBOARD.md</div>
+              <div class="artifact-desc">
+                BCS work areas mapped to artifacts, CV bullet points, client
+                applications, and future development paths.
+              </div>
+            </div>
+            <div class="artifact">
+              <div class="artifact-name">BCS_PROJECT_CONTINUITY_GUIDE.md</div>
+              <div class="artifact-desc">
+                Active projects, customer contacts, next steps, risk mitigation, and
+                handoff notes for ongoing work.
+              </div>
+            </div>
+            <div class="artifact">
+              <div class="artifact-name">CLIENT_APPLICATION_MAP.md</div>
+              <div class="artifact-desc">
+                OEM-specific agent deployment strategies for Mercedes, Rivian, Lucid,
+                Audi, and other partners.
+              </div>
+            </div>
+            <div class="artifact">
+              <div class="artifact-name">DEPLOYMENT_GUIDE.md</div>
+              <div class="artifact-desc">
+                Step-by-step setup for agent system, API configuration, and first
+                queries. Complete onboarding guide.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 6: Key Artifacts - Technical -->
+    <div class="slide-container">
+      <div class="slide">
+        <div class="slide-header">
+          <div class="slide-number">06 / 12</div>
+          <h1>key artifacts: technical documentation</h1>
+        </div>
+        <div class="slide-content">
+          <div class="artifact-list">
+            <div class="artifact">
+              <div class="artifact-name">digital-twin-rain-light-sensor.md</div>
+              <div class="artifact-desc">
+                Complete digital twin for rain/light sensor with Mermaid diagrams,
+                signal flow, and agentification strategy.
+              </div>
+            </div>
+            <div class="artifact">
+              <div class="artifact-name">complete-smart-glass-report.md</div>
+              <div class="artifact-desc">
+                Smart glass electrochromic technology analysis, supplier landscape, HMI
+                integration pathways.
+              </div>
+            </div>
+            <div class="artifact">
+              <div class="artifact-name">market_analysis.md</div>
+              <div class="artifact-desc">
+                Automotive sensor market trends, technology maturity, competitive
+                landscape, and forecasting.
+              </div>
+            </div>
+            <div class="artifact">
+              <div class="artifact-name">patent_research.md</div>
+              <div class="artifact-desc">
+                IP landscape analysis for sensor technologies, freedom-to-operate
+                considerations, innovation spaces.
+              </div>
+            </div>
+            <div class="artifact">
+              <div class="artifact-name">comprehensive-project-docs.md</div>
+              <div class="artifact-desc">
+                Consolidated project documentation covering SDV architecture, sensor
+                fusion, and HMI research.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 7: Key Artifacts - Agent Specs -->
+    <div class="slide-container">
+      <div class="slide">
+        <div class="slide-header">
+          <div class="slide-number">07 / 12</div>
+          <h1>key artifacts: agent specifications</h1>
+        </div>
+        <div class="slide-content">
+          <div class="artifact-list">
+            <div class="artifact">
+              <div class="artifact-name">agents/INDEX.md</div>
+              <div class="artifact-desc">
+                Complete agent catalog with capabilities, performance metrics, and usage
+                guidelines for all 8 agents.
+              </div>
+            </div>
+            <div class="artifact">
+              <div class="artifact-name">agents/QUICK_REFERENCE.md</div>
+              <div class="artifact-desc">
+                Cheat sheet with query patterns, troubleshooting, and best practices for
+                agent system.
+              </div>
+            </div>
+            <div class="artifact">
+              <div class="artifact-name">agents/sdv-suite/README.md</div>
+              <div class="artifact-desc">
+                SDV agent suite overview, architecture, composition patterns, and
+                deployment examples.
+              </div>
+            </div>
+            <div class="artifact">
+              <div class="artifact-name">SDV_AGENT_SUITE_EXECUTIVE_SUMMARY.md</div>
+              <div class="artifact-desc">
+                High-level summary for management: ROI, use cases, integration strategy,
+                and business value.
+              </div>
+            </div>
+            <div class="artifact">
+              <div class="artifact-name">SDV_AGENT_SYSTEM_DESIGN.md</div>
+              <div class="artifact-desc">
+                Technical architecture, prompt engineering, quality assurance, and system
+                design principles.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 8: Agent Capabilities -->
+    <div class="slide-container">
+      <div class="slide">
+        <div class="slide-header">
+          <div class="slide-number">08 / 12</div>
+          <h1>what agents can do</h1>
+        </div>
+        <div class="slide-content">
+          <div class="grid-2">
+            <div>
+              <h3>architecture validation</h3>
+              <ul>
+                <li>
+                  <span class="symbol">→</span> Evaluate SDV zonal architectures
+                </li>
+                <li>
+                  <span class="symbol">→</span> Assess E/E system feasibility
+                </li>
+                <li><span class="symbol">→</span> Compare OEM approaches</li>
+                <li><span class="symbol">→</span> Identify integration risks</li>
+              </ul>
+
+              <h3 style="margin-top: 30px">sensor integration</h3>
+              <ul>
+                <li><span class="symbol">→</span> Recommend sensor suites</li>
+                <li><span class="symbol">→</span> Analyze fusion strategies</li>
+                <li><span class="symbol">→</span> Calculate redundancy needs</li>
+                <li><span class="symbol">→</span> Design virtual sensors</li>
+              </ul>
+            </div>
+
+            <div>
+              <h3>HMI innovation</h3>
+              <ul>
+                <li><span class="symbol">→</span> Forecast display technology</li>
+                <li><span class="symbol">→</span> Evaluate interaction paradigms</li>
+                <li><span class="symbol">→</span> Analyze multimodal UX</li>
+                <li><span class="symbol">→</span> Assess ergonomics</li>
+              </ul>
+
+              <h3 style="margin-top: 30px">market intelligence</h3>
+              <ul>
+                <li><span class="symbol">→</span> Track technology trends</li>
+                <li><span class="symbol">→</span> Map supplier landscape</li>
+                <li><span class="symbol">→</span> Forecast market adoption</li>
+                <li><span class="symbol">→</span> Research patent spaces</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 9: How to Use -->
+    <div class="slide-container">
+      <div class="slide">
+        <div class="slide-header">
+          <div class="slide-number">09 / 12</div>
+          <h1>how to use this package</h1>
+        </div>
+        <div class="slide-content">
+          <div class="grid-2">
+            <div>
+              <h3>step 1: explore documentation</h3>
+              <ul>
+                <li><span class="symbol">→</span> Start with README.md</li>
+                <li><span class="symbol">→</span> Review TRANSITION_DASHBOARD.md</li>
+                <li>
+                  <span class="symbol">→</span> Browse HTML documentation library
+                </li>
+                <li><span class="symbol">→</span> Check project continuity guide</li>
+              </ul>
+
+              <h3 style="margin-top: 25px">step 2: set up agents</h3>
+              <ul>
+                <li><span class="symbol">→</span> Follow DEPLOYMENT_GUIDE.md</li>
+                <li><span class="symbol">→</span> Configure API access</li>
+                <li><span class="symbol">→</span> Run test queries</li>
+                <li><span class="symbol">→</span> Review QUICK_REFERENCE.md</li>
+              </ul>
+            </div>
+
+            <div>
+              <h3>step 3: apply to projects</h3>
+              <ul>
+                <li><span class="symbol">→</span> Map agents to use cases</li>
+                <li><span class="symbol">→</span> Start with specific questions</li>
+                <li><span class="symbol">→</span> Validate with domain experts</li>
+                <li><span class="symbol">→</span> Integrate into workflows</li>
+              </ul>
+
+              <h3 style="margin-top: 25px">step 4: extend & customize</h3>
+              <ul>
+                <li><span class="symbol">→</span> Add BCS-specific context</li>
+                <li><span class="symbol">→</span> Modify prompts for projects</li>
+                <li><span class="symbol">→</span> Create new agent compositions</li>
+                <li><span class="symbol">→</span> Build custom workflows</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="highlight" style="margin-top: 30px">
+            <strong>recommended first query:</strong> "Evaluate the sensor architecture
+            for [specific project]. Consider redundancy, cost, and regulatory
+            requirements."
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 10: Client Applications -->
+    <div class="slide-container">
+      <div class="slide">
+        <div class="slide-header">
+          <div class="slide-number">10 / 12</div>
+          <h1>client-specific applications</h1>
+        </div>
+        <div class="slide-content">
+          <table>
+            <thead>
+              <tr>
+                <th>client</th>
+                <th>primary applications</th>
+                <th>key agents</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Mercedes-Benz</strong></td>
+                <td>MB.OS architecture review, Digital Light evolution</td>
+                <td>SDV Validator, Optical Specialist</td>
+              </tr>
+              <tr>
+                <td><strong>Rivian</strong></td>
+                <td>R1 Gen 2 HMI innovation, sensor platform design</td>
+                <td>HMI Forecaster, Sensor Fusion</td>
+              </tr>
+              <tr>
+                <td><strong>Lucid Motors</strong></td>
+                <td>Glass Cockpit evolution, premium HMI patterns</td>
+                <td>HMI Forecaster, Tech Scout</td>
+              </tr>
+              <tr>
+                <td><strong>Audi/VW Group</strong></td>
+                <td>Virtual Cockpit 3.0, zonal architecture</td>
+                <td>SDV Validator, HMI Forecaster</td>
+              </tr>
+              <tr>
+                <td><strong>BMW</strong></td>
+                <td>Neue Klasse sensor suite, OS9 architecture</td>
+                <td>Sensor Fusion, SDV Validator</td>
+              </tr>
+              <tr>
+                <td><strong>Tesla</strong></td>
+                <td>Camera-only FSD validation, HW4 analysis</td>
+                <td>Virtual Sensor, Sensor Fusion</td>
+              </tr>
+            </tbody>
+          </table>
+          <p style="font-size: 12px; color: var(--muted); margin-top: 20px">
+            See CLIENT_APPLICATION_MAP.md for detailed deployment strategies and
+            example queries for each OEM.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 11: Value Proposition -->
+    <div class="slide-container">
+      <div class="slide">
+        <div class="slide-header">
+          <div class="slide-number">11 / 12</div>
+          <h1>value for BCS team</h1>
+        </div>
+        <div class="slide-content">
+          <div class="grid-3">
+            <div class="card">
+              <h3>time savings</h3>
+              <p>
+                50-60% faster initial research on new sensor technologies, architectures,
+                and market trends.
+              </p>
+            </div>
+            <div class="card">
+              <h3>knowledge retention</h3>
+              <p>
+                3 years of automotive sensor expertise captured as queryable research
+                agents.
+              </p>
+            </div>
+            <div class="card">
+              <h3>scalable expertise</h3>
+              <p>
+                Multiple team members can leverage specialist knowledge simultaneously
+                across projects.
+              </p>
+            </div>
+            <div class="card">
+              <h3>consistency</h3>
+              <p>
+                Standardized analysis frameworks ensure consistent quality across all
+                projects.
+              </p>
+            </div>
+            <div class="card">
+              <h3>extensibility</h3>
+              <p>
+                Open architecture allows BCS to add proprietary data and customize for
+                specific needs.
+              </p>
+            </div>
+            <div class="card">
+              <h3>competitive advantage</h3>
+              <p>
+                Faster proposal development, deeper technical analysis, better client
+                presentations.
+              </p>
+            </div>
+          </div>
+
+          <div class="highlight" style="margin-top: 40px">
+            <strong>roi estimate:</strong> agent system pays for itself within first 3-4
+            major proposals through time savings and analysis depth improvements.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 12: Next Steps -->
+    <div class="slide-container">
+      <div class="slide">
+        <div class="slide-header">
+          <div class="slide-number">12 / 12</div>
+          <h1>next steps</h1>
+        </div>
+        <div class="slide-content">
+          <div class="highlight">
+            <strong>immediate actions:</strong>
+          </div>
+
+          <ul style="margin: 30px 0">
+            <li>
+              <span class="symbol">01</span> <strong>Review core documentation</strong>
+              → Start with README.md and TRANSITION_DASHBOARD.md
+            </li>
+            <li>
+              <span class="symbol">02</span> <strong>Explore agent capabilities</strong>
+              → Browse agents/INDEX.md and run test queries
+            </li>
+            <li>
+              <span class="symbol">03</span> <strong>Map to active projects</strong>
+              → Identify immediate applications in ongoing BCS work
+            </li>
+            <li>
+              <span class="symbol">04</span> <strong>Review project continuity</strong>
+              → Check BCS_PROJECT_CONTINUITY_GUIDE.md for handoffs
+            </li>
+            <li>
+              <span class="symbol">05</span> <strong>Customize for BCS</strong> → Add
+              proprietary context and internal project data
+            </li>
+          </ul>
+
+          <div class="grid-2" style="margin-top: 40px">
+            <div class="card">
+              <h3>resources</h3>
+              <p style="margin-bottom: 10px">
+                <strong>Main site:</strong> agents/sdv-suite/index.html
+              </p>
+              <p style="margin-bottom: 10px">
+                <strong>Documentation:</strong> html_output/index.html
+              </p>
+              <p style="margin-bottom: 10px">
+                <strong>Downloads:</strong> agents/sdv-suite/downloads.html
+              </p>
+              <p><strong>Quick reference:</strong> agents/QUICK_REFERENCE.md</p>
+            </div>
+
+            <div class="card">
+              <h3>contact & support</h3>
+              <p style="margin-bottom: 10px">
+                All artifacts are in the GitHub repository with version control and full
+                edit history.
+              </p>
+              <p>
+                Questions? Review DEPLOYMENT_GUIDE.md for troubleshooting and best
+                practices.
+              </p>
+            </div>
+          </div>
+
+          <div class="highlight" style="margin-top: 40px; text-align: center">
+            <strong>thank you for 3 years at BCS.</strong><br />
+            these tools are yours to use, modify, and extend.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Controls -->
+    <div class="controls">
+      <span id="slide-info">slide 1 / 12</span>
+      <button class="btn" onclick="prevSlide()">← prev</button>
+      <button class="btn" onclick="nextSlide()">next →</button>
+      <span style="margin: 0 10px">|</span>
+      <a href="agents/sdv-suite/index.html" class="btn">main site</a>
+    </div>
+
+    <script>
+      let currentSlide = 0;
+      const slides = document.querySelectorAll(".slide");
+      const totalSlides = slides.length;
+
+      function showSlide(n) {
+        slides[currentSlide].classList.remove("active");
+        currentSlide = (n + totalSlides) % totalSlides;
+        slides[currentSlide].classList.add("active");
+        document.getElementById("slide-info").textContent =
+          `slide ${currentSlide + 1} / ${totalSlides}`;
+      }
+
+      function nextSlide() {
+        showSlide(currentSlide + 1);
+      }
+
+      function prevSlide() {
+        showSlide(currentSlide - 1);
+      }
+
+      // Keyboard navigation
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "ArrowRight" || e.key === " ") {
+          e.preventDefault();
+          nextSlide();
+        } else if (e.key === "ArrowLeft") {
+          e.preventDefault();
+          prevSlide();
+        } else if (e.key === "Home") {
+          e.preventDefault();
+          showSlide(0);
+        } else if (e.key === "End") {
+          e.preventDefault();
+          showSlide(totalSlides - 1);
+        }
+      });
+
+      // Initialize
+      showSlide(0);
+    </script>
+  </body>
+</html>
