@@ -8,6 +8,25 @@
 
 ---
 
+## 🚀 Quick Start - Deploy Locally
+
+**Want to use this right away?**
+
+```bash
+# 1. Clone the repository
+git clone https://github.com/ilabra-axo/transition.git
+cd transition
+
+# 2. View the website (double-click or run):
+open agents/sdv-suite/index.html
+
+# 3. For full agent usage, see DEPLOYMENT_GUIDE.md
+```
+
+**📖 Complete Setup Instructions:** [DEPLOYMENT_GUIDE.md](DEPLOYMENT_GUIDE.md)
+
+---
+
 ## 🎯 What Is This Package?
 
 As I transition out of BCS Automotive Interface Solutions, I'm leaving you with **more than documentation of completed work**. This package contains:
@@ -53,6 +72,7 @@ This package consolidates work from my primary focus areas at BCS:
 
 | Your Role at BCS | Start With | Then Read | Time |
 |------------------|------------|-----------|------|
+| **Want to deploy locally?** | [DEPLOYMENT_GUIDE.md](DEPLOYMENT_GUIDE.md) | [Quick Reference](agents/QUICK_REFERENCE.md) | 15 min |
 | **Project Manager** | [Executive Summary](agents/SDV_AGENT_SUITE_EXECUTIVE_SUMMARY.md) | [Transition Dashboard](TRANSITION_DASHBOARD.md) | 30 min |
 | **Sensor Engineer** | [Transition Dashboard](TRANSITION_DASHBOARD.md) | [Sensor Fusion Analyst](agents/sdv-suite/cards/sensor_fusion_analyst.json) | 45 min |
 | **HMI Designer** | [Smart Glass Report](complete-smart-glass-report.md) | [HMI/UX Forecaster](agents/sdv-suite/cards/hmi_ux_forecaster.json) | 60 min |
