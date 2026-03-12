@@ -3,171 +3,253 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PROMPT_ENGINEERING_GUIDE</title>
+    <title>PROMPT_ENGINEERING_GUIDE | BCS Documentation</title>
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
+
+        :root {
+            --bg: #ffffff;
+            --text: #1a1a1a;
+            --muted: #666666;
+            --border: #e0e0e0;
+            --accent: #0066cc;
+            --light-bg: #f8f8f8;
+        }
+
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            font-family: "Courier New", "Monaco", "Menlo", monospace;
             line-height: 1.6;
-            color: #333;
-            background: #f5f5f5;
-            padding: 20px;
-        }
-        .container {
-            max-width: 900px;
+            color: var(--text);
+            background: var(--bg);
+            font-size: 14px;
+            max-width: 1200px;
             margin: 0 auto;
-            background: white;
-            padding: 40px;
-            border-radius: 8px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            padding: 40px 20px;
         }
-        .header-actions {
+
+        header {
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 30px;
+            margin-bottom: 50px;
+        }
+
+        .header-nav {
             display: flex;
             justify-content: space-between;
             align-items: center;
             margin-bottom: 20px;
-            padding-bottom: 15px;
-            border-bottom: 2px solid #e1e4e8;
+            font-size: 11px;
         }
+
+        .nav-links a {
+            color: var(--muted);
+            text-decoration: none;
+            margin-right: 20px;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+
         .export-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            padding: 8px 16px;
-            background: #0366d6;
-            color: white;
+            display: inline-block;
+            padding: 6px 12px;
+            background: var(--light-bg);
+            border: 1px solid var(--border);
+            border-radius: 2px;
+            font-size: 11px;
+            color: var(--text);
             text-decoration: none;
-            border-radius: 6px;
-            font-size: 14px;
-            font-weight: 500;
-            transition: background 0.2s;
+            transition: all 0.2s;
         }
+
         .export-btn:hover {
-            background: #0256c7;
-            text-decoration: none;
+            background: var(--accent);
+            color: white;
+            border-color: var(--accent);
         }
-        .export-btn::before {
-            content: "📄";
-        }
-        .meta {
-            color: #6a737d;
-            font-size: 0.9em;
-        }
-        h1, h2, h3, h4, h5, h6 {
-            margin-top: 24px;
-            margin-bottom: 16px;
+
+        .page-title {
+            font-size: 18px;
             font-weight: 600;
-            line-height: 1.25;
-            color: #1a1a1a;
+            margin-bottom: 10px;
+            letter-spacing: -0.5px;
         }
+
+        .meta {
+            font-size: 11px;
+            color: var(--muted);
+        }
+
         h1 {
-            font-size: 2.5em;
-            border-bottom: 2px solid #e1e4e8;
-            padding-bottom: 0.3em;
-            margin-top: 0;
+            font-size: 18px;
+            font-weight: 600;
+            margin: 40px 0 20px 0;
+            letter-spacing: -0.5px;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 10px;
         }
+
         h2 {
-            font-size: 2em;
-            border-bottom: 1px solid #e1e4e8;
-            padding-bottom: 0.3em;
+            font-size: 14px;
+            font-weight: 600;
+            margin: 35px 0 15px 0;
+            text-transform: lowercase;
+            letter-spacing: 0.5px;
         }
-        h3 { font-size: 1.5em; }
-        h4 { font-size: 1.25em; }
-        h5 { font-size: 1em; }
-        h6 { font-size: 0.875em; }
+
+        h3 {
+            font-size: 13px;
+            font-weight: 600;
+            margin: 25px 0 12px 0;
+        }
+
         p {
             margin-bottom: 16px;
+            font-size: 13px;
+            line-height: 1.8;
         }
+
         a {
-            color: #0366d6;
+            color: var(--accent);
             text-decoration: none;
         }
+
         a:hover {
             text-decoration: underline;
         }
+
         code {
-            background-color: #f6f8fa;
+            background-color: var(--light-bg);
             padding: 2px 6px;
-            border-radius: 3px;
-            font-family: 'Courier New', Courier, monospace;
-            font-size: 85%;
-            color: #e83e8c;
+            border-radius: 2px;
+            font-family: "Courier New", "Monaco", "Menlo", monospace;
+            font-size: 12px;
+            color: var(--text);
+            border: 1px solid var(--border);
         }
+
         pre {
-            background-color: #f6f8fa;
-            padding: 16px;
+            background-color: var(--light-bg);
+            padding: 20px;
             overflow: auto;
-            border-radius: 6px;
-            margin: 16px 0;
-            border: 1px solid #e1e4e8;
+            border-radius: 2px;
+            margin: 20px 0;
+            border: 1px solid var(--border);
         }
+
         pre code {
             background-color: transparent;
             padding: 0;
-            color: #24292e;
+            border: none;
             display: block;
             white-space: pre;
+            font-size: 12px;
+            line-height: 1.6;
         }
+
         ul, ol {
             margin: 16px 0;
             padding-left: 32px;
         }
+
         li {
-            margin: 4px 0;
+            margin: 6px 0;
+            font-size: 13px;
+            line-height: 1.7;
         }
+
         blockquote {
-            border-left: 4px solid #dfe2e5;
+            border-left: 3px solid var(--accent);
             padding: 0 16px;
-            margin: 16px 0;
-            color: #6a737d;
+            margin: 20px 0;
+            color: var(--muted);
+            background: var(--light-bg);
+            padding: 16px 20px;
         }
+
         table {
             border-collapse: collapse;
             width: 100%;
-            margin: 16px 0;
+            margin: 20px 0;
+            font-size: 12px;
         }
+
         table th, table td {
-            border: 1px solid #dfe2e5;
-            padding: 8px 12px;
+            border: 1px solid var(--border);
+            padding: 10px 14px;
             text-align: left;
         }
+
         table th {
-            background-color: #f6f8fa;
+            background-color: var(--light-bg);
             font-weight: 600;
+            text-transform: lowercase;
+            font-size: 11px;
+            color: var(--muted);
         }
-        table tr:nth-child(even) {
-            background-color: #f6f8fa;
+
+        table tr:hover {
+            background-color: var(--light-bg);
         }
+
         hr {
             border: 0;
-            border-top: 1px solid #e1e4e8;
-            margin: 24px 0;
+            border-top: 1px solid var(--border);
+            margin: 40px 0;
         }
+
         img {
             max-width: 100%;
             height: auto;
-            margin: 16px 0;
+            margin: 20px 0;
+            border: 1px solid var(--border);
         }
-        .footer {
-            margin-top: 40px;
-            padding-top: 20px;
-            border-top: 1px solid #e1e4e8;
-            text-align: center;
-            color: #6a737d;
-            font-size: 0.9em;
+
+        footer {
+            margin-top: 80px;
+            padding-top: 30px;
+            border-top: 1px solid var(--border);
+            font-size: 11px;
+            color: var(--muted);
+        }
+
+        .source-info {
+            background: var(--light-bg);
+            padding: 15px 20px;
+            margin-top: 20px;
+            border: 1px solid var(--border);
+            font-size: 11px;
+            color: var(--muted);
+        }
+
+        strong {
+            font-weight: 600;
+        }
+
+        em {
+            font-style: italic;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="header-actions">
-            <div class="meta">Generated from Markdown</div>
-            <a href="../PROMPT_ENGINEERING_GUIDE.md" class="export-btn" download>Export as MD</a>
+    <header>
+        <div class="header-nav">
+            <div class="nav-links">
+                <a href="../../../index.html">← documentation index</a>
+                <a href="../../../../agents/sdv-suite/index.html">main site</a>
+            </div>
+            <a href="../PROMPT_ENGINEERING_GUIDE.md" class="export-btn" download>export as .md</a>
         </div>
+        <div class="page-title">PROMPT_ENGINEERING_GUIDE</div>
+        <div class="meta">source: PROMPT_ENGINEERING_GUIDE.md</div>
+    </header>
+
+    <main>
         <h1>Prompt Engineering Guide for Agent Development</h1>
 <p>This guide provides proven prompts to help you generate high-quality agent designs, ontologies, and documentation using AI assistants (Claude, GPT-4, etc.).</p>
 <h2>Table of Contents</h2>
@@ -690,9 +772,18 @@ Tone: Professional, directive, clear
 <p><strong>Pro Tip:</strong> Save successful prompts and their outputs. Build your own prompt library customized to your agent development workflow.</p>
 <p><strong>Last Updated:</strong> 2026-02-07
 </p>
-        <div class="footer">
-            <p>Source: <a href="../PROMPT_ENGINEERING_GUIDE.md">PROMPT_ENGINEERING_GUIDE.md</a></p>
+    </main>
+
+    <footer>
+        <div class="source-info">
+            <strong>note:</strong> this document is auto-generated from markdown.
+            to edit, download the source .md file using the "export as .md" button above.
         </div>
-    </div>
+        <p style="margin-top: 20px;">
+            BCS Knowledge Transfer Package |
+            <a href="../../../../agents/sdv-suite/index.html">back to main site</a> |
+            <a href="../../../index.html">all documentation</a>
+        </p>
+    </footer>
 </body>
 </html>

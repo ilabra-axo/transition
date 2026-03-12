@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML_DOCS_GUIDE | BCS Documentation</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg: #ffffff;
+            --text: #1a1a1a;
+            --muted: #666666;
+            --border: #e0e0e0;
+            --accent: #0066cc;
+            --light-bg: #f8f8f8;
+        }
+
+        body {
+            font-family: "Courier New", "Monaco", "Menlo", monospace;
+            line-height: 1.6;
+            color: var(--text);
+            background: var(--bg);
+            font-size: 14px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        header {
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 30px;
+            margin-bottom: 50px;
+        }
+
+        .header-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            font-size: 11px;
+        }
+
+        .nav-links a {
+            color: var(--muted);
+            text-decoration: none;
+            margin-right: 20px;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+
+        .export-btn {
+            display: inline-block;
+            padding: 6px 12px;
+            background: var(--light-bg);
+            border: 1px solid var(--border);
+            border-radius: 2px;
+            font-size: 11px;
+            color: var(--text);
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+
+        .export-btn:hover {
+            background: var(--accent);
+            color: white;
+            border-color: var(--accent);
+        }
+
+        .page-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 10px;
+            letter-spacing: -0.5px;
+        }
+
+        .meta {
+            font-size: 11px;
+            color: var(--muted);
+        }
+
+        h1 {
+            font-size: 18px;
+            font-weight: 600;
+            margin: 40px 0 20px 0;
+            letter-spacing: -0.5px;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 10px;
+        }
+
+        h2 {
+            font-size: 14px;
+            font-weight: 600;
+            margin: 35px 0 15px 0;
+            text-transform: lowercase;
+            letter-spacing: 0.5px;
+        }
+
+        h3 {
+            font-size: 13px;
+            font-weight: 600;
+            margin: 25px 0 12px 0;
+        }
+
+        p {
+            margin-bottom: 16px;
+            font-size: 13px;
+            line-height: 1.8;
+        }
+
+        a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        code {
+            background-color: var(--light-bg);
+            padding: 2px 6px;
+            border-radius: 2px;
+            font-family: "Courier New", "Monaco", "Menlo", monospace;
+            font-size: 12px;
+            color: var(--text);
+            border: 1px solid var(--border);
+        }
+
+        pre {
+            background-color: var(--light-bg);
+            padding: 20px;
+            overflow: auto;
+            border-radius: 2px;
+            margin: 20px 0;
+            border: 1px solid var(--border);
+        }
+
+        pre code {
+            background-color: transparent;
+            padding: 0;
+            border: none;
+            display: block;
+            white-space: pre;
+            font-size: 12px;
+            line-height: 1.6;
+        }
+
+        ul, ol {
+            margin: 16px 0;
+            padding-left: 32px;
+        }
+
+        li {
+            margin: 6px 0;
+            font-size: 13px;
+            line-height: 1.7;
+        }
+
+        blockquote {
+            border-left: 3px solid var(--accent);
+            padding: 0 16px;
+            margin: 20px 0;
+            color: var(--muted);
+            background: var(--light-bg);
+            padding: 16px 20px;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 20px 0;
+            font-size: 12px;
+        }
+
+        table th, table td {
+            border: 1px solid var(--border);
+            padding: 10px 14px;
+            text-align: left;
+        }
+
+        table th {
+            background-color: var(--light-bg);
+            font-weight: 600;
+            text-transform: lowercase;
+            font-size: 11px;
+            color: var(--muted);
+        }
+
+        table tr:hover {
+            background-color: var(--light-bg);
+        }
+
+        hr {
+            border: 0;
+            border-top: 1px solid var(--border);
+            margin: 40px 0;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            margin: 20px 0;
+            border: 1px solid var(--border);
+        }
+
+        footer {
+            margin-top: 80px;
+            padding-top: 30px;
+            border-top: 1px solid var(--border);
+            font-size: 11px;
+            color: var(--muted);
+        }
+
+        .source-info {
+            background: var(--light-bg);
+            padding: 15px 20px;
+            margin-top: 20px;
+            border: 1px solid var(--border);
+            font-size: 11px;
+            color: var(--muted);
+        }
+
+        strong {
+            font-weight: 600;
+        }
+
+        em {
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-nav">
+            <div class="nav-links">
+                <a href="../../../index.html">← documentation index</a>
+                <a href="../../../../agents/sdv-suite/index.html">main site</a>
+            </div>
+            <a href="../HTML_DOCS_GUIDE.md" class="export-btn" download>export as .md</a>
+        </div>
+        <div class="page-title">HTML_DOCS_GUIDE</div>
+        <div class="meta">source: HTML_DOCS_GUIDE.md</div>
+    </header>
+
+    <main>
+        <h1>HTML Documentation Guide</h1>
+<p>This guide explains how to use and maintain the HTML documentation system for this project.</p>
+<h2>Overview</h2>
+<p>All markdown (<code>.md</code>) files in this project are automatically converted to beautiful, responsive HTML pages with:
+<ul><li>📄 <strong>Export as MD</strong> buttons for editing source files</li>
+<li>🔗 <strong>Automatic hyperlinks</strong> between documents</li>
+<li>📱 <strong>Responsive design</strong> that works on all devices</li>
+<li>🎨 <strong>Professional styling</strong> based on GitHub markdown standards</li></p>
+<h2>Quick Start</h2>
+<h3>Viewing Documentation</h3>
+<li>Open <code>html_output/index.html</code> in your web browser</li>
+<li>Browse through the organized list of all documentation</li>
+<li>Click any document to view it</li>
+<li>Use the "Export as MD" button to download/view the original markdown source</li>
+<h3>Rebuilding Documentation</h3>
+<p>After editing any markdown files, rebuild the HTML documentation:</p>
+<pre><code>node build-docs.js
+</code></pre>
+<p>This single command will:
+<li>Convert all <code>.md</code> files to <code>.html</code></li>
+<li>Update all internal links</li>
+<li>Rebuild the index page</li>
+<li>Preserve directory structure</li></p>
+<h2>Features</h2>
+<h3>1. Export as MD Button</h3>
+<p>Every HTML page includes an "Export as MD" button in the top-right corner that:
+<li>Links directly to the original markdown source file</li>
+<li>Allows you to download the <code>.md</code> file</li>
+<li>Makes it easy to find and edit the source documentation</li></p>
+<h3>2. Automatic Hyperlinking</h3>
+<p>All markdown links are automatically converted:
+<li>Links to <code>.md</code> files → converted to <code>.html</code> links</li>
+<li>Internal navigation works seamlessly</li>
+<li>External links remain unchanged</li></p>
+<p><strong>Example:</strong>
+<pre><code><a href="DEPLOYMENT_GUIDE.html">See the Guide</a>
+</code></pre>
+Becomes a working link to <code>DEPLOYMENT_GUIDE.html</code></p>
+<h3>3. Responsive Design</h3>
+<p>All HTML pages feature:
+<li>Clean, readable typography</li>
+<li>Mobile-friendly layouts</li>
+<li>Syntax-highlighted code blocks</li>
+<li>Properly formatted tables and lists</li>
+<li>Professional color scheme</li></p>
+<h3>4. Index Page</h3>
+<p><code>html_output/index.html</code> provides:
+<li>Organized view of all documents</li>
+<li>Grouping by directory/category</li>
+<li>Document count statistics</li>
+<li>Visual icons for different document types</li>
+<li>Quick navigation to any page</li></p>
+<h2>Directory Structure</h2>
+<pre><code>transition/
+├── build-docs.js              # Main build script (runs both steps)
+├── convert-md.js              # Converts .md to .html
+├── create-index.js            # Creates index.html
+│
+└── html_output/               # Generated HTML documentation
+    ├── index.html             # Main navigation page
+    ├── README.html            # Project readme
+    ├── *.html                 # All root-level documents
+    └── agents/                # Subdirectory structure preserved
+        ├── INDEX.html
+        ├── QUICK_REFERENCE.html
+        └── sdv-suite/
+            └── *.html
+</code></pre>
+<h2>Individual Scripts</h2>
+<h3>convert-md.js</h3>
+<p>Converts all markdown files to HTML:</p>
+<pre><code>node convert-md.js
+</code></pre>
+<p><strong>What it does:</strong>
+<li>Finds all <code>.md</code> files in the project</li>
+<li>Converts markdown syntax to HTML</li>
+<li>Adds "Export as MD" buttons</li>
+<li>Updates internal links</li>
+<li>Applies professional styling</li>
+<li>Preserves directory structure</li></p>
+<h3>create-index.js</h3>
+<p>Creates the main index/navigation page:</p>
+<pre><code>node create-index.js
+</code></pre>
+<p><strong>What it does:</strong>
+<li>Scans the <code>html_output</code> directory</li>
+<li>Groups documents by category</li>
+<li>Creates an organized index page</li>
+<li>Adds statistics and visual icons</li></p>
+<h3>build-docs.js</h3>
+<p>Runs both scripts in sequence:</p>
+<pre><code>node build-docs.js
+</code></pre>
+<p><strong>Recommended:</strong> Use this for normal rebuilds after editing markdown files.</p>
+<h2>Workflow</h2>
+<h3>Editing Documentation</h3>
+<li>Edit any <code>.md</code> file in the project</li>
+<li>Run <code>node build-docs.js</code></li>
+<li>Refresh your browser to see changes</li>
+<li>Share the HTML files as needed</li>
+<h3>Adding New Documents</h3>
+<li>Create a new <code>.md</code> file anywhere in the project</li>
+<li>Run <code>node build-docs.js</code></li>
+<li>The new document will automatically appear in the index</li>
+<h3>Sharing Documentation</h3>
+<p>The <code>html_output</code> folder is self-contained and can be:
+<li>Opened directly in any web browser</li>
+<li>Hosted on a web server</li>
+<li>Shared as a zip file</li>
+<li>Committed to version control</li></p>
+<h2>Tips & Best Practices</h2>
+<h3>✅ Do's</h3>
+<li>Run <code>build-docs.js</code> after editing any markdown files</li>
+<li>Use relative links in markdown (e.g., <code>./other-doc.md</code>)</li>
+<li>Keep the original markdown files as the source of truth</li>
+<li>Use the "Export as MD" button to navigate to source files</li>
+<h3>❌ Don'ts</h3>
+<li>Don't edit HTML files directly (they'll be overwritten)</li>
+<li>Don't manually create links to <code>.html</code> files in markdown</li>
+<li>Don't delete the <code>html_output</code> folder (it will be recreated)</li>
+<h2>Technical Details</h2>
+<h3>Markdown Features Supported</h3>
+<li>Headers (H1-H6)</li>
+<li>Bold and italic text</li>
+<li>Code blocks with syntax highlighting</li>
+<li>Inline code</li>
+<li>Links and images</li>
+<li>Lists (ordered and unordered)</li>
+<li>Blockquotes</li>
+<li>Horizontal rules</li>
+<li>Tables</li>
+<h3>Browser Compatibility</h3>
+<p>The generated HTML works in all modern browsers:
+<li>Chrome/Edge</li>
+<li>Firefox</li>
+<li>Safari</li>
+<li>Opera</li></p>
+<h3>Dependencies</h3>
+<li><strong>Node.js</strong> (v12 or higher)</li>
+<li>No external npm packages required (uses built-in modules)</li>
+<h2>Troubleshooting</h2>
+<h3>HTML files not updating</h3>
+<li>Make sure you saved your markdown file</li>
+<li>Run <code>node build-docs.js</code> again</li>
+<li>Hard refresh your browser (Ctrl+Shift+R or Cmd+Shift+R)</li>
+<h3>Links not working</h3>
+<li>Ensure markdown links use relative paths</li>
+<li>Check that linked files exist</li>
+<li>Rebuild with <code>node build-docs.js</code></li>
+<h3>Index page missing documents</h3>
+<li>Verify HTML files were generated in <code>html_output/</code></li>
+<li>Run <code>node create-index.js</code> again</li>
+<li>Check for errors in the console output</li>
+<h2>Maintenance</h2>
+<p>The HTML documentation system requires no regular maintenance. Simply rebuild when markdown files change:</p>
+<pre><code>node build-docs.js
+</code></pre>
+<p>That's it! The system automatically handles:
+<li>Finding new files</li>
+<li>Updating changed files</li>
+<li>Removing deleted files (on next build)</li>
+<li>Updating the index</li>
+<li>Fixing all links</li></p>
+<h2>Questions?</h2>
+<p>For more information about the documentation content itself, see:
+<li><code>README.md</code> - Project overview</li>
+<li><code>QUICK_START.md</code> - Getting started guide</li>
+<li><code>DEPLOYMENT_GUIDE.md</code> - Deployment instructions</li></ul></p>
+    </main>
+
+    <footer>
+        <div class="source-info">
+            <strong>note:</strong> this document is auto-generated from markdown.
+            to edit, download the source .md file using the "export as .md" button above.
+        </div>
+        <p style="margin-top: 20px;">
+            BCS Knowledge Transfer Package |
+            <a href="../../../../agents/sdv-suite/index.html">back to main site</a> |
+            <a href="../../../index.html">all documentation</a>
+        </p>
+    </footer>
+</body>
+</html>

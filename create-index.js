@@ -32,7 +32,7 @@ function groupFilesByDirectory(files) {
   const groups = {};
 
   files.forEach((file) => {
-    const dir = file.dir || "Root";
+    const dir = file.dir || "root";
     if (!groups[dir]) {
       groups[dir] = [];
     }
@@ -47,223 +47,313 @@ function createIndexHTML(fileGroups) {
 
   // Sort directories
   const sortedDirs = Object.keys(fileGroups).sort((a, b) => {
-    if (a === "Root") return -1;
-    if (b === "Root") return 1;
+    if (a === "root") return -1;
+    if (b === "root") return 1;
     return a.localeCompare(b);
   });
 
   sortedDirs.forEach((dir) => {
     const files = fileGroups[dir].sort((a, b) => a.name.localeCompare(b.name));
 
+    const dirTitle = dir === "root" ? "main documentation" : dir;
+
     fileListHTML += `
-      <div class="section">
-        <h2>${dir === "Root" ? "📁 Main Documents" : "📁 " + dir}</h2>
-        <ul class="file-list">`;
+      <section class="category">
+        <h2>${dirTitle}</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>document</th>
+              <th>type</th>
+              <th style="text-align: right">action</th>
+            </tr>
+          </thead>
+          <tbody>`;
 
     files.forEach((file) => {
-      const icon = getFileIcon(file.name);
+      const type = getDocType(file.name);
       fileListHTML += `
-          <li>
-            <a href="${file.path}" class="file-link">
-              <span class="file-icon">${icon}</span>
-              <span class="file-name">${file.name}</span>
-            </a>
-          </li>`;
+            <tr>
+              <td><a href="${file.path}" class="doc-link">${file.name}</a></td>
+              <td><span class="doc-type">${type}</span></td>
+              <td style="text-align: right"><a href="${file.path}" class="view-btn">view →</a></td>
+            </tr>`;
     });
 
     fileListHTML += `
-        </ul>
-      </div>`;
+          </tbody>
+        </table>
+      </section>`;
   });
 
-  return `<!DOCTYPE html>
+  const totalDocs = Object.values(fileGroups).flat().length;
+  const totalCategories = Object.keys(fileGroups).length;
+
+  return `<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Documentation Index</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Documentation Index | BCS Knowledge Transfer</title>
+    <meta
+      name="description"
+      content="Complete documentation library for BCS transition package - guides, references, and technical documentation."
+    />
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            padding: 40px 20px;
-        }
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            background: white;
-            border-radius: 12px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-            overflow: hidden;
-        }
-        .header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 40px;
-            text-align: center;
-        }
-        .header h1 {
-            font-size: 2.5em;
-            margin-bottom: 10px;
-            font-weight: 700;
-        }
-        .header p {
-            font-size: 1.1em;
-            opacity: 0.95;
-        }
-        .content {
-            padding: 40px;
-        }
-        .section {
-            margin-bottom: 40px;
-        }
-        .section h2 {
-            color: #2d3748;
-            font-size: 1.5em;
-            margin-bottom: 20px;
-            padding-bottom: 10px;
-            border-bottom: 2px solid #e2e8f0;
-        }
-        .file-list {
-            list-style: none;
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 15px;
-        }
-        .file-link {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            padding: 15px 20px;
-            background: #f7fafc;
-            border: 2px solid #e2e8f0;
-            border-radius: 8px;
-            text-decoration: none;
-            color: #2d3748;
-            transition: all 0.3s ease;
-        }
-        .file-link:hover {
-            background: #667eea;
-            color: white;
-            border-color: #667eea;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
-        }
-        .file-icon {
-            font-size: 1.5em;
-            flex-shrink: 0;
-        }
-        .file-name {
-            font-weight: 500;
-            font-size: 0.95em;
-            word-break: break-word;
-        }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      :root {
+        --bg: #ffffff;
+        --text: #1a1a1a;
+        --muted: #666666;
+        --border: #e0e0e0;
+        --accent: #0066cc;
+        --light-bg: #f8f8f8;
+      }
+
+      body {
+        font-family: "Courier New", "Monaco", "Menlo", monospace;
+        line-height: 1.6;
+        color: var(--text);
+        background: var(--bg);
+        font-size: 14px;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 40px 20px;
+      }
+
+      header {
+        border-bottom: 1px solid var(--border);
+        padding-bottom: 30px;
+        margin-bottom: 50px;
+      }
+
+      .nav {
+        margin-bottom: 30px;
+      }
+
+      .nav a {
+        color: var(--muted);
+        text-decoration: none;
+        font-size: 12px;
+        margin-right: 20px;
+      }
+
+      .nav a:hover {
+        color: var(--accent);
+      }
+
+      h1 {
+        font-size: 18px;
+        font-weight: 600;
+        margin-bottom: 15px;
+        letter-spacing: -0.5px;
+      }
+
+      .tagline {
+        font-size: 12px;
+        color: var(--muted);
+        line-height: 1.8;
+      }
+
+      .stats {
+        display: flex;
+        gap: 30px;
+        margin-top: 20px;
+        padding: 20px;
+        background: var(--light-bg);
+        border: 1px solid var(--border);
+        font-size: 11px;
+      }
+
+      .stat {
+        color: var(--muted);
+      }
+
+      .stat strong {
+        color: var(--text);
+        font-weight: 600;
+        margin-right: 5px;
+      }
+
+      h2 {
+        font-size: 14px;
+        font-weight: 600;
+        margin-bottom: 20px;
+        text-transform: lowercase;
+        letter-spacing: 0.5px;
+      }
+
+      .category {
+        margin-bottom: 50px;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 13px;
+      }
+
+      th {
+        text-align: left;
+        font-weight: 600;
+        padding: 12px 16px;
+        border-bottom: 1px solid var(--border);
+        color: var(--muted);
+        font-size: 11px;
+        text-transform: lowercase;
+      }
+
+      td {
+        padding: 16px;
+        border-bottom: 1px solid var(--border);
+        vertical-align: middle;
+      }
+
+      tr:hover {
+        background: var(--light-bg);
+      }
+
+      .doc-link {
+        color: var(--text);
+        text-decoration: none;
+        font-weight: 500;
+      }
+
+      .doc-link:hover {
+        color: var(--accent);
+      }
+
+      .doc-type {
+        display: inline-block;
+        padding: 2px 8px;
+        background: var(--light-bg);
+        border: 1px solid var(--border);
+        border-radius: 2px;
+        font-size: 10px;
+        color: var(--muted);
+        text-transform: lowercase;
+      }
+
+      .view-btn {
+        color: var(--accent);
+        text-decoration: none;
+        font-size: 12px;
+        font-weight: 500;
+      }
+
+      .view-btn:hover {
+        text-decoration: underline;
+      }
+
+      footer {
+        margin-top: 80px;
+        padding-top: 30px;
+        border-top: 1px solid var(--border);
+        font-size: 11px;
+        color: var(--muted);
+      }
+
+      .info-box {
+        background: var(--light-bg);
+        padding: 20px;
+        margin: 30px 0;
+        border: 1px solid var(--border);
+        font-size: 12px;
+        line-height: 1.8;
+      }
+
+      .info-box strong {
+        color: var(--text);
+        font-weight: 600;
+      }
+
+      @media (max-width: 768px) {
         .stats {
-            background: #f7fafc;
-            padding: 20px;
-            border-radius: 8px;
-            margin-bottom: 30px;
-            text-align: center;
+          flex-direction: column;
+          gap: 10px;
         }
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
-            margin-top: 15px;
+
+        table {
+          font-size: 12px;
         }
-        .stat-item {
-            background: white;
-            padding: 15px;
-            border-radius: 6px;
-            border: 2px solid #e2e8f0;
+
+        td, th {
+          padding: 12px 10px;
         }
-        .stat-number {
-            font-size: 2em;
-            font-weight: 700;
-            color: #667eea;
-            display: block;
-        }
-        .stat-label {
-            color: #718096;
-            font-size: 0.9em;
-            margin-top: 5px;
-        }
-        .footer {
-            background: #f7fafc;
-            padding: 20px;
-            text-align: center;
-            color: #718096;
-            border-top: 1px solid #e2e8f0;
-        }
-        @media (max-width: 768px) {
-            .header h1 {
-                font-size: 1.8em;
-            }
-            .file-list {
-                grid-template-columns: 1fr;
-            }
-        }
+      }
     </style>
-</head>
-<body>
-    <div class="container">
-        <div class="header">
-            <h1>📚 Documentation Library</h1>
-            <p>Browse all generated documentation</p>
-        </div>
-        <div class="content">
-            <div class="stats">
-                <h3>Collection Statistics</h3>
-                <div class="stats-grid">
-                    <div class="stat-item">
-                        <span class="stat-number">${Object.values(fileGroups).flat().length}</span>
-                        <div class="stat-label">Total Documents</div>
-                    </div>
-                    <div class="stat-item">
-                        <span class="stat-number">${Object.keys(fileGroups).length}</span>
-                        <div class="stat-label">Categories</div>
-                    </div>
-                    <div class="stat-item">
-                        <span class="stat-number">📄</span>
-                        <div class="stat-label">HTML Format</div>
-                    </div>
-                </div>
-            </div>
-            ${fileListHTML}
-        </div>
-        <div class="footer">
-            <p>Generated from Markdown files • Click any document to view • Use "Export as MD" to download source</p>
-        </div>
-    </div>
-</body>
+  </head>
+  <body>
+    <header>
+      <nav class="nav">
+        <a href="../agents/sdv-suite/index.html">← back to main site</a>
+        <a href="../agents/sdv-suite/downloads.html">downloads</a>
+      </nav>
+      <h1>documentation library</h1>
+      <p class="tagline">
+        complete reference library for BCS knowledge transfer package.
+        all markdown documentation converted to browsable HTML format.
+        each document includes an "export as .md" button for editing source files.
+      </p>
+      <div class="stats">
+        <div class="stat"><strong>${totalDocs}</strong> total documents</div>
+        <div class="stat"><strong>${totalCategories}</strong> categories</div>
+        <div class="stat"><strong>html</strong> format</div>
+        <div class="stat"><strong>markdown</strong> source available</div>
+      </div>
+    </header>
+
+    <main>
+      <div class="info-box">
+        <strong>how to use:</strong> click any document to view in your browser.
+        use the "export as .md" button on each page to download the original markdown source for editing.
+        all internal links between documents work automatically.
+      </div>
+
+      ${fileListHTML}
+    </main>
+
+    <footer>
+      <p style="margin-bottom: 10px">
+        <strong>rebuilding documentation:</strong> after editing markdown files, run
+        <code style="background: var(--light-bg); padding: 2px 6px; border: 1px solid var(--border);">node build-docs.js</code>
+        to regenerate all HTML files.
+      </p>
+      <p>
+        BCS Knowledge Transfer Package |
+        <a href="../agents/sdv-suite/index.html">main site</a> |
+        <a href="../agents/sdv-suite/downloads.html">downloads</a>
+      </p>
+    </footer>
+  </body>
 </html>`;
 }
 
-function getFileIcon(fileName) {
+function getDocType(fileName) {
   const name = fileName.toLowerCase();
 
-  if (name.includes("readme")) return "📖";
-  if (name.includes("guide") || name.includes("tutorial")) return "📘";
-  if (name.includes("quick") || name.includes("start")) return "🚀";
-  if (name.includes("dashboard")) return "📊";
-  if (name.includes("deployment")) return "🚢";
-  if (name.includes("agent")) return "🤖";
-  if (name.includes("reference")) return "📚";
-  if (name.includes("design") || name.includes("architecture")) return "🏗️";
-  if (name.includes("summary") || name.includes("executive")) return "📋";
-  if (name.includes("report")) return "📄";
-  if (name.includes("analysis") || name.includes("market")) return "📈";
-  if (name.includes("patent") || name.includes("research")) return "🔬";
-  if (name.includes("cv") || name.includes("resume")) return "👤";
-  if (name.includes("index")) return "🗂️";
+  if (name.includes("readme")) return "overview";
+  if (name.includes("guide")) return "guide";
+  if (name.includes("quick") || name.includes("start")) return "quickstart";
+  if (name.includes("dashboard")) return "dashboard";
+  if (name.includes("deployment")) return "deployment";
+  if (name.includes("agent")) return "agent spec";
+  if (name.includes("reference")) return "reference";
+  if (name.includes("design") || name.includes("architecture"))
+    return "technical";
+  if (name.includes("summary") || name.includes("executive")) return "summary";
+  if (name.includes("report")) return "report";
+  if (name.includes("analysis") || name.includes("market")) return "analysis";
+  if (name.includes("patent") || name.includes("research")) return "research";
+  if (name.includes("cv") || name.includes("resume")) return "cv";
+  if (name.includes("index")) return "index";
 
-  return "📄";
+  return "document";
 }
 
 function main() {
